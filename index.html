@@ -1349,6 +1349,12 @@ function renderCountdown(){
 // pre-torneo. Equipos favoritos que ya mostraron fragilidad en J1 (Espana
 // 0-0 vs debutante, Holanda 2-2 vs Japon, Belgica vs Egipto) ven su
 // probabilidad de titulo penalizada en proporcion.
+// ════════════════════════════════════════════════════
+// CHAMPION PROBABILITIES — Modelo integrado final
+// Incorpora: effPwr (FIFA+mkt+PIB+cultura+sorpresa+DT+LBC+depth)
+// + momentum exponencial real + profundidad de plantel
+// + exponente 3.2 (mas paridad que 3.4 original)
+// ════════════════════════════════════════════════════
 function champProbabilities(topN){
   topN = topN || 7;
   var keys = Object.keys(TEAMS);
@@ -1356,28 +1362,43 @@ function champProbabilities(topN){
   var total = 0;
   for(var i=0;i<keys.length;i++){
     var d = TEAMS[keys[i]];
-    var basePwr = effPwr(keys[i]); // ya incluye PARITY_BLEND + ajuste confederacion
 
-    // factor de forma real: promedio de los ultimos resultados jugados (0,1,3)
-    // normalizado a un multiplicador 0.85-1.10. Equipos sin partidos jugados
-    // (form ficticio) quedan en 1.0 (neutro).
+    // Base: effPwr ya incluye PARITY_BLEND + confederacion + PIB + cultura + sorpresa
+    var basePwr = effPwr(keys[i]);
+
+    // Factor de forma real con MOMENTUM EXPONENCIAL
+    // El ultimo resultado vale 8x, el anterior 4x, etc.
+    // Equipos que aun no jugaron: factor 1.0 (neutro)
     var formFactor = 1.0;
-    // Determinar cuantos partidos reales jugo este equipo (0,1,2...)
     var realPlayed = 0;
     for(var k in PLAYED_MATCHES){
       var parts = k.split("|");
       if (parts[0]===keys[i] || parts[1]===keys[i]) realPlayed++;
     }
     if (realPlayed > 0){
-      var sum=0;
-      for(var j=0;j<realPlayed;j++){ sum += d.form[j]; }
-      var avgForm = sum/realPlayed; // 0 (perdio todo) a 3 (gano todo)
-      // mapear avgForm (0-3) a factor (0.85-1.10), 1pt (empate) = neutro
-      formFactor = 0.85 + (avgForm/3)*0.25;
+      // momentumScore ya usa pesos exponenciales [8,4,2,1,0.5]
+      var mom = momentumScore(keys[i]);
+      // Mapear 0-1 a 0.80-1.15 (mas rango: goleada Messi = +15%, empate Spain = -20%)
+      formFactor = 0.80 + mom*0.35;
     }
 
-    var effective = basePwr * formFactor;
-    var s = Math.pow(effective/100, 3.4); // exponente reducido de 4.2 a 3.4 (mas paridad)
+    // Bonus de profundidad de plantel (dep 0-10)
+    // En un torneo de 7 partidos, los bancos profundos ganan cuartos y semis
+    var dep = d.dep || 5;
+    var depBonus = 1 + (dep-5)*0.010; // -5% a +5%
+
+    // Bonus de conversion vs bloque bajo (lbc 0-10)
+    // En eliminatorias, casi todos los rivales juegan cerrados
+    var lbc = d.lbc || 5;
+    var lbcBonus = 1 + (lbc-5)*0.008; // -4% a +4%
+
+    // Continuidad DT: equipos con DT consolidado tienen menor varianza en knockout
+    var dtc = d.dtc || 5;
+    var dtcBonus = 1 + (dtc-5)*0.006; // -3% a +3%
+
+    var effective = basePwr * formFactor * depBonus * lbcBonus * dtcBonus;
+    // Exponente 3.2: menos concentrado que 3.4/4.2, mas chances para outsiders
+    var s = Math.pow(Math.max(effective,0)/100, 3.2);
     scores.push({name:keys[i], score:s});
     total += s;
   }
@@ -1922,21 +1943,26 @@ function renderRankings(){
   }
   keys.sort(function(a,b){ return TEAMS[b].pwr - TEAMS[a].pwr; });
   var maxPwr = TEAMS[keys[0]].pwr;
-  var html = '<thead><tr><th>#</th><th>Selección</th><th class="c">Conf.</th><th class="c">FIFA</th><th>Power Rating</th><th class="c">Valor Plantel</th><th class="c">Forma</th><th class="c">Mundiales</th></tr></thead><tbody>';
+  var html = '<thead><tr><th>#</th><th>Selección</th><th class="c">FIFA</th><th>Power Rating</th><th class="c">Mkt</th><th class="c">DT</th><th class="c">Depth</th><th class="c">LBC</th><th class="c">Forma</th></tr></thead><tbody>';
   for(var i=0;i<keys.length;i++){
     var nm = keys[i], d = TEAMS[nm];
     var hostTag = (HOSTS.indexOf(nm)>=0) ? '<span class="host-tag">SEDE</span>' : "";
     var barW = (d.pwr/maxPwr*100).toFixed(0);
-    var mktTxt = d.mkt>=1000 ? "€"+(d.mkt/1000).toFixed(2)+"B" : "€"+d.mkt.toFixed(0)+"M";
+    var mktTxt = d.mkt>=1000 ? "€"+(d.mkt/1000).toFixed(1)+"B" : "€"+d.mkt.toFixed(0)+"M";
+    var dtc = d.dtc||5, dep = d.dep||5, lbc = d.lbc||5;
+    var dtcColor = dtc>=8?"var(--green)":dtc>=6?"var(--gold)":"var(--muted)";
+    var depColor = dep>=8?"var(--green)":dep>=6?"var(--gold)":"var(--muted)";
+    var lbcColor = lbc>=7?"var(--green)":lbc>=5?"var(--gold)":"var(--red)";
     html += '<tr>'
       +'<td class="rank-pos">'+(i+1)+'</td>'
       +'<td>'+d.flag+' '+nm+hostTag+'</td>'
-      +'<td class="c"><span class="conf-chip">'+d.conf+'</span></td>'
-      +'<td class="c" style="font-family:var(--font-mono);color:var(--muted2);">#'+d.rk+'</td>'
-      +'<td><div style="display:flex;align-items:center;gap:8px;"><div class="rank-bar-bg" style="width:60px;"><div class="rank-bar" style="width:'+barW+'%"></div></div><span class="pwr-num">'+d.pwr.toFixed(1)+'</span></div></td>'
-      +'<td class="c" style="font-family:var(--font-mono);font-size:11px;color:var(--muted2);">'+mktTxt+'</td>'
+      +'<td class="c" style="font-family:var(--font-mono);color:var(--muted2);font-size:10px;">#'+d.rk+'</td>'
+      +'<td><div style="display:flex;align-items:center;gap:6px;"><div class="rank-bar-bg" style="width:50px;"><div class="rank-bar" style="width:'+barW+'%"></div></div><span class="pwr-num">'+d.pwr.toFixed(1)+'</span></div></td>'
+      +'<td class="c" style="font-size:10px;color:var(--muted2);">'+mktTxt+'</td>'
+      +'<td class="c" style="font-family:var(--font-mono);font-size:12px;font-weight:700;color:'+dtcColor+';">'+dtc+'/10</td>'
+      +'<td class="c" style="font-family:var(--font-mono);font-size:12px;font-weight:700;color:'+depColor+';">'+dep+'/10</td>'
+      +'<td class="c" style="font-family:var(--font-mono);font-size:12px;font-weight:700;color:'+lbcColor+';">'+lbc+'/10</td>'
       +'<td class="c">'+formDots(d.form)+'</td>'
-      +'<td class="c" style="font-size:10px;color:var(--muted2);">'+d.apps+(d.titles>0 ? ' · 🏆x'+d.titles : '')+'</td>'
       +'</tr>';
   }
   html += '</tbody>';
