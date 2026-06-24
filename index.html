@@ -408,7 +408,7 @@ select:focus { outline: none; border-color: var(--gold); }
   <div class="hero-band">
     <div class="hero-eyebrow">FIFA · World Cup 2026 · 48 Selecciones</div>
     <h1 class="hero-h1">World Cup<br><span>Intelligence</span></h1>
-    <p class="hero-sub">Modelo Poisson recalibrado · Boost de paridad mundialista · Boost de empate · Power Rating (FIFA + Mercado) · ULTRA MODEL · Pi-Rating + Dixon-Coles + Decay + Poisson + xG + FIFA + PIB + DT + LBC + Depth · 17 partidos</p>
+    <p class="hero-sub">Modelo Poisson recalibrado · Boost de paridad mundialista · Boost de empate · Power Rating (FIFA + Mercado) · ULTRA MODEL · 47 partidos J1+J2 · Pi-Rating+Dixon-Coles+Decay · 23 jun 23:59</p>
     <div class="hero-kpis">
       <div class="hk"><div class="hk-n">48</div><div class="hk-l">Selecciones</div></div>
       <div class="hk"><div class="hk-n">12</div><div class="hk-l">Grupos</div></div>
@@ -692,55 +692,57 @@ select:focus { outline: none; border-color: var(--gold); }
 
 
 
+
+
 const TEAMS = {
-  "Mexico": {g:"A",conf:"CONCACAF",flag:"🇲🇽",c:"#006847",pts:1650,rk:14,pwr:88.1,xg:1.43,gc:0.59,mkt:191.9,dtc:15,dep:7,lbc:7,titles:0,apps:17,best:"Cuartos de Final",form:[3,1,3,3,3]},
-  "Corea del Sur": {g:"A",conf:"AFC",flag:"🇰🇷",c:"#cd2e3a",pts:1530,rk:23,pwr:63.3,xg:1.48,gc:0.97,mkt:139.1,dtc:7,dep:6,lbc:6,titles:0,apps:11,best:"Semifinal (1966*)",form:[3,0,0,3,1]},
-  "Sudafrica": {g:"A",conf:"CAF",flag:"🇿🇦",c:"#007749",pts:1478,rk:58,pwr:41.8,xg:0.43,gc:1.49,mkt:49.3,dtc:5,dep:3,lbc:4,titles:0,apps:4,best:"Fase de Grupos",form:[0,3,1,3,3]},
-  "Rep. Checa": {g:"A",conf:"UEFA",flag:"🇨🇿",c:"#11457e",pts:1565,rk:32,pwr:55.3,xg:0.97,gc:1.5,mkt:188.2,dtc:6,dep:4,lbc:5,titles:0,apps:10,best:"Subcampeón (1934*,1962*)",form:[0,1,3,1,0]},
-  "Canada": {g:"B",conf:"CONCACAF",flag:"🇨🇦",c:"#ff0000",pts:1585,rk:30,pwr:59.3,xg:1.25,gc:1.09,mkt:196.7,dtc:7,dep:5,lbc:5,titles:0,apps:3,best:"Fase de Grupos",form:[0,0,3,3,0]},
-  "Bosnia": {g:"B",conf:"UEFA",flag:"🇧🇦",c:"#002395",pts:1545,rk:35,pwr:47.2,xg:1.02,gc:1.19,mkt:151.6,dtc:5,dep:4,lbc:4,titles:0,apps:1,best:"Fase de Grupos",form:[3,3,3,0,1]},
-  "Qatar": {g:"B",conf:"AFC",flag:"🇶🇦",c:"#8a1538",pts:1505,rk:42,pwr:42.8,xg:0.76,gc:1.67,mkt:20.5,dtc:4,dep:4,lbc:3,titles:0,apps:2,best:"Fase de Grupos",form:[0,0,1,0,1]},
-  "Suiza": {g:"B",conf:"UEFA",flag:"🇨🇭",c:"#d52b1e",pts:1700,rk:14,pwr:73.7,xg:1.45,gc:0.84,mkt:332.5,dtc:8,dep:7,lbc:6,titles:0,apps:12,best:"Cuartos de Final",form:[1,0,1,0,1]},
-  "Brasil": {g:"C",conf:"CONMEBOL",flag:"🇧🇷",c:"#ffcc29",pts:1765,rk:6,pwr:65.0,xg:1.53,gc:1.2,mkt:928.2,inj:"Sin Rodrygo, Eder Militao, Estevao y Wesley (lesion)",dtc:4,dep:8,lbc:6,titles:5,apps:22,best:"Campeon",form:[1,1,3,3,3]},
-  "Marruecos": {g:"C",conf:"CAF",flag:"🇲🇦",c:"#c1272d",pts:1755,rk:7,pwr:72.3,xg:1.6,gc:1.13,mkt:498.3,inj:"Sin Aguerd (capitan) y Abde Ezzalzouli (lesion, confirmado 11 jun)",dtc:9,dep:6,lbc:7,titles:0,apps:7,best:"4to puesto (2022)",form:[1,3,3,3,1]},
-  "Escocia": {g:"C",conf:"UEFA",flag:"🏴󠁧󠁢󠁳󠁣󠁴󠁿",c:"#0065bd",pts:1605,rk:22,pwr:64.3,xg:1.16,gc:1.21,mkt:170.3,dtc:8,dep:5,lbc:5,titles:0,apps:9,best:"Fase de Grupos",form:[3,3,3,3,0]},
-  "Haiti": {g:"C",conf:"CONCACAF",flag:"🇭🇹",c:"#00209f",pts:1410,rk:72,pwr:32.4,xg:0.99,gc:1.35,mkt:55.9,dtc:4,dep:2,lbc:4,titles:0,apps:2,best:"Fase de Grupos",form:[0,0,3,0,3]},
-  "Estados Unidos": {g:"D",conf:"CONCACAF",flag:"🇺🇸",c:"#3c3b6e",pts:1690,rk:17,pwr:66.7,xg:1.45,gc:0.72,mkt:385.7,dtc:6,dep:7,lbc:6,titles:0,apps:11,best:"Semifinal (1930)",form:[3,0,1,1,1]},
-  "Paraguay": {g:"D",conf:"CONMEBOL",flag:"🇵🇾",c:"#0038a8",pts:1572,rk:29,pwr:50.1,xg:0.83,gc:1.31,mkt:153.7,dtc:6,dep:4,lbc:4,titles:0,apps:9,best:"Octavos de Final",form:[0,0,3,3,3]},
-  "Australia": {g:"D",conf:"AFC",flag:"🇦🇺",c:"#00843d",pts:1612,rk:21,pwr:60.2,xg:0.92,gc:1.24,mkt:77.5,dtc:7,dep:5,lbc:5,titles:0,apps:6,best:"Octavos de Final",form:[3,3,0,0,3]},
-  "Turquia": {g:"D",conf:"UEFA",flag:"🇹🇷",c:"#e30a17",pts:1648,rk:18,pwr:58.6,xg:1.41,gc:0.88,mkt:473.7,dtc:6,dep:5,lbc:5,titles:0,apps:3,best:"3er puesto (2002)",form:[0,3,0,3,3]},
-  "Alemania": {g:"E",conf:"UEFA",flag:"🇩🇪",c:"#000000",pts:1735,rk:10,pwr:80.6,xg:2.55,gc:0.67,mkt:947.0,dtc:7,dep:9,lbc:8,titles:4,apps:20,best:"Campeon",form:[3,3,3,3,0]},
-  "Curazao": {g:"E",conf:"CONCACAF",flag:"🇨🇼",c:"#002b7f",pts:1452,rk:66,pwr:38.9,xg:0.64,gc:2.35,mkt:25.8,dtc:5,dep:2,lbc:3,titles:0,apps:1,best:"Debut",form:[0,3,0,1,3]},
-  "Costa de Marfil": {g:"E",conf:"CAF",flag:"🇨🇮",c:"#f77f00",pts:1558,rk:33,pwr:55.9,xg:1.5,gc:1.0,mkt:522.1,dtc:6,dep:5,lbc:6,titles:0,apps:4,best:"Fase de Grupos",form:[3,3,0,0,1]},
-  "Ecuador": {g:"E",conf:"CONMEBOL",flag:"🇪🇨",c:"#ffd100",pts:1598,rk:17,pwr:60.3,xg:1.3,gc:1.41,mkt:368.7,dtc:7,dep:6,lbc:5,titles:0,apps:5,best:"Octavos de Final",form:[0,3,0,1,0]},
-  "Holanda": {g:"F",conf:"UEFA",flag:"🇳🇱",c:"#ff6c00",pts:1753,rk:8,pwr:77.0,xg:1.24,gc:0.68,mkt:804.2,inj:"Sin Xavi Simons, Schouten, de Ligt y Timber (lesion)",dtc:6,dep:8,lbc:7,titles:0,apps:11,best:"Subcampeon (x3)",form:[1,3,1,1,3]},
-  "Japon": {g:"F",conf:"AFC",flag:"🇯🇵",c:"#bc002d",pts:1678,rk:13,pwr:75.2,xg:0.99,gc:0.92,mkt:270.9,inj:"Sin Wataru Endo (capitan, mediocampo defensivo)",dtc:10,dep:6,lbc:6,titles:0,apps:8,best:"Octavos de Final",form:[1,1,3,3,3]},
-  "Suecia": {g:"F",conf:"UEFA",flag:"🇸🇪",c:"#005293",pts:1578,rk:26,pwr:69.4,xg:1.36,gc:0.75,mkt:406.1,dtc:8,dep:6,lbc:6,titles:0,apps:12,best:"Subcampeon (1958)",form:[3,0,3,1,3]},
-  "Tunez": {g:"F",conf:"CAF",flag:"🇹🇳",c:"#e70013",pts:1525,rk:39,pwr:42.4,xg:0.64,gc:1.29,mkt:69.9,dtc:5,dep:3,lbc:4,titles:0,apps:7,best:"Fase de Grupos",form:[0,0,3,0,0]},
-  "Belgica": {g:"G",conf:"UEFA",flag:"🇧🇪",c:"#ed2939",pts:1742,rk:9,pwr:69.3,xg:1.62,gc:0.89,mkt:547.5,dtc:6,dep:8,lbc:5,titles:0,apps:15,best:"3er puesto (2018)",form:[1,1,3,1,3]},
-  "Egipto": {g:"G",conf:"CAF",flag:"🇪🇬",c:"#ce1126",pts:1598,rk:24,pwr:55.9,xg:1.03,gc:1.27,mkt:116.5,dtc:7,dep:5,lbc:5,titles:0,apps:4,best:"Fase de Grupos",form:[1,3,3,0,0]},
-  "Iran": {g:"G",conf:"AFC",flag:"🇮🇷",c:"#239f40",pts:1638,rk:19,pwr:49.6,xg:0.99,gc:1.20,mkt:32.1,dtc:6,dep:4,lbc:5,titles:0,apps:7,best:"Fase de Grupos",form:[3,3,0,0,3]},
-  "Nueva Zelanda": {g:"G",conf:"OFC",flag:"🇳🇿",c:"#000000",pts:1418,rk:70,pwr:38.8,xg:0.70,gc:1.72,mkt:34.4,dtc:5,dep:2,lbc:3,titles:0,apps:3,best:"Fase de Grupos",form:[1,3,0,0,3]},
-  "Espana": {g:"H",conf:"UEFA",flag:"🇪🇸",c:"#aa151b",pts:1874,rk:2,pwr:71.4,xg:2.24,gc:0.45,mkt:1220.0,dtc:6,dep:9,lbc:4,titles:1,apps:16,best:"Campeon",form:[1,3,3,3,1]},
-  "Cabo Verde": {g:"H",conf:"CAF",flag:"🇨🇻",c:"#003893",pts:1462,rk:63,pwr:49.8,xg:0.6,gc:1.9,mkt:54.5,dtc:7,dep:3,lbc:6,titles:0,apps:1,best:"Debut",form:[1,3,1,0,3]},
-  "Arabia Saudita": {g:"H",conf:"AFC",flag:"🇸🇦",c:"#006c35",pts:1495,rk:48,pwr:45.3,xg:0.75,gc:1.34,mkt:40.7,dtc:5,dep:3,lbc:4,titles:0,apps:7,best:"Octavos de Final",form:[1,0,0,1,1]},
-  "Uruguay": {g:"H",conf:"CONMEBOL",flag:"🇺🇾",c:"#5cb6e8",pts:1712,rk:12,pwr:69.7,xg:1.29,gc:0.74,mkt:359.3,dtc:8,dep:6,lbc:6,titles:2,apps:14,best:"Campeon",form:[1,3,3,1,3]},
-  "Francia": {g:"I",conf:"UEFA",flag:"🇫🇷",c:"#0055a4",pts:1870,rk:3,pwr:90.3,xg:2.24,gc:0.54,mkt:1520.0,dtc:10,dep:10,lbc:7,titles:2,apps:16,best:"Campeon",form:[3,3,3,3,1]},
-  "Senegal": {g:"I",conf:"CAF",flag:"🇸🇳",c:"#00853f",pts:1620,rk:20,pwr:60.4,xg:1.58,gc:1.11,mkt:478.1,dtc:7,dep:6,lbc:6,titles:0,apps:3,best:"Cuartos de Final",form:[0,3,3,1,3]},
-  "Noruega": {g:"I",conf:"UEFA",flag:"🇳🇴",c:"#ba0c2f",pts:1592,rk:25,pwr:65.4,xg:1.45,gc:1.07,mkt:589.9,dtc:6,dep:6,lbc:6,titles:0,apps:3,best:"Octavos de Final",form:[3,0,1,1,0]},
-  "Irak": {g:"I",conf:"AFC",flag:"🇮🇶",c:"#ce1126",pts:1430,rk:68,pwr:39.7,xg:0.64,gc:1.77,mkt:21.2,dtc:5,dep:3,lbc:4,titles:0,apps:1,best:"Debut (vuelve tras 40a)",form:[0,3,3,1,1]},
-  "Argentina": {g:"J",conf:"CONMEBOL",flag:"🇦🇷",c:"#75aadb",pts:1877,rk:1,pwr:83.3,xg:2.11,gc:0.66,mkt:782.5,dtc:10,dep:7,lbc:8,titles:3,apps:18,best:"Campeon",form:[3,1,3,0,3]},
-  "Austria": {g:"J",conf:"UEFA",flag:"🇦🇹",c:"#ed2939",pts:1655,rk:23,pwr:67.1,xg:1.33,gc:0.93,mkt:242.2,dtc:8,dep:5,lbc:6,titles:0,apps:8,best:"3er puesto (1954)",form:[3,0,3,3,3]},
-  "Argelia": {g:"J",conf:"CAF",flag:"🇩🇿",c:"#006233",pts:1602,rk:28,pwr:54.4,xg:1.25,gc:0.99,mkt:256.9,dtc:6,dep:5,lbc:5,titles:0,apps:4,best:"Fase de Grupos",form:[0,3,3,3,0]},
-  "Jordania": {g:"J",conf:"AFC",flag:"🇯🇴",c:"#007a3d",pts:1455,rk:63,pwr:35.0,xg:0.68,gc:1.74,mkt:20.0,dtc:5,dep:2,lbc:3,titles:0,apps:1,best:"Debut",form:[0,0,3,0,0]},
-  "Portugal": {g:"K",conf:"UEFA",flag:"🇵🇹",c:"#046a38",pts:1766,rk:5,pwr:75.9,xg:2.07,gc:0.69,mkt:1010.0,dtc:7,dep:8,lbc:7,titles:0,apps:8,best:"3er puesto (1966)",form:[0,0,1,3,3]},
-  "Colombia": {g:"K",conf:"CONMEBOL",flag:"🇨🇴",c:"#fcd116",pts:1718,rk:13,pwr:69.1,xg:1.68,gc:1.03,mkt:302.4,dtc:7,dep:7,lbc:7,titles:0,apps:7,best:"Cuartos de Final",form:[3,3,3,3,0]},
-  "Uzbekistan": {g:"K",conf:"AFC",flag:"🇺🇿",c:"#1eb53a",pts:1488,rk:53,pwr:35.7,xg:0.96,gc:1.49,mkt:85.3,dtc:5,dep:2,lbc:3,titles:0,apps:1,best:"Debut",form:[3,0,1,1,0]},
-  "RD Congo": {g:"K",conf:"CAF",flag:"🇨🇩",c:"#007fff",pts:1432,rk:67,pwr:30.6,xg:0.95,gc:1.50,mkt:143.9,dtc:4,dep:2,lbc:3,titles:0,apps:1,best:"Debut",form:[0,0,0,3,1]},
-  "Inglaterra": {g:"L",conf:"UEFA",flag:"🏴󠁧󠁢󠁥󠁮󠁧󠁿",c:"#ffffff",pts:1827,rk:4,pwr:71.3,xg:2.18,gc:0.60,mkt:1360.0,dtc:4,dep:9,lbc:6,titles:1,apps:16,best:"Campeon",form:[0,3,3,1,3]},
-  "Croacia": {g:"L",conf:"UEFA",flag:"🇭🇷",c:"#ff0000",pts:1730,rk:11,pwr:70.4,xg:1.58,gc:0.73,mkt:387.3,dtc:7,dep:7,lbc:6,titles:0,apps:6,best:"Subcampeon (2018)",form:[3,3,0,3,0]},
-  "Ghana": {g:"L",conf:"CAF",flag:"🇬🇭",c:"#ce1126",pts:1548,rk:37,pwr:47.6,xg:1.23,gc:1.26,mkt:234.6,dtc:5,dep:4,lbc:5,titles:0,apps:4,best:"Cuartos de Final (2010)",form:[3,3,1,0,3]},
-  "Panama": {g:"L",conf:"CONCACAF",flag:"🇵🇦",c:"#db1f48",pts:1495,rk:49,pwr:46.0,xg:0.78,gc:1.36,mkt:34.6,dtc:6,dep:3,lbc:4,titles:0,apps:2,best:"Fase de Grupos",form:[3,0,3,0,0]},
+  "Mexico": {g:"A",conf:"CONCACAF",flag:"🇲🇽",c:"#006847",pts:1650,rk:14,pwr:88.1,xg:1.31,gc:0.53,mkt:191.9,dtc:15,dep:7,lbc:7,titles:0,apps:17,best:"Cuartos de Final",form:[3,3,1,3,3]},
+  "Corea del Sur": {g:"A",conf:"AFC",flag:"🇰🇷",c:"#cd2e3a",pts:1530,rk:23,pwr:63.3,xg:1.22,gc:1.03,mkt:139.1,dtc:7,dep:6,lbc:6,titles:0,apps:11,best:"Semifinal (1966*)",form:[0,3,0,0,3]},
+  "Sudafrica": {g:"A",conf:"CAF",flag:"🇿🇦",c:"#007749",pts:1478,rk:58,pwr:41.8,xg:0.64,gc:1.27,mkt:49.3,dtc:5,dep:3,lbc:4,titles:0,apps:4,best:"Fase de Grupos",form:[1,0,3,1,3]},
+  "Rep. Checa": {g:"A",conf:"UEFA",flag:"🇨🇿",c:"#11457e",pts:1565,rk:32,pwr:55.3,xg:0.96,gc:1.28,mkt:188.2,dtc:6,dep:4,lbc:5,titles:0,apps:10,best:"Subcampeón (1934*,1962*)",form:[1,0,1,3,1]},
+  "Canada": {g:"B",conf:"CONCACAF",flag:"🇨🇦",c:"#ff0000",pts:1585,rk:30,pwr:59.3,xg:2.15,gc:0.73,mkt:196.7,dtc:7,dep:5,lbc:5,titles:0,apps:3,best:"Fase de Grupos",form:[3,0,0,3,3]},
+  "Bosnia": {g:"B",conf:"UEFA",flag:"🇧🇦",c:"#002395",pts:1545,rk:35,pwr:47.2,xg:0.95,gc:1.83,mkt:151.6,dtc:5,dep:4,lbc:4,titles:0,apps:1,best:"Fase de Grupos",form:[0,3,3,3,0]},
+  "Qatar": {g:"B",conf:"AFC",flag:"🇶🇦",c:"#8a1538",pts:1505,rk:42,pwr:42.8,xg:0.54,gc:2.4,mkt:20.5,dtc:4,dep:4,lbc:3,titles:0,apps:2,best:"Fase de Grupos",form:[0,0,0,1,0]},
+  "Suiza": {g:"B",conf:"UEFA",flag:"🇨🇭",c:"#d52b1e",pts:1700,rk:14,pwr:73.7,xg:1.99,gc:0.84,mkt:332.5,dtc:8,dep:7,lbc:6,titles:0,apps:12,best:"Cuartos de Final",form:[3,1,0,1,0]},
+  "Brasil": {g:"C",conf:"CONMEBOL",flag:"🇧🇷",c:"#ffcc29",pts:1765,rk:6,pwr:65.0,xg:1.76,gc:0.84,mkt:928.2,inj:"Sin Rodrygo, Eder Militao, Estevao y Wesley (lesion)",dtc:4,dep:8,lbc:6,titles:5,apps:22,best:"Campeon",form:[3,1,1,3,3]},
+  "Marruecos": {g:"C",conf:"CAF",flag:"🇲🇦",c:"#c1272d",pts:1755,rk:7,pwr:72.3,xg:1.44,gc:0.9,mkt:498.3,inj:"Sin Aguerd (capitan) y Abde Ezzalzouli (lesion, confirmado 11 jun)",dtc:9,dep:6,lbc:7,titles:0,apps:7,best:"4to puesto (2022)",form:[3,1,3,3,3]},
+  "Escocia": {g:"C",conf:"UEFA",flag:"🏴󠁧󠁢󠁳󠁣󠁴󠁿",c:"#0065bd",pts:1605,rk:22,pwr:64.3,xg:0.92,gc:1.21,mkt:170.3,dtc:8,dep:5,lbc:5,titles:0,apps:9,best:"Fase de Grupos",form:[0,3,3,3,3]},
+  "Haiti": {g:"C",conf:"CONCACAF",flag:"🇭🇹",c:"#00209f",pts:1410,rk:72,pwr:32.4,xg:0.71,gc:1.65,mkt:55.9,dtc:4,dep:2,lbc:4,titles:0,apps:2,best:"Fase de Grupos",form:[0,0,0,3,0]},
+  "Estados Unidos": {g:"D",conf:"CONCACAF",flag:"🇺🇸",c:"#3c3b6e",pts:1690,rk:17,pwr:66.7,xg:1.61,gc:0.67,mkt:385.7,dtc:6,dep:7,lbc:6,titles:0,apps:11,best:"Semifinal (1930)",form:[3,3,0,1,1]},
+  "Paraguay": {g:"D",conf:"CONMEBOL",flag:"🇵🇾",c:"#0038a8",pts:1572,rk:29,pwr:50.1,xg:0.86,gc:1.05,mkt:153.7,dtc:6,dep:4,lbc:4,titles:0,apps:9,best:"Octavos de Final",form:[3,0,0,3,3]},
+  "Australia": {g:"D",conf:"AFC",flag:"🇦🇺",c:"#00843d",pts:1612,rk:21,pwr:60.2,xg:0.79,gc:1.48,mkt:77.5,dtc:7,dep:5,lbc:5,titles:0,apps:6,best:"Octavos de Final",form:[0,3,3,0,0]},
+  "Turquia": {g:"D",conf:"UEFA",flag:"🇹🇷",c:"#e30a17",pts:1648,rk:18,pwr:58.6,xg:1.11,gc:0.89,mkt:473.7,dtc:6,dep:5,lbc:5,titles:0,apps:3,best:"3er puesto (2002)",form:[0,0,3,0,3]},
+  "Alemania": {g:"E",conf:"UEFA",flag:"🇩🇪",c:"#000000",pts:1735,rk:10,pwr:80.6,xg:2.41,gc:0.78,mkt:947.0,dtc:7,dep:9,lbc:8,titles:4,apps:20,best:"Campeon",form:[3,3,3,3,3]},
+  "Curazao": {g:"E",conf:"CONCACAF",flag:"🇨🇼",c:"#002b7f",pts:1452,rk:66,pwr:38.9,xg:0.68,gc:1.71,mkt:25.8,dtc:5,dep:2,lbc:3,titles:0,apps:1,best:"Debut",form:[1,0,3,0,1]},
+  "Costa de Marfil": {g:"E",conf:"CAF",flag:"🇨🇮",c:"#f77f00",pts:1558,rk:33,pwr:55.9,xg:1.28,gc:1.48,mkt:522.1,dtc:6,dep:5,lbc:6,titles:0,apps:4,best:"Fase de Grupos",form:[0,3,3,0,0]},
+  "Ecuador": {g:"E",conf:"CONMEBOL",flag:"🇪🇨",c:"#ffd100",pts:1598,rk:17,pwr:60.3,xg:1.08,gc:1.15,mkt:368.7,dtc:7,dep:6,lbc:5,titles:0,apps:5,best:"Octavos de Final",form:[1,0,3,0,1]},
+  "Holanda": {g:"F",conf:"UEFA",flag:"🇳🇱",c:"#ff6c00",pts:1753,rk:8,pwr:77.0,xg:2.26,gc:0.63,mkt:804.2,inj:"Sin Xavi Simons, Schouten, de Ligt y Timber (lesion)",dtc:6,dep:8,lbc:7,titles:0,apps:11,best:"Subcampeon (x3)",form:[3,1,3,1,1]},
+  "Japon": {g:"F",conf:"AFC",flag:"🇯🇵",c:"#bc002d",pts:1678,rk:13,pwr:75.2,xg:1.75,gc:0.65,mkt:270.9,inj:"Sin Wataru Endo (capitan, mediocampo defensivo)",dtc:10,dep:6,lbc:6,titles:0,apps:8,best:"Octavos de Final",form:[3,1,1,3,3]},
+  "Suecia": {g:"F",conf:"UEFA",flag:"🇸🇪",c:"#005293",pts:1578,rk:26,pwr:69.4,xg:1.04,gc:1.97,mkt:406.1,dtc:8,dep:6,lbc:6,titles:0,apps:12,best:"Subcampeon (1958)",form:[0,3,0,3,1]},
+  "Tunez": {g:"F",conf:"CAF",flag:"🇹🇳",c:"#e70013",pts:1525,rk:39,pwr:42.4,xg:0.48,gc:1.93,mkt:69.9,dtc:5,dep:3,lbc:4,titles:0,apps:7,best:"Fase de Grupos",form:[0,0,0,3,0]},
+  "Belgica": {g:"G",conf:"UEFA",flag:"🇧🇪",c:"#ed2939",pts:1742,rk:9,pwr:69.3,xg:1.41,gc:0.89,mkt:547.5,dtc:6,dep:8,lbc:5,titles:0,apps:15,best:"3er puesto (2018)",form:[1,1,1,3,1]},
+  "Egipto": {g:"G",conf:"CAF",flag:"🇪🇬",c:"#ce1126",pts:1598,rk:24,pwr:55.9,xg:1.46,gc:1.08,mkt:116.5,dtc:7,dep:5,lbc:5,titles:0,apps:4,best:"Fase de Grupos",form:[3,1,3,3,0]},
+  "Iran": {g:"G",conf:"AFC",flag:"🇮🇷",c:"#239f40",pts:1638,rk:19,pwr:49.6,xg:0.95,gc:1.16,mkt:32.1,dtc:6,dep:4,lbc:5,titles:0,apps:7,best:"Fase de Grupos",form:[1,3,3,0,0]},
+  "Nueva Zelanda": {g:"G",conf:"OFC",flag:"🇳🇿",c:"#000000",pts:1418,rk:70,pwr:38.8,xg:0.74,gc:1.87,mkt:34.4,dtc:5,dep:2,lbc:3,titles:0,apps:3,best:"Fase de Grupos",form:[0,1,3,0,0]},
+  "Espana": {g:"H",conf:"UEFA",flag:"🇪🇸",c:"#aa151b",pts:1874,rk:2,pwr:71.4,xg:2.62,gc:0.35,mkt:1220.0,dtc:6,dep:9,lbc:4,titles:1,apps:16,best:"Campeon",form:[3,1,3,3,3]},
+  "Cabo Verde": {g:"H",conf:"CAF",flag:"🇨🇻",c:"#003893",pts:1462,rk:63,pwr:49.8,xg:0.92,gc:1.7,mkt:54.5,dtc:7,dep:3,lbc:6,titles:0,apps:1,best:"Debut",form:[1,1,3,1,0]},
+  "Arabia Saudita": {g:"H",conf:"AFC",flag:"🇸🇦",c:"#006c35",pts:1495,rk:48,pwr:45.3,xg:0.53,gc:2.08,mkt:40.7,dtc:5,dep:3,lbc:4,titles:0,apps:7,best:"Octavos de Final",form:[0,1,0,0,1]},
+  "Uruguay": {g:"H",conf:"CONMEBOL",flag:"🇺🇾",c:"#5cb6e8",pts:1712,rk:12,pwr:69.7,xg:1.33,gc:1.0,mkt:359.3,dtc:8,dep:6,lbc:6,titles:2,apps:14,best:"Campeon",form:[1,1,3,3,1]},
+  "Francia": {g:"I",conf:"UEFA",flag:"🇫🇷",c:"#0055a4",pts:1870,rk:3,pwr:90.3,xg:2.46,gc:0.46,mkt:1520.0,dtc:10,dep:10,lbc:7,titles:2,apps:16,best:"Campeon",form:[3,3,3,3,3]},
+  "Senegal": {g:"I",conf:"CAF",flag:"🇸🇳",c:"#00853f",pts:1620,rk:20,pwr:60.4,xg:1.67,gc:1.55,mkt:478.1,dtc:7,dep:6,lbc:6,titles:0,apps:3,best:"Cuartos de Final",form:[0,0,3,3,1]},
+  "Noruega": {g:"I",conf:"UEFA",flag:"🇳🇴",c:"#ba0c2f",pts:1592,rk:25,pwr:65.4,xg:1.75,gc:1.36,mkt:589.9,dtc:6,dep:6,lbc:6,titles:0,apps:3,best:"Octavos de Final",form:[3,3,0,1,1]},
+  "Irak": {g:"I",conf:"AFC",flag:"🇮🇶",c:"#ce1126",pts:1430,rk:68,pwr:39.7,xg:0.52,gc:2.18,mkt:21.2,dtc:5,dep:3,lbc:4,titles:0,apps:1,best:"Debut (vuelve tras 40a)",form:[0,0,3,3,1]},
+  "Argentina": {g:"J",conf:"CONMEBOL",flag:"🇦🇷",c:"#75aadb",pts:1877,rk:1,pwr:83.3,xg:2.11,gc:0.56,mkt:782.5,dtc:10,dep:7,lbc:8,titles:3,apps:18,best:"Campeon",form:[3,3,1,3,0]},
+  "Austria": {g:"J",conf:"UEFA",flag:"🇦🇹",c:"#ed2939",pts:1655,rk:23,pwr:67.1,xg:0.96,gc:1.4,mkt:242.2,dtc:8,dep:5,lbc:6,titles:0,apps:8,best:"3er puesto (1954)",form:[0,3,0,3,3]},
+  "Argelia": {g:"J",conf:"CAF",flag:"🇩🇿",c:"#006233",pts:1602,rk:28,pwr:54.4,xg:0.99,gc:0.83,mkt:256.9,dtc:6,dep:5,lbc:5,titles:0,apps:4,best:"Fase de Grupos",form:[1,0,3,3,3]},
+  "Jordania": {g:"J",conf:"AFC",flag:"🇯🇴",c:"#007a3d",pts:1455,rk:63,pwr:35.0,xg:0.65,gc:1.28,mkt:20.0,dtc:5,dep:2,lbc:3,titles:0,apps:1,best:"Debut",form:[1,0,0,3,0]},
+  "Portugal": {g:"K",conf:"UEFA",flag:"🇵🇹",c:"#046a38",pts:1766,rk:5,pwr:75.9,xg:2.5,gc:0.55,mkt:1010.0,dtc:7,dep:8,lbc:7,titles:0,apps:8,best:"3er puesto (1966)",form:[3,1,0,0,1]},
+  "Colombia": {g:"K",conf:"CONMEBOL",flag:"🇨🇴",c:"#fcd116",pts:1718,rk:13,pwr:69.1,xg:1.68,gc:1.03,mkt:302.4,dtc:7,dep:7,lbc:7,titles:0,apps:7,best:"Cuartos de Final",form:[3,3,3,3,3]},
+  "Uzbekistan": {g:"K",conf:"AFC",flag:"🇺🇿",c:"#1eb53a",pts:1488,rk:53,pwr:35.7,xg:0.76,gc:2.07,mkt:85.3,dtc:5,dep:2,lbc:3,titles:0,apps:1,best:"Debut",form:[0,0,3,0,1]},
+  "RD Congo": {g:"K",conf:"CAF",flag:"🇨🇩",c:"#007fff",pts:1432,rk:67,pwr:30.6,xg:0.95,gc:1.50,mkt:143.9,dtc:4,dep:2,lbc:3,titles:0,apps:1,best:"Debut",form:[1,0,0,0,3]},
+  "Inglaterra": {g:"L",conf:"UEFA",flag:"🏴󠁧󠁢󠁥󠁮󠁧󠁿",c:"#ffffff",pts:1827,rk:4,pwr:71.3,xg:2.11,gc:0.61,mkt:1360.0,dtc:4,dep:9,lbc:6,titles:1,apps:16,best:"Campeon",form:[1,3,0,3,3]},
+  "Croacia": {g:"L",conf:"UEFA",flag:"🇭🇷",c:"#ff0000",pts:1730,rk:11,pwr:70.4,xg:1.46,gc:0.75,mkt:387.3,dtc:7,dep:7,lbc:6,titles:0,apps:6,best:"Subcampeon (2018)",form:[3,0,3,3,0]},
+  "Ghana": {g:"L",conf:"CAF",flag:"🇬🇭",c:"#ce1126",pts:1548,rk:37,pwr:47.6,xg:1.08,gc:1.42,mkt:234.6,dtc:5,dep:4,lbc:5,titles:0,apps:4,best:"Cuartos de Final (2010)",form:[1,3,3,3,1]},
+  "Panama": {g:"L",conf:"CONCACAF",flag:"🇵🇦",c:"#db1f48",pts:1495,rk:49,pwr:46.0,xg:0.78,gc:1.29,mkt:34.6,dtc:6,dep:3,lbc:4,titles:0,apps:2,best:"Fase de Grupos",form:[0,0,3,0,3]},
 };
 
 const GRUPOS = {
@@ -785,50 +787,86 @@ const J1 = {
 // ════════════════════════════════════════════════════
 
 var PLAYED_MATCHES = {
-  "Mexico|Sudafrica":         {gA:2, gB:0, fecha:"11 jun", nota:"Quinones 9', R.Jimenez 66'"},
-  "Corea del Sur|Rep. Checa": {gA:2, gB:1, fecha:"11 jun", nota:"Remontada: Hwang In-beom + Oh Hyeon-gyu (KOR)"},
-  "Canada|Bosnia":            {gA:1, gB:1, fecha:"12 jun", nota:"Larin 79' rescato el empate para Canada"},
-  "Estados Unidos|Paraguay":  {gA:4, gB:1, fecha:"12 jun", nota:"Goleada del anfitrion; Pochettino debuta con pie derecho"},
-  "Brasil|Marruecos":         {gA:1, gB:1, fecha:"13 jun", nota:"Saibari 21' (MAR); Vinicius Jr. 32' (BRA)"},
-  "Escocia|Haiti":            {gA:1, gB:0, fecha:"13 jun", nota:"Escocia gana ajustado"},
-  "Australia|Turquia":        {gA:2, gB:0, fecha:"14 jun", nota:"SORPRESA: Irankunda + Metcalfe; Turquia domino posesion sin convertir"},
-  "Alemania|Curazao":         {gA:7, gB:1, fecha:"14 jun", nota:"Goleada; Comenencia primer gol mundialista de Curazao"},
-  "Holanda|Japon":            {gA:2, gB:2, fecha:"14 jun", nota:"Ogawa 88' empata dramaticamente para Japon"},
-  "Costa de Marfil|Ecuador":  {gA:1, gB:0, fecha:"14 jun", nota:"Amad Diallo sobre el final"},
-  "Suecia|Tunez":             {gA:5, gB:1, fecha:"14 jun", nota:"Isak + Gyokeres + Svanberg; doblete Ayari"},
-  "Belgica|Egipto":           {gA:1, gB:1, fecha:"15 jun", nota:"Belgica domino pero no pudo ganar; Salah influyo en el empate egipcio"},
-  "Espana|Cabo Verde":        {gA:0, gB:0, fecha:"15 jun", nota:"HISTORICO: debutante rank 64 frena a Espana; 2.29 xG y 0 goles"},
-  "Uruguay|Arabia Saudita":   {gA:1, gB:1, fecha:"15 jun", nota:"Bielsa: 'debimos superar a este rival'"},
-  "Francia|Senegal":          {gA:3, gB:1, fecha:"16 jun", nota:"Mbappe doblete + Barcola; Senegal resistio bien 1T, Mbaye anoto el descuento"},
-  "Irak|Noruega":             {gA:0, gB:4, fecha:"16 jun", nota:"Haaland doblete + Ostigard + autogol Aymen Hussein; Noruega goleo en Boston"},
-  "Argentina|Argelia":        {gA:3, gB:0, fecha:"16 jun", nota:"HAT-TRICK MESSI (16', 60', 77') - iguala a Klose como maximo goleador mundial (16 goles)"}
+  // ── JORNADA 1 ────────────────────────────────────────
+  "Mexico|Sudafrica":         {gA:2, gB:0, fecha:"11 jun"},
+  "Corea del Sur|Rep. Checa": {gA:2, gB:1, fecha:"11 jun"},
+  "Canada|Bosnia":            {gA:1, gB:1, fecha:"12 jun"},
+  "Qatar|Suiza":              {gA:1, gB:1, fecha:"13 jun"},
+  "Estados Unidos|Paraguay":  {gA:4, gB:1, fecha:"12 jun"},
+  "Brasil|Marruecos":         {gA:1, gB:1, fecha:"13 jun"},
+  "Escocia|Haiti":            {gA:1, gB:0, fecha:"13 jun"},
+  "Australia|Turquia":        {gA:2, gB:0, fecha:"13 jun"},
+  "Alemania|Curazao":         {gA:7, gB:1, fecha:"14 jun"},
+  "Holanda|Japon":            {gA:2, gB:2, fecha:"14 jun"},
+  "Costa de Marfil|Ecuador":  {gA:1, gB:0, fecha:"14 jun"},
+  "Suecia|Tunez":             {gA:5, gB:1, fecha:"14 jun"},
+  "Belgica|Egipto":           {gA:1, gB:1, fecha:"15 jun"},
+  "Iran|Nueva Zelanda":       {gA:2, gB:2, fecha:"15 jun"},
+  "Espana|Cabo Verde":        {gA:0, gB:0, fecha:"15 jun"},
+  "Uruguay|Arabia Saudita":   {gA:1, gB:1, fecha:"15 jun"},
+  "Francia|Senegal":          {gA:3, gB:1, fecha:"16 jun"},
+  "Irak|Noruega":             {gA:0, gB:4, fecha:"16 jun"},
+  "Argentina|Argelia":        {gA:3, gB:0, fecha:"16 jun"},
+  "Austria|Jordania":         {gA:3, gB:1, fecha:"16 jun"},
+  "Portugal|RD Congo":        {gA:1, gB:1, fecha:"17 jun"},
+  "Colombia|Uzbekistan":      {gA:3, gB:1, fecha:"17 jun"},
+  "Inglaterra|Croacia":       {gA:4, gB:2, fecha:"17 jun"},
+  "Ghana|Panama":             {gA:1, gB:0, fecha:"17 jun"},
+  // ── JORNADA 2 ────────────────────────────────────────
+  "Rep. Checa|Sudafrica":     {gA:1, gB:1, fecha:"18 jun"},
+  "Mexico|Corea del Sur":     {gA:1, gB:0, fecha:"18 jun"},
+  "Suiza|Bosnia":             {gA:4, gB:1, fecha:"18 jun"},
+  "Canada|Qatar":             {gA:6, gB:0, fecha:"18 jun"},
+  "Marruecos|Escocia":        {gA:1, gB:0, fecha:"19 jun"},
+  "Brasil|Haiti":             {gA:3, gB:0, fecha:"19 jun"},
+  "Estados Unidos|Australia": {gA:2, gB:0, fecha:"19 jun"},
+  "Turquia|Paraguay":         {gA:0, gB:1, fecha:"19 jun"},
+  "Alemania|Costa de Marfil": {gA:2, gB:1, fecha:"20 jun"},
+  "Ecuador|Curazao":          {gA:0, gB:0, fecha:"20 jun"},
+  "Holanda|Suecia":           {gA:5, gB:1, fecha:"20 jun"},
+  "Tunez|Japon":              {gA:0, gB:4, fecha:"20 jun"},
+  "Belgica|Iran":             {gA:0, gB:0, fecha:"21 jun"},
+  "Nueva Zelanda|Egipto":     {gA:1, gB:3, fecha:"21 jun"},
+  "Espana|Arabia Saudita":    {gA:4, gB:0, fecha:"21 jun"},
+  "Uruguay|Cabo Verde":       {gA:2, gB:2, fecha:"21 jun"},
+  "Francia|Irak":             {gA:3, gB:0, fecha:"22 jun"},
+  "Noruega|Senegal":          {gA:3, gB:2, fecha:"22 jun"},
+  "Argentina|Austria":        {gA:2, gB:0, fecha:"22 jun"},
+  "Jordania|Argelia":         {gA:0, gB:0, fecha:"22 jun"},
+  "Portugal|Uzbekistan":     {gA:5, gB:0, fecha:"23 jun"},
+  "Inglaterra|Ghana":         {gA:0, gB:0, fecha:"23 jun"},
+  "Croacia|Panama":           {gA:1, gB:0, fecha:"23 jun"},
 };
 
 function getPlayedResult(a,b){
-  var k1 = a+"|"+b, k2 = b+"|"+a;
-  if (PLAYED_MATCHES[k1]) return {gA:PLAYED_MATCHES[k1].gA, gB:PLAYED_MATCHES[k1].gB};
-  if (PLAYED_MATCHES[k2]) return {gA:PLAYED_MATCHES[k2].gB, gB:PLAYED_MATCHES[k2].gA};
+  var k1=a+"|"+b, k2=b+"|"+a;
+  if(PLAYED_MATCHES[k1]) return {gA:PLAYED_MATCHES[k1].gA, gB:PLAYED_MATCHES[k1].gB};
+  if(PLAYED_MATCHES[k2]) return {gA:PLAYED_MATCHES[k2].gB, gB:PLAYED_MATCHES[k2].gA};
   return null;
 }
 
+// Solo los últimos resultados más relevantes para el ticker
 var RESULTS_FEED = [
-  {a:"Argentina",   b:"Argelia",      gA:3, gB:0, group:"J", fecha:"16 jun", estado:"FINAL"},
-  {a:"Noruega",     b:"Irak",         gA:4, gB:0, group:"I", fecha:"16 jun", estado:"FINAL"},
-  {a:"Francia",     b:"Senegal",      gA:3, gB:1, group:"I", fecha:"16 jun", estado:"FINAL"},
-  {a:"Espana",      b:"Cabo Verde",   gA:0, gB:0, group:"H", fecha:"15 jun", estado:"FINAL"},
-  {a:"Uruguay",     b:"Arabia Saudita",gA:1,gB:1, group:"H", fecha:"15 jun", estado:"FINAL"},
-  {a:"Belgica",     b:"Egipto",       gA:1, gB:1, group:"G", fecha:"15 jun", estado:"FINAL"},
-  {a:"Suecia",      b:"Tunez",        gA:5, gB:1, group:"F", fecha:"14 jun", estado:"FINAL"},
-  {a:"Holanda",     b:"Japon",        gA:2, gB:2, group:"F", fecha:"14 jun", estado:"FINAL"},
-  {a:"Alemania",    b:"Curazao",      gA:7, gB:1, group:"E", fecha:"14 jun", estado:"FINAL"},
-  {a:"Costa de Marfil",b:"Ecuador",   gA:1, gB:0, group:"E", fecha:"14 jun", estado:"FINAL"},
-  {a:"Australia",   b:"Turquia",      gA:2, gB:0, group:"D", fecha:"14 jun", estado:"FINAL"},
-  {a:"Brasil",      b:"Marruecos",    gA:1, gB:1, group:"C", fecha:"13 jun", estado:"FINAL"},
-  {a:"Escocia",     b:"Haiti",        gA:1, gB:0, group:"C", fecha:"13 jun", estado:"FINAL"},
-  {a:"Estados Unidos",b:"Paraguay",   gA:4, gB:1, group:"D", fecha:"12 jun", estado:"FINAL"},
-  {a:"Canada",      b:"Bosnia",       gA:1, gB:1, group:"B", fecha:"12 jun", estado:"FINAL"},
-  {a:"Mexico",      b:"Sudafrica",    gA:2, gB:0, group:"A", fecha:"11 jun", estado:"FINAL"},
-  {a:"Corea del Sur",b:"Rep. Checa",  gA:2, gB:1, group:"A", fecha:"11 jun", estado:"FINAL"}
+  {a:"Argentina",  b:"Austria",      gA:2, gB:0, group:"J", fecha:"22 jun", estado:"FINAL"},
+  {a:"Francia",    b:"Irak",         gA:3, gB:0, group:"I", fecha:"22 jun", estado:"FINAL"},
+  {a:"Noruega",    b:"Senegal",      gA:3, gB:2, group:"I", fecha:"22 jun", estado:"FINAL"},
+  {a:"Jordania",   b:"Argelia",      gA:0, gB:0, group:"J", fecha:"22 jun", estado:"FINAL"},
+  {a:"Espana",     b:"Arabia Saudita",gA:4,gB:0, group:"H", fecha:"21 jun", estado:"FINAL"},
+  {a:"Uruguay",    b:"Cabo Verde",   gA:2, gB:2, group:"H", fecha:"21 jun", estado:"FINAL"},
+  {a:"Nueva Zelanda",b:"Egipto",     gA:1, gB:3, group:"G", fecha:"21 jun", estado:"FINAL"},
+  {a:"Belgica",    b:"Iran",         gA:0, gB:0, group:"G", fecha:"21 jun", estado:"FINAL"},
+  {a:"Holanda",    b:"Suecia",       gA:5, gB:1, group:"F", fecha:"20 jun", estado:"FINAL"},
+  {a:"Tunez",      b:"Japon",        gA:0, gB:4, group:"F", fecha:"20 jun", estado:"FINAL"},
+  {a:"Alemania",   b:"Costa de Marfil",gA:2,gB:1,group:"E",fecha:"20 jun", estado:"FINAL"},
+  {a:"Ecuador",    b:"Curazao",      gA:0, gB:0, group:"E", fecha:"20 jun", estado:"FINAL"},
+  {a:"Brasil",     b:"Haiti",        gA:3, gB:0, group:"C", fecha:"19 jun", estado:"FINAL"},
+  {a:"Marruecos",  b:"Escocia",      gA:1, gB:0, group:"C", fecha:"19 jun", estado:"FINAL"},
+  {a:"Estados Unidos",b:"Australia", gA:2, gB:0, group:"D", fecha:"19 jun", estado:"FINAL"},
+  {a:"Turquia",    b:"Paraguay",     gA:0, gB:1, group:"D", fecha:"19 jun", estado:"FINAL"},
+  {a:"Canada",     b:"Qatar",        gA:6, gB:0, group:"B", fecha:"18 jun", estado:"FINAL"},
+  {a:"Suiza",      b:"Bosnia",       gA:4, gB:1, group:"B", fecha:"18 jun", estado:"FINAL"},
+  {a:"Mexico",     b:"Corea del Sur",gA:1, gB:0, group:"A", fecha:"18 jun", estado:"FINAL"},
+  {a:"Rep. Checa", b:"Sudafrica",    gA:1, gB:1, group:"A", fecha:"18 jun", estado:"FINAL"}
 ];
 
 var CONF_NAMES = {
@@ -1023,7 +1061,37 @@ function initPiRatingsFromResults(){
     // 16 jun - Grupo I y J
     ["Francia","Senegal",3,1],
     ["Irak","Noruega",0,4],
-    ["Argentina","Argelia",3,0]
+    ["Argentina","Argelia",3,0],
+    // J1 K y L
+    ["Portugal","RD Congo",1,1],
+    ["Colombia","Uzbekistan",3,1],
+    ["Inglaterra","Croacia",4,2],
+    ["Ghana","Panama",1,0],
+    // J2
+
+    ["Rep. Checa","Sudafrica",1,1],
+    ["Mexico","Corea del Sur",1,0],
+    ["Suiza","Bosnia",4,1],
+    ["Canada","Qatar",6,0],
+    ["Marruecos","Escocia",1,0],
+    ["Brasil","Haiti",3,0],
+    ["Estados Unidos","Australia",2,0],
+    ["Turquia","Paraguay",0,1],
+    ["Alemania","Costa de Marfil",2,1],
+    ["Ecuador","Curazao",0,0],
+    ["Holanda","Suecia",5,1],
+    ["Tunez","Japon",0,4],
+    ["Belgica","Iran",0,0],
+    ["Nueva Zelanda","Egipto",1,3],
+    ["Espana","Arabia Saudita",4,0],
+    ["Uruguay","Cabo Verde",2,2],
+    ["Francia","Irak",3,0],
+    ["Noruega","Senegal",3,2],
+    ["Argentina","Austria",2,0],
+    ["Jordania","Argelia",0,0],
+    ["Portugal","Uzbekistan",5,0],
+    ["Inglaterra","Ghana",0,0],
+    ["Croacia","Panama",1,0],
   ];
   for(var i=0;i<matchOrder.length;i++){
     var m=matchOrder[i];
@@ -1108,7 +1176,30 @@ function teamTemporalWeight(name){
     "Belgica":"15 jun","Egipto":"15 jun",
     "Espana":"15 jun","Cabo Verde":"15 jun",
     "Uruguay":"15 jun","Arabia Saudita":"15 jun",
-    "Francia":"16 jun","Senegal":"16 jun",
+    "Francia":"22 jun","Senegal":"22 jun",
+    "Rep. Checa":"18 jun","Sudafrica":"18 jun",
+    "Suiza":"18 jun","Bosnia":"18 jun",
+    "Canada":"18 jun","Qatar":"18 jun",
+    "Marruecos":"19 jun","Escocia":"19 jun",
+    "Brasil":"19 jun","Haiti":"19 jun",
+    "Estados Unidos":"19 jun","Paraguay":"19 jun",
+    "Australia":"19 jun","Turquia":"19 jun",
+    "Alemania":"20 jun","Costa de Marfil":"20 jun",
+    "Ecuador":"20 jun","Curazao":"20 jun",
+    "Holanda":"20 jun","Suecia":"20 jun",
+    "Japon":"20 jun","Tunez":"20 jun",
+    "Belgica":"21 jun","Iran":"21 jun",
+    "Espana":"21 jun","Arabia Saudita":"21 jun",
+    "Uruguay":"21 jun","Cabo Verde":"21 jun",
+    "Nueva Zelanda":"21 jun","Egipto":"21 jun",
+    "Francia":"22 jun","Irak":"22 jun",
+    "Noruega":"22 jun","Senegal":"22 jun",
+    "Argentina":"22 jun","Austria":"22 jun",
+    "Argelia":"22 jun","Jordania":"22 jun",
+    "Portugal":"17 jun","RD Congo":"17 jun",
+    "Colombia":"17 jun","Uzbekistan":"17 jun",
+    "Inglaterra":"17 jun","Croacia":"17 jun",
+    "Ghana":"17 jun","Panama":"17 jun",
     "Irak":"16 jun","Noruega":"16 jun",
     "Argentina":"16 jun","Argelia":"16 jun"
   };
@@ -2573,6 +2664,8 @@ function init(){
 }
 
 document.addEventListener("DOMContentLoaded", init);
+
+
 
 
 
