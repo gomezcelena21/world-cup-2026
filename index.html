@@ -197,6 +197,8 @@ body { background: var(--bg); color: var(--text); font-family: var(--font); min-
 .group-table td:first-child { text-align: left; font-weight: 600; }
 .group-table tr:last-child td { border-bottom: none; }
 .row-q { background: rgba(212,175,55,.045); }
+.row-q2 { background: rgba(34,197,94,.025); }
+.row-elim { opacity: 0.38; }
 .pwr-num { font-family: var(--font-mono); font-weight: 700; color: var(--gold); font-size: 12px; }
 .host-tag { font-size: 7px; font-weight: 800; letter-spacing: 1px; padding: 1px 4px; border-radius: 3px; background: rgba(59,130,246,.12); color: var(--blue); margin-left: 3px; }
 
@@ -408,7 +410,7 @@ select:focus { outline: none; border-color: var(--gold); }
   <div class="hero-band">
     <div class="hero-eyebrow">FIFA · World Cup 2026 · 48 Selecciones</div>
     <h1 class="hero-h1">World Cup<br><span>Intelligence</span></h1>
-    <p class="hero-sub">Modelo Poisson recalibrado · Boost de paridad mundialista · Boost de empate · Power Rating (FIFA + Mercado) · ULTRA MODEL · 47 partidos J1+J2 · Pi-Rating+Dixon-Coles+Decay · 23 jun 23:59</p>
+    <p class="hero-sub">Modelo Poisson · Pi-Rating + Dixon-Coles + Decay · Fase de grupos completa · 16avos y Octavos completados · Cuartos: 9-11 jul · Actualizado 7 jul 2026</p>
     <div class="hero-kpis">
       <div class="hk"><div class="hk-n">48</div><div class="hk-l">Selecciones</div></div>
       <div class="hk"><div class="hk-n">12</div><div class="hk-l">Grupos</div></div>
@@ -420,7 +422,7 @@ select:focus { outline: none; border-color: var(--gold); }
   </div>
 
   <div class="panel">
-    <div class="panel-head"><div class="panel-title">🔴 Resultados de Hoy</div><div class="panel-badge">Jornada 1 · 12 partidos jugados</div></div>
+    <div class="panel-head"><div class="panel-title">🔴 Últimos Resultados · J3</div><div class="panel-badge">Jornada 3 · 26 jun 2026</div></div>
     <div class="panel-body" id="results-ticker"></div>
   </div>
 
@@ -431,7 +433,7 @@ select:focus { outline: none; border-color: var(--gold); }
 
   <div class="grid-3">
     <div class="panel">
-      <div class="panel-head"><div class="panel-title">Proyección de Campeón</div><div class="panel-badge">Pre-torneo</div></div>
+      <div class="panel-head"><div class="panel-title">Proyección de Campeón</div><div class="panel-badge">Tras J3 parcial</div></div>
       <div class="panel-body">
         <div class="donut-wrap">
           <canvas id="donut-cv" width="150" height="150"></canvas>
@@ -446,13 +448,13 @@ select:focus { outline: none; border-color: var(--gold); }
       </div>
     </div>
     <div class="panel">
-      <div class="panel-head"><div class="panel-title">Próxima Jornada</div><div class="panel-badge">Grupos G-L</div></div>
+      <div class="panel-head"><div class="panel-title">Próximo Partido</div><div class="panel-badge">J3 · Grupos G en curso</div></div>
       <div class="panel-body" id="opener-card"></div>
     </div>
   </div>
 
   <div class="panel">
-    <div class="panel-head"><div class="panel-title">Estado Fase de Grupos</div><div class="panel-badge">12/12 grupos sorteados</div></div>
+    <div class="panel-head"><div class="panel-title">Estado Fase de Grupos</div><div class="panel-badge">12/12 grupos · J3 en curso</div></div>
     <div class="panel-body" style="padding:0;">
       <table class="rank-table" id="dash-groups-table"></table>
     </div>
@@ -463,11 +465,11 @@ select:focus { outline: none; border-color: var(--gold); }
 <!-- ══════════════ GRUPOS ══════════════ -->
 <div class="page" id="page-grupos">
   <div class="panel-head" style="border-radius:12px 12px 0 0;border:1px solid var(--border);">
-    <div class="panel-title">Fase de Grupos · Proyección Pre-Torneo</div>
+    <div class="panel-title">Fase de Grupos · Resultados Reales + Proyección</div>
     <div class="panel-badge">11–27 jun 2026</div>
   </div>
   <p style="font-size:11px;color:var(--muted2);margin:10px 0 14px;line-height:1.6;">
-    Como la fase de grupos arranca el 11 de junio, las posiciones se ordenan por <b style="color:var(--gold)">Power Rating</b> (rating pre-torneo basado en ranking FIFA, forma reciente y estilo). Clasifican los 2 primeros de cada grupo + los 8 mejores terceros.
+    Grupos A–F, H e I con las 3 jornadas completas. Grupos G, J, K y L con J3 pendiente o en curso. Las posiciones se ordenan por resultados reales cuando están disponibles, y por <b style="color:var(--gold)">Power Rating</b> para partidos no jugados. Clasifican los 2 primeros de cada grupo + los 8 mejores terceros.
   </p>
   <div class="groups-grid" id="groups-grid"></div>
 </div>
@@ -680,19 +682,10 @@ select:focus { outline: none; border-color: var(--gold); }
 
 <div class="footer-bar">
   <span>Datos: FIFA Ranking · Sorteo oficial Washington D.C. (5 dic 2025) · Repechajes resueltos (31 mar 2026)</span>
-  <span id="footer-update">⚽ 14 partidos jugados · España 0-0 Cabo Verde (sorpresa) · Ajuste de altitud activo en Predicciones</span>
+  <span id="footer-update">⚽ 7 jul 2026 · Octavos completos · Suiza elimina Colombia PEN · Argentina 3-2 Egipto · Cuartos confirmados: FRA-MAR · ESP-BEL · NOR-ING · ARG-SUI</span>
 </div>
 
 <script>
-
-
-
-
-
-
-
-
-
 
 const TEAMS = {
   "Mexico": {g:"A",conf:"CONCACAF",flag:"🇲🇽",c:"#006847",pts:1650,rk:14,pwr:88.1,xg:1.31,gc:0.53,mkt:191.9,dtc:15,dep:7,lbc:7,titles:0,apps:17,best:"Cuartos de Final",form:[3,3,1,3,3]},
@@ -702,9 +695,9 @@ const TEAMS = {
   "Canada": {g:"B",conf:"CONCACAF",flag:"🇨🇦",c:"#ff0000",pts:1585,rk:30,pwr:59.3,xg:2.15,gc:0.73,mkt:196.7,dtc:7,dep:5,lbc:5,titles:0,apps:3,best:"Fase de Grupos",form:[3,0,0,3,3]},
   "Bosnia": {g:"B",conf:"UEFA",flag:"🇧🇦",c:"#002395",pts:1545,rk:35,pwr:47.2,xg:0.95,gc:1.83,mkt:151.6,dtc:5,dep:4,lbc:4,titles:0,apps:1,best:"Fase de Grupos",form:[0,3,3,3,0]},
   "Qatar": {g:"B",conf:"AFC",flag:"🇶🇦",c:"#8a1538",pts:1505,rk:42,pwr:42.8,xg:0.54,gc:2.4,mkt:20.5,dtc:4,dep:4,lbc:3,titles:0,apps:2,best:"Fase de Grupos",form:[0,0,0,1,0]},
-  "Suiza": {g:"B",conf:"UEFA",flag:"🇨🇭",c:"#d52b1e",pts:1700,rk:14,pwr:73.7,xg:1.99,gc:0.84,mkt:332.5,dtc:8,dep:7,lbc:6,titles:0,apps:12,best:"Cuartos de Final",form:[3,1,0,1,0]},
+  "Suiza": {g:"B",conf:"UEFA",flag:"🇨🇭",c:"#d52b1e",pts:1700,rk:14,pwr:78.0,xg:1.50,gc:0.85,mkt:332.5,dtc:8,dep:7,lbc:6,titles:0,apps:12,best:"Cuartos (2026)",form:[3,3,3,3,3]},
   "Brasil": {g:"C",conf:"CONMEBOL",flag:"🇧🇷",c:"#ffcc29",pts:1765,rk:6,pwr:65.0,xg:1.76,gc:0.84,mkt:928.2,inj:"Sin Rodrygo, Eder Militao, Estevao y Wesley (lesion)",dtc:4,dep:8,lbc:6,titles:5,apps:22,best:"Campeon",form:[3,1,1,3,3]},
-  "Marruecos": {g:"C",conf:"CAF",flag:"🇲🇦",c:"#c1272d",pts:1755,rk:7,pwr:72.3,xg:1.44,gc:0.9,mkt:498.3,inj:"Sin Aguerd (capitan) y Abde Ezzalzouli (lesion, confirmado 11 jun)",dtc:9,dep:6,lbc:7,titles:0,apps:7,best:"4to puesto (2022)",form:[3,1,3,3,3]},
+  "Marruecos": {g:"C",conf:"CAF",flag:"🇲🇦",c:"#c1272d",pts:1755,rk:7,pwr:82.0,xg:1.80,gc:0.70,mkt:498.3,inj:"Sin Aguerd (capitan) y Abde Ezzalzouli (lesion, confirmado 11 jun)",dtc:9,dep:6,lbc:7,titles:0,apps:7,best:"Cuartos (2026)",form:[3,3,3,3,3]},
   "Escocia": {g:"C",conf:"UEFA",flag:"🏴󠁧󠁢󠁳󠁣󠁴󠁿",c:"#0065bd",pts:1605,rk:22,pwr:64.3,xg:0.92,gc:1.21,mkt:170.3,dtc:8,dep:5,lbc:5,titles:0,apps:9,best:"Fase de Grupos",form:[0,3,3,3,3]},
   "Haiti": {g:"C",conf:"CONCACAF",flag:"🇭🇹",c:"#00209f",pts:1410,rk:72,pwr:32.4,xg:0.71,gc:1.65,mkt:55.9,dtc:4,dep:2,lbc:4,titles:0,apps:2,best:"Fase de Grupos",form:[0,0,0,3,0]},
   "Estados Unidos": {g:"D",conf:"CONCACAF",flag:"🇺🇸",c:"#3c3b6e",pts:1690,rk:17,pwr:66.7,xg:1.61,gc:0.67,mkt:385.7,dtc:6,dep:7,lbc:6,titles:0,apps:11,best:"Semifinal (1930)",form:[3,3,0,1,1]},
@@ -719,19 +712,19 @@ const TEAMS = {
   "Japon": {g:"F",conf:"AFC",flag:"🇯🇵",c:"#bc002d",pts:1678,rk:13,pwr:75.2,xg:1.75,gc:0.65,mkt:270.9,inj:"Sin Wataru Endo (capitan, mediocampo defensivo)",dtc:10,dep:6,lbc:6,titles:0,apps:8,best:"Octavos de Final",form:[3,1,1,3,3]},
   "Suecia": {g:"F",conf:"UEFA",flag:"🇸🇪",c:"#005293",pts:1578,rk:26,pwr:69.4,xg:1.04,gc:1.97,mkt:406.1,dtc:8,dep:6,lbc:6,titles:0,apps:12,best:"Subcampeon (1958)",form:[0,3,0,3,1]},
   "Tunez": {g:"F",conf:"CAF",flag:"🇹🇳",c:"#e70013",pts:1525,rk:39,pwr:42.4,xg:0.48,gc:1.93,mkt:69.9,dtc:5,dep:3,lbc:4,titles:0,apps:7,best:"Fase de Grupos",form:[0,0,0,3,0]},
-  "Belgica": {g:"G",conf:"UEFA",flag:"🇧🇪",c:"#ed2939",pts:1742,rk:9,pwr:69.3,xg:1.41,gc:0.89,mkt:547.5,dtc:6,dep:8,lbc:5,titles:0,apps:15,best:"3er puesto (2018)",form:[1,1,1,3,1]},
+  "Belgica": {g:"G",conf:"UEFA",flag:"🇧🇪",c:"#ed2939",pts:1742,rk:9,pwr:75.0,xg:1.85,gc:0.90,mkt:547.5,dtc:6,dep:8,lbc:5,titles:0,apps:15,best:"Cuartos (2026)",form:[3,3,3,3,3]},
   "Egipto": {g:"G",conf:"CAF",flag:"🇪🇬",c:"#ce1126",pts:1598,rk:24,pwr:55.9,xg:1.46,gc:1.08,mkt:116.5,dtc:7,dep:5,lbc:5,titles:0,apps:4,best:"Fase de Grupos",form:[3,1,3,3,0]},
   "Iran": {g:"G",conf:"AFC",flag:"🇮🇷",c:"#239f40",pts:1638,rk:19,pwr:49.6,xg:0.95,gc:1.16,mkt:32.1,dtc:6,dep:4,lbc:5,titles:0,apps:7,best:"Fase de Grupos",form:[1,3,3,0,0]},
   "Nueva Zelanda": {g:"G",conf:"OFC",flag:"🇳🇿",c:"#000000",pts:1418,rk:70,pwr:38.8,xg:0.74,gc:1.87,mkt:34.4,dtc:5,dep:2,lbc:3,titles:0,apps:3,best:"Fase de Grupos",form:[0,1,3,0,0]},
-  "Espana": {g:"H",conf:"UEFA",flag:"🇪🇸",c:"#aa151b",pts:1874,rk:2,pwr:71.4,xg:2.62,gc:0.35,mkt:1220.0,dtc:6,dep:9,lbc:4,titles:1,apps:16,best:"Campeon",form:[3,1,3,3,3]},
+  "Espana": {g:"H",conf:"UEFA",flag:"🇪🇸",c:"#aa151b",pts:1874,rk:2,pwr:73.0,xg:1.80,gc:0.20,mkt:1220.0,dtc:6,dep:9,lbc:4,titles:1,apps:16,best:"Campeon",form:[1,3,3,3,3]},
   "Cabo Verde": {g:"H",conf:"CAF",flag:"🇨🇻",c:"#003893",pts:1462,rk:63,pwr:49.8,xg:0.92,gc:1.7,mkt:54.5,dtc:7,dep:3,lbc:6,titles:0,apps:1,best:"Debut",form:[1,1,3,1,0]},
   "Arabia Saudita": {g:"H",conf:"AFC",flag:"🇸🇦",c:"#006c35",pts:1495,rk:48,pwr:45.3,xg:0.53,gc:2.08,mkt:40.7,dtc:5,dep:3,lbc:4,titles:0,apps:7,best:"Octavos de Final",form:[0,1,0,0,1]},
   "Uruguay": {g:"H",conf:"CONMEBOL",flag:"🇺🇾",c:"#5cb6e8",pts:1712,rk:12,pwr:69.7,xg:1.33,gc:1.0,mkt:359.3,dtc:8,dep:6,lbc:6,titles:2,apps:14,best:"Campeon",form:[1,1,3,3,1]},
-  "Francia": {g:"I",conf:"UEFA",flag:"🇫🇷",c:"#0055a4",pts:1870,rk:3,pwr:90.3,xg:2.46,gc:0.46,mkt:1520.0,dtc:10,dep:10,lbc:7,titles:2,apps:16,best:"Campeon",form:[3,3,3,3,3]},
+  "Francia": {g:"I",conf:"UEFA",flag:"🇫🇷",c:"#0055a4",pts:1870,rk:3,pwr:74.0,xg:1.60,gc:0.80,mkt:1520.0,dtc:10,dep:10,lbc:7,titles:2,apps:16,best:"Campeon",form:[3,3,3,0,3]},
   "Senegal": {g:"I",conf:"CAF",flag:"🇸🇳",c:"#00853f",pts:1620,rk:20,pwr:60.4,xg:1.67,gc:1.55,mkt:478.1,dtc:7,dep:6,lbc:6,titles:0,apps:3,best:"Cuartos de Final",form:[0,0,3,3,1]},
-  "Noruega": {g:"I",conf:"UEFA",flag:"🇳🇴",c:"#ba0c2f",pts:1592,rk:25,pwr:65.4,xg:1.75,gc:1.36,mkt:589.9,dtc:6,dep:6,lbc:6,titles:0,apps:3,best:"Octavos de Final",form:[3,3,0,1,1]},
+  "Noruega": {g:"I",conf:"UEFA",flag:"🇳🇴",c:"#ba0c2f",pts:1592,rk:25,pwr:80.0,xg:1.90,gc:0.85,mkt:589.9,dtc:6,dep:6,lbc:6,titles:0,apps:3,best:"Cuartos (2026)",form:[3,3,3,3,3]},
   "Irak": {g:"I",conf:"AFC",flag:"🇮🇶",c:"#ce1126",pts:1430,rk:68,pwr:39.7,xg:0.52,gc:2.18,mkt:21.2,dtc:5,dep:3,lbc:4,titles:0,apps:1,best:"Debut (vuelve tras 40a)",form:[0,0,3,3,1]},
-  "Argentina": {g:"J",conf:"CONMEBOL",flag:"🇦🇷",c:"#75aadb",pts:1877,rk:1,pwr:83.3,xg:2.11,gc:0.56,mkt:782.5,dtc:10,dep:7,lbc:8,titles:3,apps:18,best:"Campeon",form:[3,3,1,3,0]},
+  "Argentina": {g:"J",conf:"CONMEBOL",flag:"🇦🇷",c:"#75aadb",pts:1877,rk:1,pwr:85.0,xg:2.20,gc:1.20,mkt:782.5,dtc:10,dep:7,lbc:8,titles:3,apps:18,best:"Campeon",form:[3,3,3,3,3]},
   "Austria": {g:"J",conf:"UEFA",flag:"🇦🇹",c:"#ed2939",pts:1655,rk:23,pwr:67.1,xg:0.96,gc:1.4,mkt:242.2,dtc:8,dep:5,lbc:6,titles:0,apps:8,best:"3er puesto (1954)",form:[0,3,0,3,3]},
   "Argelia": {g:"J",conf:"CAF",flag:"🇩🇿",c:"#006233",pts:1602,rk:28,pwr:54.4,xg:0.99,gc:0.83,mkt:256.9,dtc:6,dep:5,lbc:5,titles:0,apps:4,best:"Fase de Grupos",form:[1,0,3,3,3]},
   "Jordania": {g:"J",conf:"AFC",flag:"🇯🇴",c:"#007a3d",pts:1455,rk:63,pwr:35.0,xg:0.65,gc:1.28,mkt:20.0,dtc:5,dep:2,lbc:3,titles:0,apps:1,best:"Debut",form:[1,0,0,3,0]},
@@ -739,7 +732,7 @@ const TEAMS = {
   "Colombia": {g:"K",conf:"CONMEBOL",flag:"🇨🇴",c:"#fcd116",pts:1718,rk:13,pwr:69.1,xg:1.68,gc:1.03,mkt:302.4,dtc:7,dep:7,lbc:7,titles:0,apps:7,best:"Cuartos de Final",form:[3,3,3,3,3]},
   "Uzbekistan": {g:"K",conf:"AFC",flag:"🇺🇿",c:"#1eb53a",pts:1488,rk:53,pwr:35.7,xg:0.76,gc:2.07,mkt:85.3,dtc:5,dep:2,lbc:3,titles:0,apps:1,best:"Debut",form:[0,0,3,0,1]},
   "RD Congo": {g:"K",conf:"CAF",flag:"🇨🇩",c:"#007fff",pts:1432,rk:67,pwr:30.6,xg:0.95,gc:1.50,mkt:143.9,dtc:4,dep:2,lbc:3,titles:0,apps:1,best:"Debut",form:[1,0,0,0,3]},
-  "Inglaterra": {g:"L",conf:"UEFA",flag:"🏴󠁧󠁢󠁥󠁮󠁧󠁿",c:"#ffffff",pts:1827,rk:4,pwr:71.3,xg:2.11,gc:0.61,mkt:1360.0,dtc:4,dep:9,lbc:6,titles:1,apps:16,best:"Campeon",form:[1,3,0,3,3]},
+  "Inglaterra": {g:"L",conf:"UEFA",flag:"🏴󠁧󠁢󠁥󠁮󠁧󠁿",c:"#ffffff",pts:1827,rk:4,pwr:65.0,xg:1.55,gc:1.20,mkt:1360.0,dtc:4,dep:9,lbc:6,titles:1,apps:16,best:"Campeon",form:[3,0,3,0,3]},
   "Croacia": {g:"L",conf:"UEFA",flag:"🇭🇷",c:"#ff0000",pts:1730,rk:11,pwr:70.4,xg:1.46,gc:0.75,mkt:387.3,dtc:7,dep:7,lbc:6,titles:0,apps:6,best:"Subcampeon (2018)",form:[3,0,3,3,0]},
   "Ghana": {g:"L",conf:"CAF",flag:"🇬🇭",c:"#ce1126",pts:1548,rk:37,pwr:47.6,xg:1.08,gc:1.42,mkt:234.6,dtc:5,dep:4,lbc:5,titles:0,apps:4,best:"Cuartos de Final (2010)",form:[1,3,3,3,1]},
   "Panama": {g:"L",conf:"CONCACAF",flag:"🇵🇦",c:"#db1f48",pts:1495,rk:49,pwr:46.0,xg:0.78,gc:1.29,mkt:34.6,dtc:6,dep:3,lbc:4,titles:0,apps:2,best:"Fase de Grupos",form:[0,0,3,0,3]},
@@ -753,14 +746,13 @@ const GRUPOS = {
   E: ["Alemania","Ecuador","Costa de Marfil","Curazao"],
   F: ["Holanda","Japon","Suecia","Tunez"],
   G: ["Belgica","Egipto","Iran","Nueva Zelanda"],
-  H: ["Espana","Uruguay","Arabia Saudita","Cabo Verde"],
+  H: ["Espana","Cabo Verde","Arabia Saudita","Uruguay"],
   I: ["Francia","Senegal","Noruega","Irak"],
   J: ["Argentina","Austria","Argelia","Jordania"],
   K: ["Portugal","Colombia","Uzbekistan","RD Congo"],
   L: ["Inglaterra","Croacia","Ghana","Panama"],
 };
 
-// Sedes y fechas de Jornada 1 (Grupo -> partido inaugural del grupo)
 const J1 = {
   A: {sede:"Ciudad de Mexico", fecha:"11 jun", hora:"13:00", local:"Mexico", visita:"Sudafrica"},
   B: {sede:"Toronto",          fecha:"12 jun", hora:"12:00", local:"Canada", visita:"Bosnia"},
@@ -775,67 +767,192 @@ const J1 = {
   K: {sede:"Kansas City",      fecha:"16 jun", hora:"12:00", local:"Portugal", visita:"RD Congo"},
   L: {sede:"Boston",           fecha:"16 jun", hora:"15:00", local:"Inglaterra", visita:"Panama"},
 };
-// ════════════════════════════════════════════════════
-//  RESULTADOS REALES — actualizado en vivo
-//  Formato: "EquipoA|EquipoB": {gA, gB} -> gA = goles de EquipoA
-// ════════════════════════════════════════════════════
 
-// ════════════════════════════════════════════════════
-//  WORLD CUP INTELLIGENCE 2026 — ENGINE
-//  Datos: FIFA Ranking jun-2026, Sorteo Washington (5 dic 2025)
-//  Repechajes resueltos 31 mar 2026 (Chequia, Bosnia, Suecia, Turquia, RD Congo, Irak)
-// ════════════════════════════════════════════════════
-
+// ════════════════════════════════════════════════════════════════════
+//  RESULTADOS REALES — actualizado al 26 jun 2026
+//  JORNADA 3 completa: Grupos A-F (24-25 jun), H e I (26 jun)
+//  Grupo G en curso (26 jun noche). Grupos J, K, L el 27 jun.
+// ════════════════════════════════════════════════════════════════════
 var PLAYED_MATCHES = {
   // ── JORNADA 1 ────────────────────────────────────────
-  "Mexico|Sudafrica":         {gA:2, gB:0, fecha:"11 jun"},
-  "Corea del Sur|Rep. Checa": {gA:2, gB:1, fecha:"11 jun"},
-  "Canada|Bosnia":            {gA:1, gB:1, fecha:"12 jun"},
-  "Qatar|Suiza":              {gA:1, gB:1, fecha:"13 jun"},
-  "Estados Unidos|Paraguay":  {gA:4, gB:1, fecha:"12 jun"},
-  "Brasil|Marruecos":         {gA:1, gB:1, fecha:"13 jun"},
-  "Escocia|Haiti":            {gA:1, gB:0, fecha:"13 jun"},
-  "Australia|Turquia":        {gA:2, gB:0, fecha:"13 jun"},
-  "Alemania|Curazao":         {gA:7, gB:1, fecha:"14 jun"},
-  "Holanda|Japon":            {gA:2, gB:2, fecha:"14 jun"},
-  "Costa de Marfil|Ecuador":  {gA:1, gB:0, fecha:"14 jun"},
-  "Suecia|Tunez":             {gA:5, gB:1, fecha:"14 jun"},
-  "Belgica|Egipto":           {gA:1, gB:1, fecha:"15 jun"},
-  "Iran|Nueva Zelanda":       {gA:2, gB:2, fecha:"15 jun"},
-  "Espana|Cabo Verde":        {gA:0, gB:0, fecha:"15 jun"},
-  "Uruguay|Arabia Saudita":   {gA:1, gB:1, fecha:"15 jun"},
-  "Francia|Senegal":          {gA:3, gB:1, fecha:"16 jun"},
-  "Irak|Noruega":             {gA:0, gB:4, fecha:"16 jun"},
-  "Argentina|Argelia":        {gA:3, gB:0, fecha:"16 jun"},
-  "Austria|Jordania":         {gA:3, gB:1, fecha:"16 jun"},
-  "Portugal|RD Congo":        {gA:1, gB:1, fecha:"17 jun"},
-  "Colombia|Uzbekistan":      {gA:3, gB:1, fecha:"17 jun"},
-  "Inglaterra|Croacia":       {gA:4, gB:2, fecha:"17 jun"},
-  "Ghana|Panama":             {gA:1, gB:0, fecha:"17 jun"},
+  "Mexico|Sudafrica":          {gA:2, gB:0, fecha:"11 jun"},
+  "Corea del Sur|Rep. Checa":  {gA:2, gB:1, fecha:"11 jun"},
+  "Canada|Bosnia":             {gA:1, gB:1, fecha:"12 jun"},
+  "Qatar|Suiza":               {gA:1, gB:1, fecha:"13 jun"},
+  "Estados Unidos|Paraguay":   {gA:4, gB:1, fecha:"12 jun"},
+  "Brasil|Marruecos":          {gA:1, gB:1, fecha:"13 jun"},
+  "Escocia|Haiti":             {gA:1, gB:0, fecha:"13 jun"},
+  "Australia|Turquia":         {gA:2, gB:0, fecha:"13 jun"},
+  "Alemania|Curazao":          {gA:7, gB:1, fecha:"14 jun"},
+  "Holanda|Japon":             {gA:2, gB:2, fecha:"14 jun"},
+  "Costa de Marfil|Ecuador":   {gA:1, gB:0, fecha:"14 jun"},
+  "Suecia|Tunez":              {gA:5, gB:1, fecha:"14 jun"},
+  "Belgica|Egipto":            {gA:1, gB:1, fecha:"15 jun"},
+  "Iran|Nueva Zelanda":        {gA:2, gB:2, fecha:"15 jun"},
+  "Espana|Cabo Verde":         {gA:0, gB:0, fecha:"15 jun"},
+  "Uruguay|Arabia Saudita":    {gA:1, gB:1, fecha:"15 jun"},
+  "Francia|Senegal":           {gA:3, gB:1, fecha:"16 jun"},
+  "Irak|Noruega":              {gA:0, gB:4, fecha:"16 jun"},
+  "Argentina|Argelia":         {gA:3, gB:0, fecha:"16 jun"},
+  "Austria|Jordania":          {gA:3, gB:1, fecha:"17 jun"},
+  "Portugal|RD Congo":         {gA:1, gB:1, fecha:"17 jun"},
+  "Colombia|Uzbekistan":       {gA:3, gB:1, fecha:"17 jun"},
+  "Inglaterra|Croacia":        {gA:4, gB:2, fecha:"17 jun"},
+  "Ghana|Panama":              {gA:1, gB:0, fecha:"17 jun"},
   // ── JORNADA 2 ────────────────────────────────────────
-  "Rep. Checa|Sudafrica":     {gA:1, gB:1, fecha:"18 jun"},
-  "Mexico|Corea del Sur":     {gA:1, gB:0, fecha:"18 jun"},
-  "Suiza|Bosnia":             {gA:4, gB:1, fecha:"18 jun"},
-  "Canada|Qatar":             {gA:6, gB:0, fecha:"18 jun"},
-  "Marruecos|Escocia":        {gA:1, gB:0, fecha:"19 jun"},
-  "Brasil|Haiti":             {gA:3, gB:0, fecha:"19 jun"},
-  "Estados Unidos|Australia": {gA:2, gB:0, fecha:"19 jun"},
-  "Turquia|Paraguay":         {gA:0, gB:1, fecha:"19 jun"},
-  "Alemania|Costa de Marfil": {gA:2, gB:1, fecha:"20 jun"},
-  "Ecuador|Curazao":          {gA:0, gB:0, fecha:"20 jun"},
-  "Holanda|Suecia":           {gA:5, gB:1, fecha:"20 jun"},
-  "Tunez|Japon":              {gA:0, gB:4, fecha:"20 jun"},
-  "Belgica|Iran":             {gA:0, gB:0, fecha:"21 jun"},
-  "Nueva Zelanda|Egipto":     {gA:1, gB:3, fecha:"21 jun"},
-  "Espana|Arabia Saudita":    {gA:4, gB:0, fecha:"21 jun"},
-  "Uruguay|Cabo Verde":       {gA:2, gB:2, fecha:"21 jun"},
-  "Francia|Irak":             {gA:3, gB:0, fecha:"22 jun"},
-  "Noruega|Senegal":          {gA:3, gB:2, fecha:"22 jun"},
-  "Argentina|Austria":        {gA:2, gB:0, fecha:"22 jun"},
-  "Jordania|Argelia":         {gA:0, gB:0, fecha:"22 jun"},
-  "Portugal|Uzbekistan":     {gA:5, gB:0, fecha:"23 jun"},
-  "Inglaterra|Ghana":         {gA:0, gB:0, fecha:"23 jun"},
-  "Croacia|Panama":           {gA:1, gB:0, fecha:"23 jun"},
+  "Rep. Checa|Sudafrica":      {gA:1, gB:1, fecha:"18 jun"},
+  "Mexico|Corea del Sur":      {gA:1, gB:0, fecha:"18 jun"},
+  "Suiza|Bosnia":              {gA:4, gB:1, fecha:"18 jun"},
+  "Canada|Qatar":              {gA:6, gB:0, fecha:"18 jun"},
+  "Marruecos|Escocia":         {gA:1, gB:0, fecha:"19 jun"},
+  "Brasil|Haiti":              {gA:3, gB:0, fecha:"19 jun"},
+  "Estados Unidos|Australia":  {gA:2, gB:0, fecha:"19 jun"},
+  "Turquia|Paraguay":          {gA:0, gB:1, fecha:"19 jun"},
+  "Alemania|Costa de Marfil":  {gA:2, gB:1, fecha:"20 jun"},
+  "Ecuador|Curazao":           {gA:0, gB:0, fecha:"20 jun"},
+  "Holanda|Suecia":            {gA:5, gB:1, fecha:"20 jun"},
+  "Tunez|Japon":               {gA:0, gB:4, fecha:"20 jun"},
+  "Belgica|Iran":              {gA:0, gB:0, fecha:"21 jun"},
+  "Nueva Zelanda|Egipto":      {gA:1, gB:3, fecha:"21 jun"},
+  "Espana|Arabia Saudita":     {gA:4, gB:0, fecha:"21 jun"},
+  "Uruguay|Cabo Verde":        {gA:2, gB:2, fecha:"21 jun"},
+  "Francia|Irak":              {gA:3, gB:0, fecha:"22 jun"},
+  "Noruega|Senegal":           {gA:3, gB:2, fecha:"22 jun"},
+  "Argentina|Austria":         {gA:2, gB:0, fecha:"22 jun"},
+  "Jordania|Argelia":          {gA:0, gB:0, fecha:"22 jun"},
+  "Portugal|Uzbekistan":       {gA:5, gB:0, fecha:"23 jun"},
+  "Colombia|RD Congo":         {gA:1, gB:0, fecha:"23 jun"},
+  "Inglaterra|Ghana":          {gA:0, gB:0, fecha:"23 jun"},
+  "Croacia|Panama":            {gA:1, gB:0, fecha:"23 jun"},
+  // ── JORNADA 3 ────────────────────────────────────────
+  // Grupo A — 24 jun
+  "Mexico|Rep. Checa":         {gA:3, gB:0, fecha:"24 jun"},
+  "Sudafrica|Corea del Sur":   {gA:1, gB:0, fecha:"24 jun"},
+  // Grupo B — 24 jun
+  "Suiza|Canada":              {gA:3, gB:1, fecha:"24 jun"},
+  "Bosnia|Qatar":              {gA:3, gB:1, fecha:"24 jun"},
+  // Grupo C — 24 jun
+  "Brasil|Escocia":            {gA:3, gB:0, fecha:"24 jun"},
+  "Marruecos|Haiti":           {gA:4, gB:2, fecha:"24 jun"},
+  // Grupo D — 25 jun
+  "Turquia|Estados Unidos":    {gA:3, gB:2, fecha:"25 jun"},
+  "Paraguay|Australia":        {gA:0, gB:0, fecha:"25 jun"},
+  // Grupo E — 25 jun
+  "Ecuador|Alemania":          {gA:2, gB:1, fecha:"25 jun"},
+  "Costa de Marfil|Curazao":   {gA:2, gB:0, fecha:"25 jun"},
+  // Grupo F — 25 jun
+  "Japon|Suecia":              {gA:1, gB:1, fecha:"25 jun"},
+  "Holanda|Tunez":             {gA:3, gB:1, fecha:"25 jun"},
+  // Grupo H — 26 jun
+  "Cabo Verde|Arabia Saudita": {gA:0, gB:0, fecha:"26 jun"},
+  "Uruguay|Espana":            {gA:0, gB:1, fecha:"26 jun"},
+  // Grupo I — 26 jun
+  "Francia|Noruega":           {gA:4, gB:1, fecha:"26 jun"},  // Francia 4-1 Noruega ✅
+  "Senegal|Irak":              {gA:5, gB:0, fecha:"26 jun"},
+  // Grupo G — 26 jun (COMPLETO)
+  "Belgica|Nueva Zelanda":     {gA:5, gB:1, fecha:"26 jun"},
+  "Egipto|Iran":               {gA:1, gB:1, fecha:"26 jun"},
+  // ── JORNADA 3 — Grupos J, K, L (27 jun) ─────────────────
+  "Argentina|Jordania":        {gA:3, gB:1, fecha:"27 jun"},
+  "Austria|Argelia":           {gA:3, gB:3, fecha:"27 jun"},
+  "Colombia|Portugal":         {gA:0, gB:0, fecha:"27 jun"},
+  "RD Congo|Uzbekistan":       {gA:3, gB:1, fecha:"27 jun"},
+  "Inglaterra|Panama":         {gA:2, gB:0, fecha:"27 jun"},
+  "Croacia|Ghana":             {gA:2, gB:1, fecha:"27 jun"},
+  // ── 16AVOS DE FINAL (28 jun – 3 jul) ────────────────────
+  "Canada|Sudafrica":          {gA:1, gB:0, fecha:"28 jun"},
+  "Brasil|Japon":              {gA:2, gB:1, fecha:"29 jun"},
+  "Alemania|Paraguay":         {gA:1, gB:1, fecha:"29 jun"},  // Paraguay 4-3 penales
+  "Holanda|Marruecos":         {gA:1, gB:1, fecha:"29 jun"},  // Marruecos 3-2 penales
+  "Noruega|Costa de Marfil":   {gA:2, gB:1, fecha:"30 jun"},
+  "Francia|Suecia":            {gA:3, gB:0, fecha:"30 jun"},
+  "Mexico|Ecuador":            {gA:2, gB:0, fecha:"30 jun"},
+  "Inglaterra|RD Congo":       {gA:2, gB:1, fecha:"1 jul"},
+  "Belgica|Senegal":           {gA:3, gB:2, fecha:"1 jul"},   // aet
+  "Estados Unidos|Bosnia":     {gA:2, gB:0, fecha:"1 jul"},
+  "Espana|Austria":            {gA:3, gB:0, fecha:"2 jul"},
+  "Portugal|Croacia":          {gA:2, gB:1, fecha:"2 jul"},
+  "Suiza|Argelia":             {gA:2, gB:0, fecha:"2 jul"},
+  "Egipto|Australia":          {gA:1, gB:1, fecha:"3 jul"},   // Egipto 4-2 penales
+  "Argentina|Cabo Verde":      {gA:3, gB:2, fecha:"3 jul"},   // aet
+  "Colombia|Ghana":            {gA:1, gB:0, fecha:"3 jul"},
+  // ── OCTAVOS DE FINAL (4–7 jul) ───────────────────────────
+  "Marruecos|Canada":          {gA:3, gB:0, fecha:"4 jul"},
+  "Francia|Paraguay":          {gA:1, gB:0, fecha:"4 jul"},
+  "Noruega|Brasil":            {gA:2, gB:1, fecha:"5 jul"},
+  "Inglaterra|Mexico":         {gA:3, gB:2, fecha:"5 jul"},
+  "Espana|Portugal":           {gA:1, gB:0, fecha:"6 jul"},
+  "Belgica|Estados Unidos":    {gA:4, gB:1, fecha:"6 jul"},
+  "Argentina|Egipto":          {gA:3, gB:2, fecha:"7 jul"},   // remontada épica 0-2 → 3-2
+  "Suiza|Colombia":            {gA:1, gB:1, fecha:"7 jul"},   // Suiza gana penales
+};
+
+// ── CLASIFICADOS, ELIMINADOS Y ESTADO KNOCKOUT — 7 jul 2026 ──────────
+// Fuente: ESPN, Yahoo Sports, CBS Sports, FIFA.com
+// q1=1ro grupo, q2=2do grupo, q3=3ro clasificado, elim=eliminado en grupos
+// "ko_elim" = eliminado en fase eliminatoria, "qf" = cuartos de final
+// ────────────────────────────────────────────────────────────────────
+var CONFIRMED_STATUS = {
+  // GRUPO A
+  "Mexico":          "qf",      // 1° grupo → venció Ecuador 16avos, perdió vs Inglaterra octavos → eliminado
+  "Sudafrica":       "ko_elim", // 2° grupo → perdió vs Canadá 16avos
+  "Corea del Sur":   "elim",    // 3ro eliminado en grupos
+  "Rep. Checa":      "elim",
+  // GRUPO B
+  "Suiza":           "qf",      // 1° grupo → venció Argelia 16avos, venció Colombia octavos (pen) → CUARTOS
+  "Canada":          "ko_elim", // 2° grupo → venció Sudáfrica 16avos, perdió vs Marruecos octavos
+  "Bosnia":          "ko_elim", // 3ro → perdió vs USA 16avos
+  "Qatar":           "elim",
+  // GRUPO C
+  "Brasil":          "ko_elim", // 1° grupo → venció Japón 16avos, perdió vs Noruega octavos
+  "Marruecos":       "qf",      // 2° grupo → venció Holanda 16avos (pen), venció Canadá octavos → CUARTOS
+  "Escocia":         "elim",
+  "Haiti":           "elim",
+  // GRUPO D
+  "Estados Unidos":  "ko_elim", // 1° grupo → venció Bosnia 16avos, perdió vs Bélgica octavos
+  "Australia":       "ko_elim", // 2° grupo → perdió vs Egipto 16avos (pen)
+  "Paraguay":        "ko_elim", // 3ro → venció Alemania 16avos (pen), perdió vs Francia octavos
+  "Turquia":         "elim",
+  // GRUPO E
+  "Alemania":        "ko_elim", // 1° grupo → perdió vs Paraguay 16avos (pen)
+  "Costa de Marfil": "ko_elim", // 2° grupo → perdió vs Noruega 16avos
+  "Ecuador":         "ko_elim", // 3ro → perdió vs México 16avos
+  "Curazao":         "elim",
+  // GRUPO F
+  "Holanda":         "ko_elim", // 1° grupo → perdió vs Marruecos 16avos (pen)
+  "Japon":           "ko_elim", // 2° grupo → perdió vs Brasil 16avos
+  "Suecia":          "ko_elim", // 3ro → perdió vs Francia 16avos
+  "Tunez":           "elim",
+  // GRUPO G
+  "Belgica":         "qf",      // 1° grupo → venció Senegal 16avos, venció USA octavos → CUARTOS
+  "Egipto":          "ko_elim", // 2° grupo → venció Australia 16avos (pen), perdió vs Argentina octavos
+  "Iran":            "elim",    // 3ro eliminado en grupos (desplazado por Argelia en top 8)
+  "Nueva Zelanda":   "elim",
+  // GRUPO H
+  "Espana":          "qf",      // 1° grupo → venció Austria 16avos, venció Portugal octavos → CUARTOS
+  "Cabo Verde":      "ko_elim", // 2° grupo → perdió vs Argentina 16avos
+  "Arabia Saudita":  "q3",      // 3ro clasificado — perdió vs... (ver cuadro)
+  "Uruguay":         "elim",
+  // GRUPO I
+  "Francia":         "qf",      // 1° grupo → venció Suecia 16avos, venció Paraguay octavos → CUARTOS
+  "Noruega":         "qf",      // 2° grupo → venció Costa de Marfil 16avos, venció Brasil octavos → CUARTOS
+  "Senegal":         "ko_elim", // 3ro → perdió vs Bélgica 16avos
+  "Irak":            "elim",
+  // GRUPO J
+  "Argentina":       "qf",      // 1° grupo → venció Cabo Verde 16avos, venció Egipto octavos → CUARTOS
+  "Austria":         "ko_elim", // 2° grupo → perdió vs España 16avos
+  "Argelia":         "ko_elim", // 3ro → perdió vs Suiza 16avos
+  "Jordania":        "elim",
+  // GRUPO K
+  "Colombia":        "ko_elim", // 1° grupo → venció Ghana 16avos, perdió vs Suiza octavos (pen)
+  "Portugal":        "ko_elim", // 2° grupo → perdió vs España octavos
+  "Uzbekistan":      "elim",
+  "RD Congo":        "ko_elim", // 3ro → perdió vs Inglaterra 16avos
+  // GRUPO L
+  "Inglaterra":      "qf",      // 1° grupo → venció RD Congo 16avos, venció México octavos → CUARTOS
+  "Croacia":         "ko_elim", // 2° grupo → perdió vs Portugal 16avos
+  "Ghana":           "ko_elim", // 3ro → perdió vs Colombia 16avos
+  "Panama":          "elim",
 };
 
 function getPlayedResult(a,b){
@@ -845,28 +962,46 @@ function getPlayedResult(a,b){
   return null;
 }
 
-// Solo los últimos resultados más relevantes para el ticker
+// ── TICKER DEL DASHBOARD — últimos resultados ────────────
 var RESULTS_FEED = [
-  {a:"Argentina",  b:"Austria",      gA:2, gB:0, group:"J", fecha:"22 jun", estado:"FINAL"},
-  {a:"Francia",    b:"Irak",         gA:3, gB:0, group:"I", fecha:"22 jun", estado:"FINAL"},
-  {a:"Noruega",    b:"Senegal",      gA:3, gB:2, group:"I", fecha:"22 jun", estado:"FINAL"},
-  {a:"Jordania",   b:"Argelia",      gA:0, gB:0, group:"J", fecha:"22 jun", estado:"FINAL"},
-  {a:"Espana",     b:"Arabia Saudita",gA:4,gB:0, group:"H", fecha:"21 jun", estado:"FINAL"},
-  {a:"Uruguay",    b:"Cabo Verde",   gA:2, gB:2, group:"H", fecha:"21 jun", estado:"FINAL"},
-  {a:"Nueva Zelanda",b:"Egipto",     gA:1, gB:3, group:"G", fecha:"21 jun", estado:"FINAL"},
-  {a:"Belgica",    b:"Iran",         gA:0, gB:0, group:"G", fecha:"21 jun", estado:"FINAL"},
-  {a:"Holanda",    b:"Suecia",       gA:5, gB:1, group:"F", fecha:"20 jun", estado:"FINAL"},
-  {a:"Tunez",      b:"Japon",        gA:0, gB:4, group:"F", fecha:"20 jun", estado:"FINAL"},
-  {a:"Alemania",   b:"Costa de Marfil",gA:2,gB:1,group:"E",fecha:"20 jun", estado:"FINAL"},
-  {a:"Ecuador",    b:"Curazao",      gA:0, gB:0, group:"E", fecha:"20 jun", estado:"FINAL"},
-  {a:"Brasil",     b:"Haiti",        gA:3, gB:0, group:"C", fecha:"19 jun", estado:"FINAL"},
-  {a:"Marruecos",  b:"Escocia",      gA:1, gB:0, group:"C", fecha:"19 jun", estado:"FINAL"},
-  {a:"Estados Unidos",b:"Australia", gA:2, gB:0, group:"D", fecha:"19 jun", estado:"FINAL"},
-  {a:"Turquia",    b:"Paraguay",     gA:0, gB:1, group:"D", fecha:"19 jun", estado:"FINAL"},
-  {a:"Canada",     b:"Qatar",        gA:6, gB:0, group:"B", fecha:"18 jun", estado:"FINAL"},
-  {a:"Suiza",      b:"Bosnia",       gA:4, gB:1, group:"B", fecha:"18 jun", estado:"FINAL"},
-  {a:"Mexico",     b:"Corea del Sur",gA:1, gB:0, group:"A", fecha:"18 jun", estado:"FINAL"},
-  {a:"Rep. Checa", b:"Sudafrica",    gA:1, gB:1, group:"A", fecha:"18 jun", estado:"FINAL"}
+  // OCTAVOS — 7 jul
+  {a:"Suiza",        b:"Colombia",       gA:1, gB:1, group:"R16", fecha:"7 jul",  estado:"FINAL PEN"},
+  {a:"Argentina",    b:"Egipto",         gA:3, gB:2, group:"R16", fecha:"7 jul",  estado:"FINAL"},
+  // OCTAVOS — 6 jul
+  {a:"Belgica",      b:"Estados Unidos", gA:4, gB:1, group:"R16", fecha:"6 jul",  estado:"FINAL"},
+  {a:"Espana",       b:"Portugal",       gA:1, gB:0, group:"R16", fecha:"6 jul",  estado:"FINAL"},
+  // OCTAVOS — 5 jul
+  {a:"Noruega",      b:"Brasil",         gA:2, gB:1, group:"R16", fecha:"5 jul",  estado:"FINAL 🔴"},
+  {a:"Inglaterra",   b:"Mexico",         gA:3, gB:2, group:"R16", fecha:"5 jul",  estado:"FINAL"},
+  // OCTAVOS — 4 jul
+  {a:"Marruecos",    b:"Canada",         gA:3, gB:0, group:"R16", fecha:"4 jul",  estado:"FINAL"},
+  {a:"Francia",      b:"Paraguay",       gA:1, gB:0, group:"R16", fecha:"4 jul",  estado:"FINAL"},
+  // 16AVOS — 3 jul
+  {a:"Argentina",    b:"Cabo Verde",     gA:3, gB:2, group:"R32", fecha:"3 jul",  estado:"FINAL AET"},
+  {a:"Egipto",       b:"Australia",      gA:1, gB:1, group:"R32", fecha:"3 jul",  estado:"FINAL PEN"},
+  {a:"Colombia",     b:"Ghana",          gA:1, gB:0, group:"R32", fecha:"3 jul",  estado:"FINAL"},
+  // 16AVOS — 2 jul
+  {a:"Espana",       b:"Austria",        gA:3, gB:0, group:"R32", fecha:"2 jul",  estado:"FINAL"},
+  {a:"Portugal",     b:"Croacia",        gA:2, gB:1, group:"R32", fecha:"2 jul",  estado:"FINAL"},
+  {a:"Suiza",        b:"Argelia",        gA:2, gB:0, group:"R32", fecha:"2 jul",  estado:"FINAL"},
+  // 16AVOS — 1 jul
+  {a:"Belgica",      b:"Senegal",        gA:3, gB:2, group:"R32", fecha:"1 jul",  estado:"FINAL AET"},
+  {a:"Estados Unidos",b:"Bosnia",        gA:2, gB:0, group:"R32", fecha:"1 jul",  estado:"FINAL"},
+  {a:"Inglaterra",   b:"RD Congo",       gA:2, gB:1, group:"R32", fecha:"1 jul",  estado:"FINAL"},
+  // 25 jun — Grupos D, E, F
+  {a:"Turquia",      b:"Estados Unidos", gA:3, gB:2, group:"D", fecha:"25 jun", estado:"FINAL"},
+  {a:"Paraguay",     b:"Australia",      gA:0, gB:0, group:"D", fecha:"25 jun", estado:"FINAL"},
+  {a:"Ecuador",      b:"Alemania",       gA:2, gB:1, group:"E", fecha:"25 jun", estado:"FINAL"},
+  {a:"Costa de Marfil", b:"Curazao",     gA:2, gB:0, group:"E", fecha:"25 jun", estado:"FINAL"},
+  {a:"Japon",        b:"Suecia",         gA:1, gB:1, group:"F", fecha:"25 jun", estado:"FINAL"},
+  {a:"Holanda",      b:"Tunez",          gA:3, gB:1, group:"F", fecha:"25 jun", estado:"FINAL"},
+  // 24 jun — Grupos A, B, C
+  {a:"Mexico",       b:"Rep. Checa",     gA:3, gB:0, group:"A", fecha:"24 jun", estado:"FINAL"},
+  {a:"Sudafrica",    b:"Corea del Sur",  gA:1, gB:0, group:"A", fecha:"24 jun", estado:"FINAL"},
+  {a:"Suiza",        b:"Canada",         gA:3, gB:1, group:"B", fecha:"24 jun", estado:"FINAL"},
+  {a:"Bosnia",       b:"Qatar",          gA:3, gB:1, group:"B", fecha:"24 jun", estado:"FINAL"},
+  {a:"Brasil",       b:"Escocia",        gA:3, gB:0, group:"C", fecha:"24 jun", estado:"FINAL"},
+  {a:"Marruecos",    b:"Haiti",          gA:4, gB:2, group:"C", fecha:"24 jun", estado:"FINAL"},
 ];
 
 var CONF_NAMES = {
@@ -875,10 +1010,6 @@ var CONF_NAMES = {
 };
 var HOSTS = ["Mexico","Estados Unidos","Canada"];
 
-// ── AJUSTE POR CONFEDERACION ────────────────────────────
-// El ranking FIFA tiende a sobrevalorar a confederaciones con menos
-// competencia interna (AFC/CONCACAF/OFC) y subvalorar a UEFA/CONMEBOL,
-// segun el rendimiento historico relativo en Mundiales.
 var CONF_ADJ = {
   "UEFA": 1.05,
   "CONMEBOL": 1.05,
@@ -887,7 +1018,7 @@ var CONF_ADJ = {
   "AFC": 0.90,
   "OFC": 0.84
 };
-// Promedios globales (para normalizar lambdas y aplicar boost de paridad)
+
 var AVG_XG = 0, AVG_GC = 0, AVG_PWR = 0;
 (function(){
   var keys = Object.keys(TEAMS);
@@ -898,45 +1029,25 @@ var AVG_XG = 0, AVG_GC = 0, AVG_PWR = 0;
   AVG_PWR = sp/keys.length;
 })();
 
-// PARITY_BLEND: en un Mundial, la brecha real entre equipos es menor que la
-// que sugiere el ranking/valor de mercado (la "segunda linea" esta mas cerca
-// del top de lo esperado). Se comprime cada power rating hacia el promedio
-// global en un 18% antes de calcular ratios de lambda.
-// Actualizado 15 jun tras 5 sorpresas en 13 partidos (Corea-Chequia, Australia-Turquia,
-// Holanda-Japon, España-Cabo Verde, Egipto vs Belgica): el Mundial 2026 muestra
-// paridad excepcional. Subido de 18% a 28%.
-var PARITY_BLEND = 0.28;
+var PARITY_BLEND = 0.25;
 function effPwr(name){
   var d = TEAMS[name];
   var raw = d.pwr * (CONF_ADJ[d.conf] || 1.0);
   return raw * (1-PARITY_BLEND) + AVG_PWR * PARITY_BLEND;
 }
 
-// ── BONUS DE LOCALIA (anfitriones en fase de grupos) ────
-// Mexico, USA y Canada juegan toda la fase de grupos en su pais:
-// sin desgaste de viaje + apoyo de publico. Aplica solo en escenario neutral
-// (si el usuario fuerza "Local A/B" o "Eliminacion", no se duplica el efecto).
 var HOST_ATTACK_BONUS = 1.07;
 var HOST_OPP_PENALTY = 0.96;
 
-// ── ALTITUD / SEDE ───────────────────────────────────────
-// Las 3 sedes mexicanas tienen altitud significativa. A 2240m (CDMX) y 1566m
-// (Guadalajara), equipos no aclimatados sufren fatiga extra: menos efectividad
-// ofensiva y mas errores defensivos. Monterrey (537m) no es un factor.
-// Mexico (anfitrion) entrena regularmente en estas condiciones -> exento.
 var VENUES = {
   "Ciudad de Mexico": {alt:2240, impact:1.0},
   "Guadalajara":      {alt:1566, impact:0.65},
   "Monterrey":        {alt:537,  impact:0.0},
   "default":          {alt:0,    impact:0.0}
 };
-// Penalizacion maxima (a 2240m, impact=1.0) para un equipo NO aclimatado:
-var ALT_ATTACK_PENALTY_MAX = 0.93;  // -7% xg
-var ALT_DEFENSE_PENALTY_MAX = 1.06; // +6% gc
-// Equipos aclimatados a altura por jugar/entrenar regularmente en sedes andinas
-// o similares (ademas del propio Mexico, anfitrion)
+var ALT_ATTACK_PENALTY_MAX = 0.93;
+var ALT_DEFENSE_PENALTY_MAX = 1.06;
 var ALT_ACCLIMATIZED = ["Mexico","Ecuador","Colombia","Peru","Bolivia"];
-
 
 var ATTRS = [
   {k:"ataque",lbl:"Ataque"},
@@ -951,75 +1062,47 @@ var bracketState = {};
 var currentSc = "neutral";
 
 // ════════════════════════════════════════════════════════════════════
-// PI-RATING DINÁMICO (Constantinou & Fenton, 2013)
-// El mejor sistema de rating dinámico para fútbol demostrado en la academia.
-// Supera al Elo en predicción porque:
-// 1. El margen de goles importa (5-0 actualiza más que 1-0)
-// 2. Ratings separados para local y visitante
-// 3. Se actualiza después de cada partido real
-//
-// Fórmula de actualización tras partido A vs B (resultado gA:gB):
-//   error_A = f(gA-gB) - f(piA_atq - piB_def)
-//   piA_atq_nuevo = piA_atq + λ * error_A
-//   piB_def_nuevo = piB_def - λ * error_A
-//   (simetrico para B)
-// donde f(x) = x/(x + c) — función de saturación que reduce el impacto
-// de goleadas extremas (un 7-1 no vale 7x un 1-0)
+//  PI-RATING DINÁMICO
 // ════════════════════════════════════════════════════════════════════
-
-// Inicializar pi-ratings desde el pwr actual de cada equipo
-// Separados en ataque y defensa, normalizados 0-3
 var PI_RATINGS = {};
 (function(){
   var keys = Object.keys(TEAMS);
   for(var i=0;i<keys.length;i++){
     var d = TEAMS[keys[i]];
-    var base = d.pwr/100 * 2.5; // convertir pwr 0-100 a escala 0-2.5
+    var base = d.pwr/100 * 2.5;
     PI_RATINGS[keys[i]] = {
-      atq: base * 1.05, // leve sesgo ofensivo inicial (equipos de nivel similar)
-      def: base * 0.95, // leve sesgo defensivo inicial
-      atqA: base * 0.98, // rating como visitante (levemente inferior)
+      atq: base * 1.05,
+      def: base * 0.95,
+      atqA: base * 0.98,
       defA: base * 0.92
     };
   }
 })();
 
-// Parámetros del pi-rating calibrados para selecciones en Mundiales
-var PI_LAMBDA = 0.15;  // tasa de aprendizaje (qué tanto cambia el rating por partido)
-var PI_GAMMA  = 0.30;  // qué tanto influye el resultado de local en el rating de visitante
-var PI_C      = 3.0;   // factor de saturación (suaviza el impacto de goleadas)
+var PI_LAMBDA = 0.15;
+var PI_GAMMA  = 0.30;
+var PI_C      = 3.0;
 
 function piSaturation(diff){
-  // f(x) = x/(|x| + c): mapea diferencia de goles a valor saturado [-1, 1]
   return diff / (Math.abs(diff) + PI_C);
 }
 
 function piExpected(nameA, nameB){
-  // Diferencia esperada de goles según rating actual
-  // (positivo = A gana, negativo = B gana)
   return PI_RATINGS[nameA].atq - PI_RATINGS[nameB].def;
 }
 
-// Actualizar pi-ratings después de un partido real
-// nameA = local (o primero si es neutral), nameB = visitante
-// gA, gB = goles reales, isNeutral = sede neutral (Mundial, casi todos)
 function updatePiRating(nameA, nameB, gA, gB, rivalPwrRatio){
   if (!PI_RATINGS[nameA] || !PI_RATINGS[nameB]) return;
-  rivalPwrRatio = rivalPwrRatio || 1.0; // peso por calidad del rival (vs Curazao < vs Francia)
-
+  rivalPwrRatio = rivalPwrRatio || 1.0;
   var actualDiff  = gA - gB;
   var expected    = piExpected(nameA, nameB);
   var satActual   = piSaturation(actualDiff);
   var satExpected = piSaturation(expected);
   var error       = (satActual - satExpected) * rivalPwrRatio;
-
-  // Actualizar ratings del equipo A
   PI_RATINGS[nameA].atq += PI_LAMBDA * error;
   PI_RATINGS[nameA].atqA += PI_GAMMA * PI_LAMBDA * error;
-  // Actualizar ratings del equipo B (simetrico)
   PI_RATINGS[nameB].def -= PI_LAMBDA * error;
   PI_RATINGS[nameB].defA -= PI_GAMMA * PI_LAMBDA * error;
-  // Simetrico inverso para los ratings opuestos
   var errorB = -error;
   PI_RATINGS[nameB].atq += PI_LAMBDA * errorB;
   PI_RATINGS[nameB].atqA += PI_GAMMA * PI_LAMBDA * errorB;
@@ -1027,48 +1110,38 @@ function updatePiRating(nameA, nameB, gA, gB, rivalPwrRatio){
   PI_RATINGS[nameA].defA -= PI_GAMMA * PI_LAMBDA * errorB;
 }
 
-// Calcular la calidad relativa de un rival (para ponderar el update)
-// un partido vs Francia (pwr 90) vale mucho mas que vs Curazao (pwr 15)
 function rivalQuality(nameA, nameB){
   var avgPwr = (TEAMS[nameA].pwr + TEAMS[nameB].pwr)/2;
   var globalAvg = AVG_PWR || 50;
   return Math.max(0.3, Math.min(1.8, avgPwr/globalAvg));
 }
 
-// Inicializar pi-ratings con todos los partidos reales ya jugados
-// (el orden importa — se procesan cronológicamente)
 function initPiRatingsFromResults(){
   var matchOrder = [
-    // 11 jun - Grupo A
+    // J1
     ["Mexico","Sudafrica",2,0],
     ["Corea del Sur","Rep. Checa",2,1],
-    // 12 jun - Grupo B y D
     ["Canada","Bosnia",1,1],
     ["Estados Unidos","Paraguay",4,1],
-    // 13 jun - Grupo C
     ["Brasil","Marruecos",1,1],
     ["Escocia","Haiti",1,0],
-    // 14 jun - Grupos D, E, F
     ["Australia","Turquia",2,0],
     ["Alemania","Curazao",7,1],
     ["Holanda","Japon",2,2],
     ["Costa de Marfil","Ecuador",1,0],
     ["Suecia","Tunez",5,1],
-    // 15 jun - Grupos G y H
     ["Belgica","Egipto",1,1],
     ["Espana","Cabo Verde",0,0],
     ["Uruguay","Arabia Saudita",1,1],
-    // 16 jun - Grupo I y J
     ["Francia","Senegal",3,1],
     ["Irak","Noruega",0,4],
     ["Argentina","Argelia",3,0],
-    // J1 K y L
+    ["Austria","Jordania",3,1],
     ["Portugal","RD Congo",1,1],
     ["Colombia","Uzbekistan",3,1],
     ["Inglaterra","Croacia",4,2],
     ["Ghana","Panama",1,0],
     // J2
-
     ["Rep. Checa","Sudafrica",1,1],
     ["Mexico","Corea del Sur",1,0],
     ["Suiza","Bosnia",4,1],
@@ -1090,8 +1163,61 @@ function initPiRatingsFromResults(){
     ["Argentina","Austria",2,0],
     ["Jordania","Argelia",0,0],
     ["Portugal","Uzbekistan",5,0],
+    ["Colombia","RD Congo",1,0],
     ["Inglaterra","Ghana",0,0],
     ["Croacia","Panama",1,0],
+    // J3
+    ["Mexico","Rep. Checa",3,0],
+    ["Sudafrica","Corea del Sur",1,0],
+    ["Suiza","Canada",3,1],
+    ["Bosnia","Qatar",3,1],
+    ["Brasil","Escocia",3,0],
+    ["Marruecos","Haiti",4,2],
+    ["Turquia","Estados Unidos",3,2],
+    ["Paraguay","Australia",0,0],
+    ["Ecuador","Alemania",2,1],
+    ["Costa de Marfil","Curazao",2,0],
+    ["Japon","Suecia",1,1],
+    ["Holanda","Tunez",3,1],
+    ["Cabo Verde","Arabia Saudita",0,0],
+    ["Uruguay","Espana",0,1],
+    ["Francia","Noruega",4,1],  // Francia 4-1 Noruega ✅
+    ["Senegal","Irak",5,0],
+    ["Belgica","Nueva Zelanda",5,1],
+    ["Egipto","Iran",1,1],
+    // J3 Grupos J, K, L (27 jun)
+    ["Argentina","Jordania",3,1],
+    ["Austria","Argelia",3,3],
+    ["Colombia","Portugal",0,0],
+    ["RD Congo","Uzbekistan",3,1],
+    ["Inglaterra","Panama",2,0],
+    ["Croacia","Ghana",2,1],
+    // 16avos (28 jun – 3 jul)
+    ["Canada","Sudafrica",1,0],
+    ["Brasil","Japon",2,1],
+    ["Alemania","Paraguay",1,1],  // Paraguay gana penales
+    ["Holanda","Marruecos",1,1],  // Marruecos gana penales
+    ["Noruega","Costa de Marfil",2,1],
+    ["Francia","Suecia",3,0],
+    ["Mexico","Ecuador",2,0],
+    ["Inglaterra","RD Congo",2,1],
+    ["Belgica","Senegal",3,2],
+    ["Estados Unidos","Bosnia",2,0],
+    ["Espana","Austria",3,0],
+    ["Portugal","Croacia",2,1],
+    ["Suiza","Argelia",2,0],
+    ["Egipto","Australia",1,1],   // Egipto gana penales
+    ["Argentina","Cabo Verde",3,2],
+    ["Colombia","Ghana",1,0],
+    // Octavos (4–7 jul)
+    ["Marruecos","Canada",3,0],
+    ["Francia","Paraguay",1,0],
+    ["Noruega","Brasil",2,1],
+    ["Inglaterra","Mexico",3,2],
+    ["Espana","Portugal",1,0],
+    ["Belgica","Estados Unidos",4,1],
+    ["Argentina","Egipto",3,2],
+    ["Suiza","Colombia",1,1],   // Suiza gana penales
   ];
   for(var i=0;i<matchOrder.length;i++){
     var m=matchOrder[i];
@@ -1099,56 +1225,35 @@ function initPiRatingsFromResults(){
     updatePiRating(m[0],m[1],m[2],m[3],rq);
   }
 }
-// Ejecutar inmediatamente al cargar
 initPiRatingsFromResults();
 
-// Contribucion del pi-rating al lambda final (como factor multiplicativo)
-// piRatingFactor > 1 si el equipo esta rindiendo mejor de lo esperado
-// piRatingFactor < 1 si esta rindiendo peor de lo esperado
 function piRatingFactor(nameAtq, nameDef){
   var ri = PI_RATINGS[nameAtq], rj = PI_RATINGS[nameDef];
   if (!ri || !rj) return 1.0;
-  var piGap = (ri.atq - rj.def); // positivo = atacante mejor de lo esperado
-  // mapear a factor 0.85-1.15 con saturación
+  var piGap = (ri.atq - rj.def);
   var sat = piSaturation(piGap) * 0.15;
   return Math.max(0.82, Math.min(1.18, 1.0 + sat));
 }
 
 // ════════════════════════════════════════════════════════════════════
-// DIXON-COLES ρ (rho) — CORRECCIÓN DE BAJA PUNTUACIÓN
-// Dixon & Coles (1997) demostraron que el Poisson puro subestima
-// sistemáticamente los resultados 0-0, 1-0, 0-1 y 1-1.
-// El parámetro ρ introduce una correlación entre los goles de ambos equipos
-// que corrige esta subestimación sin cambiar las lambdas.
+//  DIXON-COLES ρ
 // ════════════════════════════════════════════════════════════════════
-// ρ calibrado para fútbol internacional de alto nivel:
-// Más conservador que en ligas domésticas porque en Mundiales hay
-// más partidos cerrados y más empates que el Poisson predice.
-var DC_RHO = -0.18; // negativo = correlación negativa (si uno mete gol, el otro "defiende más")
+var DC_RHO = -0.18;
 
 function dixonColesCorrection(gA, gB, ll, lv){
-  // Factor de corrección para resultados de baja puntuación
-  // Solo se aplica a: 0-0, 1-0, 0-1, 1-1
   if (gA===0 && gB===0) return 1 - ll*lv*DC_RHO;
   if (gA===1 && gB===0) return 1 + lv*DC_RHO;
   if (gA===0 && gB===1) return 1 + ll*DC_RHO;
   if (gA===1 && gB===1) return 1 - DC_RHO;
-  return 1.0; // sin corrección para resultados más altos
+  return 1.0;
 }
 
 // ════════════════════════════════════════════════════════════════════
-// DECAIMIENTO TEMPORAL (Dixon-Coles, 1997 — optimizado para Mundiales)
-// Partidos más recientes pesan más. En Mundiales el decay es más rápido
-// porque los equipos cambian mucho en pocos días (lesiones, cansancio,
-// ajustes tácticos del DT).
-// w(t) = exp(-ξ * dias_desde_partido)
-// ξ = 0.012 optimizado para torneos cortos (vs 0.0065 del paper original)
+//  DECAIMIENTO TEMPORAL
 // ════════════════════════════════════════════════════════════════════
-var DC_XI = 0.012; // decay rate
-var TOURNAMENT_START = new Date("2026-06-11").getTime();
+var DC_XI = 0.012;
 
 function temporalDecayWeight(fechaStr){
-  // fechaStr: "11 jun", "14 jun", etc.
   var parts = fechaStr.split(" ");
   var day = parseInt(parts[0]);
   var months = {jun:5, jul:6};
@@ -1159,55 +1264,38 @@ function temporalDecayWeight(fechaStr){
   return Math.exp(-DC_XI * daysSince);
 }
 
-// Peso promedio de decaimiento temporal para un equipo
-// (pondera sus partidos recientes por decay)
 function teamTemporalWeight(name){
-  var matchDates = {
-    "Mexico":"11 jun","Sudafrica":"11 jun",
-    "Corea del Sur":"11 jun","Rep. Checa":"11 jun",
-    "Canada":"12 jun","Bosnia":"12 jun",
-    "Estados Unidos":"12 jun","Paraguay":"12 jun",
-    "Brasil":"13 jun","Marruecos":"13 jun","Escocia":"13 jun","Haiti":"13 jun",
-    "Australia":"14 jun","Turquia":"14 jun",
-    "Alemania":"14 jun","Curazao":"14 jun",
-    "Holanda":"14 jun","Japon":"14 jun",
-    "Costa de Marfil":"14 jun","Ecuador":"14 jun",
-    "Suecia":"14 jun","Tunez":"14 jun",
-    "Belgica":"15 jun","Egipto":"15 jun",
-    "Espana":"15 jun","Cabo Verde":"15 jun",
-    "Uruguay":"15 jun","Arabia Saudita":"15 jun",
-    "Francia":"22 jun","Senegal":"22 jun",
-    "Rep. Checa":"18 jun","Sudafrica":"18 jun",
-    "Suiza":"18 jun","Bosnia":"18 jun",
-    "Canada":"18 jun","Qatar":"18 jun",
-    "Marruecos":"19 jun","Escocia":"19 jun",
-    "Brasil":"19 jun","Haiti":"19 jun",
-    "Estados Unidos":"19 jun","Paraguay":"19 jun",
-    "Australia":"19 jun","Turquia":"19 jun",
-    "Alemania":"20 jun","Costa de Marfil":"20 jun",
-    "Ecuador":"20 jun","Curazao":"20 jun",
-    "Holanda":"20 jun","Suecia":"20 jun",
-    "Japon":"20 jun","Tunez":"20 jun",
+  // Última fecha jugada por equipo (J3 si disponible, si no J2, si no J1)
+  var lastDates = {
+    "Mexico":"24 jun","Rep. Checa":"24 jun",
+    "Sudafrica":"24 jun","Corea del Sur":"24 jun",
+    "Suiza":"24 jun","Canada":"24 jun",
+    "Bosnia":"24 jun","Qatar":"24 jun",
+    "Brasil":"24 jun","Escocia":"24 jun",
+    "Marruecos":"24 jun","Haiti":"24 jun",
+    "Turquia":"25 jun","Estados Unidos":"25 jun",
+    "Paraguay":"25 jun","Australia":"25 jun",
+    "Ecuador":"25 jun","Alemania":"25 jun",
+    "Costa de Marfil":"25 jun","Curazao":"25 jun",
+    "Japon":"25 jun","Suecia":"25 jun",
+    "Holanda":"25 jun","Tunez":"25 jun",
     "Belgica":"21 jun","Iran":"21 jun",
-    "Espana":"21 jun","Arabia Saudita":"21 jun",
-    "Uruguay":"21 jun","Cabo Verde":"21 jun",
     "Nueva Zelanda":"21 jun","Egipto":"21 jun",
-    "Francia":"22 jun","Irak":"22 jun",
-    "Noruega":"22 jun","Senegal":"22 jun",
+    "Espana":"26 jun","Uruguay":"26 jun",
+    "Cabo Verde":"26 jun","Arabia Saudita":"26 jun",
+    "Francia":"26 jun","Noruega":"26 jun",
+    "Senegal":"26 jun","Irak":"26 jun",
     "Argentina":"22 jun","Austria":"22 jun",
     "Argelia":"22 jun","Jordania":"22 jun",
-    "Portugal":"17 jun","RD Congo":"17 jun",
-    "Colombia":"17 jun","Uzbekistan":"17 jun",
-    "Inglaterra":"17 jun","Croacia":"17 jun",
-    "Ghana":"17 jun","Panama":"17 jun",
-    "Irak":"16 jun","Noruega":"16 jun",
-    "Argentina":"16 jun","Argelia":"16 jun"
+    "Portugal":"23 jun","Uzbekistan":"23 jun",
+    "Colombia":"23 jun","RD Congo":"23 jun",
+    "Inglaterra":"23 jun","Ghana":"23 jun",
+    "Croacia":"23 jun","Panama":"23 jun",
   };
-  var fecha = matchDates[name];
-  if (!fecha) return 1.0; // sin partido jugado = peso neutro
+  var fecha = lastDates[name];
+  if (!fecha) return 1.0;
   return temporalDecayWeight(fecha);
 }
-
 
 function poisson(k,l){ var r=Math.exp(-l); for(var i=1;i<=k;i++) r*= l/i; return r; }
 function sampleP(l){
@@ -1216,19 +1304,15 @@ function sampleP(l){
   return k-1;
 }
 
-// ── ATRIBUTOS DE EQUIPO (para radar) ────────────────
-// MEJORA 3: Momentum exponencial
-// El ultimo resultado vale el doble que el anterior, y asi sucesivamente.
-// Captura mejor los equipos en racha (Japon, Corea) vs los que cayeron (Espana, Belgica).
 function momentumScore(name){
   var form = TEAMS[name].form;
-  var weights_exp = [8, 4, 2, 1, 0.5]; // pesos exponenciales
+  var weights_exp = [8, 4, 2, 1, 0.5];
   var total_w = 8+4+2+1+0.5;
   var sum = 0;
   for(var i=0;i<form.length && i<5;i++){
     sum += form[i] * weights_exp[i];
   }
-  return sum / (total_w * 3); // normalizado 0-1 (max = todos ganan con peso max)
+  return sum / (total_w * 3);
 }
 
 function weights(name){
@@ -1241,11 +1325,10 @@ function weights(name){
     forma:     mom,
     jerarquia: d.pwr/100,
     experiencia: Math.min((d.titles*0.30 + Math.min(d.apps,20)/20*0.70), 1),
-    sistematactico: dtc_n  // nuevo: continuidad del sistema
+    sistematactico: dtc_n
   };
 }
 
-// ── ESCENARIOS ────────────────────────────────────────
 function applyScenario(dLr, dVr){
   var dL = {xg:dLr.xg, gc:dLr.gc, pwr:dLr.pwr};
   var dV = {xg:dVr.xg, gc:dVr.gc, pwr:dVr.pwr};
@@ -1255,34 +1338,22 @@ function applyScenario(dLr, dVr){
   return {dL:dL, dV:dV};
 }
 
-// Rango comprimido (antes 0.55-1.90): un Mundial muestra mucha mas paridad
-// que un campeonato de clubes; ratios extremos generaban exceso de confianza
-// y subestimaban empates (ej. Holanda 90% vs Japon, termino 2-2).
 function suavizar(v){
   var mn=0.65, mx=1.55;
   var n=(v-mn)/(mx-mn);
   return mn + (mx-mn)*Math.sqrt(Math.max(0,Math.min(1,n)));
 }
 
-// ── LAMBDAS ────────────────────────────────────────────
-// MEJORA 6: Update bayesiano automatico
-// Después de cada partido real, el momentum exponencial del equipo
-// ajusta ligeramente sus lambdas. Equipos en racha positiva real
-// (Corea, Japon, Australia) generan un poco mas de lo que su xg base
-// sugiere; equipos que fallaron (España, Belgica) generan menos.
-// Factor: -8% a +8% sobre lambda, basado en momentumScore.
 function getLambdasN(nameL, nameV, venue){
   var dLr = TEAMS[nameL], dVr = TEAMS[nameV];
   var sc = applyScenario(dLr, dVr);
   var dL = sc.dL, dV = sc.dV;
 
-  // PARITY_BLEND aplica a xg/gc directamente
   var xgL = dL.xg*(1-PARITY_BLEND) + AVG_XG*PARITY_BLEND;
   var xgV = dV.xg*(1-PARITY_BLEND) + AVG_XG*PARITY_BLEND;
   var gcL = dL.gc*(1-PARITY_BLEND) + AVG_GC*PARITY_BLEND;
   var gcV = dV.gc*(1-PARITY_BLEND) + AVG_GC*PARITY_BLEND;
 
-  // MEJORA 6: Bayesian momentum adjustment
   var momL = momentumScore(nameL);
   var momV = momentumScore(nameV);
   var momFactorL = 0.92 + momL*0.16;
@@ -1292,7 +1363,6 @@ function getLambdasN(nameL, nameV, venue){
   xgV *= momFactorV;
   gcV *= (2 - momFactorV);
 
-  // ratio basado en power ajustado por confederacion
   var ePwrL = effPwr(nameL), ePwrV = effPwr(nameV);
   var rL = suavizar(ePwrL / Math.max(ePwrV, 0.01));
   var rV = suavizar(ePwrV / Math.max(ePwrL, 0.01));
@@ -1300,30 +1370,20 @@ function getLambdasN(nameL, nameV, venue){
   var ll = xgL * (gcV/Math.max(AVG_GC,0.5)) * rL;
   var lv = xgV * (gcL/Math.max(AVG_GC,0.5)) * rV;
 
-  // ── PI-RATING: ajuste dinámico basado en rendimiento real del torneo ──
-  // piRatingFactor > 1 = equipo rinde MEJOR de lo que su pwr sugiere
-  // piRatingFactor < 1 = equipo rinde PEOR (ej: España tras 0-0 con Cabo Verde)
-  // Se aplica con peso 35% para no sobreponderar — la base del modelo sigue siendo
-  // el pwr compuesto (FIFA+mkt+PIB+cultura+DT+LBC+depth)
   var piFactorL = piRatingFactor(nameL, nameV);
   var piFactorV = piRatingFactor(nameV, nameL);
   var PI_WEIGHT = 0.35;
   ll *= (1 + (piFactorL-1)*PI_WEIGHT);
   lv *= (1 + (piFactorV-1)*PI_WEIGHT);
 
-  // ── DECAIMIENTO TEMPORAL: partidos más recientes pesan más ──
-  // Si un equipo jugó hace 5 días (decay ~0.94) vs hace 1 día (decay ~0.99),
-  // el equipo más "fresco" tiene leve ventaja en consistencia táctica
   var decayL = teamTemporalWeight(nameL);
   var decayV = teamTemporalWeight(nameV);
-  // Normalizar decay relativo: el equipo con partido más reciente gana leve ventaja
   var decayAvg = (decayL + decayV)/2 || 1.0;
   if (decayAvg > 0){
     ll *= (0.97 + 0.03*(decayL/decayAvg));
     lv *= (0.97 + 0.03*(decayV/decayAvg));
   }
 
-  // bonus de localia
   if (currentSc === "neutral"){
     var hostL = HOSTS.indexOf(nameL) >= 0;
     var hostV = HOSTS.indexOf(nameV) >= 0;
@@ -1331,7 +1391,6 @@ function getLambdasN(nameL, nameV, venue){
     if (hostV && !hostL){ lv *= HOST_ATTACK_BONUS; ll *= HOST_OPP_PENALTY; }
   }
 
-  // ajuste de altitud por sede
   if (venue && VENUES[venue] && VENUES[venue].impact > 0){
     var imp = VENUES[venue].impact;
     var attP = 1 - (1-ALT_ATTACK_PENALTY_MAX)*imp;
@@ -1342,7 +1401,6 @@ function getLambdasN(nameL, nameV, venue){
     if (!accV){ lv *= attP; ll *= defP; }
   }
 
-  // Tope maximo de brecha 4.5:1
   var ratio = ll/Math.max(lv,0.01);
   var MAX_RATIO = 4.5;
   if (ratio > MAX_RATIO){ var adj=Math.sqrt(ratio/MAX_RATIO); ll/=adj; lv*=adj; }
@@ -1351,9 +1409,6 @@ function getLambdasN(nameL, nameV, venue){
   return { ll: Math.max(ll,0.10), lv: Math.max(lv,0.10) };
 }
 
-// Techo bajado de 78% a 68% (15 jun, tras 5 sorpresas en 13 partidos):
-// el Mundial 2026 esta resultando excepcionalmente parejo, incluso para
-// el techo ya recalibrado un dia antes.
 function calcConf(ll, lv){
   var diff = Math.abs(ll-lv);
   var base = Math.min(0.44 + diff*0.14, 0.68);
@@ -1361,11 +1416,6 @@ function calcConf(ll, lv){
   return Math.max(0.32, Math.min(0.68, base + penOpen));
 }
 
-// ── BOOST DE EMPATE ──────────────────────────────────────
-// El modelo Poisson puro subestima empates en partidos parejos (el "miedo
-// a perder" en fase de grupos lleva a planteamientos mas cautos de lo que
-// sugiere la pura multiplicacion de lambdas). Cuando l===v, se aplica un
-// bonus que crece cuanto mas parejo es el partido (diff de lambdas chico).
 function drawBoost(l, v, ll, lv){
   if (l !== v) return 1.0;
   var diff = Math.abs(ll-lv);
@@ -1377,8 +1427,6 @@ function top3(ll,lv){
   var arr=[], tot=0;
   for(var l=0;l<7;l++){
     for(var v=0;v<7;v++){
-      // Aplicar Dixon-Coles ρ para resultados de baja puntuación
-      // + draw boost para partidos parejos
       var p = poisson(l,ll)*poisson(v,lv)
               * dixonColesCorrection(l,v,ll,lv)
               * drawBoost(l,v,ll,lv);
@@ -1392,29 +1440,21 @@ function top3(ll,lv){
   return out;
 }
 
-// ── SIMULAR UN PARTIDO (para series y grupos) ───────────
 function simMatch(nameL, nameV){
   var played = getPlayedResult(nameL, nameV);
   if (played) return { gL: played.gA, gV: played.gB };
   var lam = getLambdasN(nameL, nameV);
   var ll = lam.ll, lv = lam.lv;
-  // Muestreo con corrección Dixon-Coles:
-  // generamos resultado base Poisson y aplicamos accept-reject suave
-  // para los resultados de baja puntuación más comunes
   var gL = sampleP(ll), gV = sampleP(lv);
-  // Si el resultado es de baja puntuación, aplicar corrección DC
   if (gL<=1 && gV<=1){
     var dcCorr = dixonColesCorrection(gL,gV,ll,lv);
-    // si dcCorr > 1 el resultado está sub-representado → aceptar con prob 1
-    // si dcCorr < 1 está sobre-representado → re-muestrear con prob (1-dcCorr)
     if (dcCorr < 1 && Math.random() > dcCorr){
-      gL = sampleP(ll); gV = sampleP(lv); // re-muestrear una vez
+      gL = sampleP(ll); gV = sampleP(lv);
     }
   }
   return { gL: gL, gV: gV };
 }
 
-// ── SIMULAR UN PARTIDO CON LOG (para "Simular Partido") ──
 function simMatchLog(nameL, nameV, venue){
   var lam = getLambdasN(nameL, nameV, venue);
   var lambdaL = lam.ll, lambdaV = lam.lv;
@@ -1436,7 +1476,6 @@ function simMatchLog(nameL, nameV, venue){
       evs.push({m:0,t:"fat",txt:"⛰️ Altitud "+VENUES[venue].alt+"m — fatiga extra para "+afectados.join(" y ")});
     }
   }
-
   for(var b=0;b<9;b++){
     if (b>=7){
       rateL = (lambdaL/90)*(1+ (gV>gL ? 0.18:0) );
@@ -1452,8 +1491,6 @@ function simMatchLog(nameL, nameV, venue){
   return {gL:gL, gV:gV, evs:evs};
 }
 
-// ── SIMULAR UN GRUPO (proyeccion liguilla) ─────────────
-// Devuelve standings ordenados [{name, pts, gd, gf}], promediado sobre N corridas
 function simGroupOnce(teamNames){
   var pts={}, gd={}, gf={};
   for(var i=0;i<teamNames.length;i++){ pts[teamNames[i]]=0; gd[teamNames[i]]=0; gf[teamNames[i]]=0; }
@@ -1478,7 +1515,6 @@ function simGroupOnce(teamNames){
   return arr;
 }
 
-// Proyeccion agregada de un grupo: avg pts, avg gd, % clasificar top2
 function projectGroup(teamNames, N){
   N = N || 1200;
   var sumPts={}, sumGd={}, qual={};
@@ -1505,34 +1541,23 @@ function projectGroup(teamNames, N){
   return out;
 }
 
-// ── SERIE A UN PARTIDO (knockout, sin penales explicitos) ──
-// MEJORA 5: Factor de eliminatoria directa
-// En Mundiales 1990-2022, promedio goles/partido:
-// Grupos: 2.64 | Eliminatorias (sin prorroga): 2.18 -> reduccion ~18%
-// Las lambdas se reducen en eliminatorias para reflejar mayor cautela tactica,
-// menor riesgo aceptado, y mas peso psicologico de cada error.
-var KNOCKOUT_LAMBDA_FACTOR = 0.82;
+var KNOCKOUT_LAMBDA_FACTOR = 0.88;
 
 function simKnockout(nameA, nameB){
   var lam = getLambdasN(nameA, nameB);
-  // Aplicar factor de caucion eliminatoria
   var llK = lam.ll * KNOCKOUT_LAMBDA_FACTOR;
   var lvK = lam.lv * KNOCKOUT_LAMBDA_FACTOR;
-  // Tambien ajustar por LBC (conversion vs bloque bajo) en knockout:
-  // el equipo con mejor LBC tiene ligera ventaja cuando el partido se cierra
   var lbcA = TEAMS[nameA].lbc || 5;
   var lbcB = TEAMS[nameB].lbc || 5;
-  var lbcAdj = 1 + (lbcA-lbcB)*0.012; // max +/- 6% por LBC
+  var lbcAdj = 1 + (lbcA-lbcB)*0.012;
   llK *= Math.max(0.88, Math.min(1.12, lbcAdj));
   lvK *= Math.max(0.88, Math.min(1.12, 1/lbcAdj));
   var gA = sampleP(llK), gB = sampleP(lvK);
   if (gA===gB){
-    // tiempo extra: lambdas aun mas reducidas
     gA += sampleP(llK*0.30);
     gB += sampleP(lvK*0.30);
   }
   if (gA===gB){
-    // penales: combinacion de DT continuity + pwr (DT mas experimentado = mejor en penales)
     var dtA = TEAMS[nameA].dtc || 5, dtB = TEAMS[nameB].dtc || 5;
     var pwrA = TEAMS[nameA].pwr,     pwrB = TEAMS[nameB].pwr;
     var scoreA = pwrA*0.60 + dtA*10*0.40;
@@ -1542,8 +1567,6 @@ function simKnockout(nameA, nameB){
   return gA>gB ? nameA : nameB;
 }
 
-// ── ARMAR LOS 32 CLASIFICADOS DE UNA SIMULACION DE GRUPOS ──
-// Devuelve { winners:[12 1eros A-L], runnersUp:[12 2dos A-L], thirds:[lista 12 terceros con datos] }
 var GROUP_KEYS = ["A","B","C","D","E","F","G","H","I","J","K","L"];
 
 function simAllGroupsOnce(){
@@ -1555,7 +1578,6 @@ function simAllGroupsOnce(){
     runnersUp.push(standings[1].name);
     thirds.push({name:standings[2].name, pts:standings[2].pts, gd:standings[2].gd, gf:standings[2].gf, group:g});
   }
-  // ordenar terceros y quedarse con los 8 mejores
   thirds.sort(function(a,b){
     if (b.pts!==a.pts) return b.pts-a.pts;
     if (b.gd!==a.gd) return b.gd-a.gd;
@@ -1567,31 +1589,20 @@ function simAllGroupsOnce(){
   return { winners:winners, runnersUp:runnersUp, thirds:bestThirds, bestThirdGroups:bestThirdGroups };
 }
 
-// ── ARMAR EMPAREJAMIENTOS DE 16AVOS (32 -> 16) ─────────
-// ESTRUCTURA OFICIAL CONFIRMADA POR FIFA:
-//   - Grupos A,B,D,E,G,I,K,L: el 1° enfrenta a un 3° clasificado (cruzado)
-//   - Grupos C,F,H,J: el 1° enfrenta a un 2° de otro grupo
-// El emparejamiento especifico entre 1ros-vs-terceros y 2dos-vs-2dos es una
-// PROYECCION (la tabla real de FIFA depende de cuales 8 terceros clasifican,
-// algo que solo se sabe el ultimo dia de grupos). Se ordena por Power Rating
-// para mantener el bracket equilibrado.
-var FIXED_THIRD_GROUPS = ["A","B","D","E","G","I","K","L"]; // 1° vs 3°
-var FIXED_RU_GROUPS    = ["C","F","H","J"];                 // 1° vs 2°
+var FIXED_THIRD_GROUPS = ["A","B","D","E","G","I","K","L"];
+var FIXED_RU_GROUPS    = ["C","F","H","J"];
 
 function pwrOf(name){ return TEAMS[name].pwr; }
 
 function buildR32(res){
-  var winners = res.winners.slice();    // indice = posicion en GROUP_KEYS (A=0..L=11)
+  var winners = res.winners.slice();
   var runnersUp = res.runnersUp.slice();
-  var bestThirds = res.thirds;          // 8 mejores terceros, ordenados mejor->peor
+  var bestThirds = res.thirds;
 
   function idx(g){ return GROUP_KEYS.indexOf(g); }
 
   var matches = [];
 
-  // 1) Grupos FIXED_THIRD_GROUPS: su 1° enfrenta a un 3° clasificado
-  // ordenamos estos 8 winners por poder (desc) y los 8 terceros por poder (asc)
-  // -> el winner mas fuerte recibe el tercero mas debil (balance del bracket)
   var thirdWinners = FIXED_THIRD_GROUPS.map(function(g){ return winners[idx(g)]; });
   thirdWinners.sort(function(a,b){ return pwrOf(b)-pwrOf(a); });
   var thirdsSortedAsc = bestThirds.slice().sort(function(a,b){ return pwrOf(a.name)-pwrOf(b.name); });
@@ -1599,25 +1610,21 @@ function buildR32(res){
     matches.push([thirdWinners[i], thirdsSortedAsc[7-i].name]);
   }
 
-  // 2) Grupos FIXED_RU_GROUPS: su 1° enfrenta a un 2° de otro grupo FIXED_RU_GROUPS
-  //    (rotacion: 1°C-2°F, 1°F-2°H, 1°H-2°J, 1°J-2°C)
   var rg = FIXED_RU_GROUPS;
-  matches.push([winners[idx(rg[0])], runnersUp[idx(rg[1])]]); // 1C vs 2F
-  matches.push([winners[idx(rg[1])], runnersUp[idx(rg[2])]]); // 1F vs 2H
-  matches.push([winners[idx(rg[2])], runnersUp[idx(rg[3])]]); // 1H vs 2J
-  matches.push([winners[idx(rg[3])], runnersUp[idx(rg[0])]]); // 1J vs 2C
+  matches.push([winners[idx(rg[0])], runnersUp[idx(rg[1])]]);
+  matches.push([winners[idx(rg[1])], runnersUp[idx(rg[2])]]);
+  matches.push([winners[idx(rg[2])], runnersUp[idx(rg[3])]]);
+  matches.push([winners[idx(rg[3])], runnersUp[idx(rg[0])]]);
 
-  // 3) Los 8 RU de FIXED_THIRD_GROUPS quedan libres -> se emparejan entre si (4 partidos)
   var ruFree = FIXED_THIRD_GROUPS.map(function(g){ return runnersUp[idx(g)]; });
   ruFree.sort(function(a,b){ return pwrOf(b)-pwrOf(a); });
   for(var i=0;i<4;i++){
     matches.push([ruFree[i], ruFree[7-i]]);
   }
 
-  return matches; // 16 pares
+  return matches;
 }
 
-// ── SIMULAR UN TORNEO COMPLETO ─────────────────────────
 function simTournamentOnce(){
   var savedSc = currentSc; currentSc="neutral";
   var groupsRes = simAllGroupsOnce();
@@ -1642,7 +1649,6 @@ function simTournamentOnce(){
 // ════════════════════════════════════════════════════
 
 function shortName(n){
-  // nombres largos -> version corta para UI compacta
   var MAP = {
     "Estados Unidos":"USA","Rep. Checa":"Rep. Checa","Costa de Marfil":"C. Marfil",
     "Arabia Saudita":"A. Saudita","Nueva Zelanda":"N. Zelanda","Cabo Verde":"C. Verde",
@@ -1651,9 +1657,9 @@ function shortName(n){
   return MAP[n] || n;
 }
 
-// ── COUNTDOWN (proximo: Espana vs Cabo Verde, Grupo H, 15 jun) ──
 function renderCountdown(){
-  var target = new Date("2026-06-15T19:00:00Z").getTime(); // J1 Grupo H - Miami
+  // Próximo hito: inicio de los 16avos, 28 jun
+  var target = new Date("2026-07-09T20:00:00Z").getTime(); // Cuartos: Francia vs Marruecos
   function tick(){
     var now = new Date().getTime();
     var diff = target - now;
@@ -1671,24 +1677,12 @@ function renderCountdown(){
       }
     }
     var el = document.getElementById("countdown");
-    if (el) el.innerHTML = html;
+    if (el) el.innerHTML = '<div style="font-size:9px;font-weight:700;letter-spacing:2px;color:var(--muted);margin-bottom:6px;width:100%;">⏱ CUARTOS · FRANCIA vs MARRUECOS · 9 JUL</div>' + html;
   }
   tick();
   setInterval(tick, 1000);
 }
 
-// ── DONUT: PROYECCION DE CAMPEON ───────────────────────
-// Actualizado 15 jun: incorpora forma reciente REAL (resultados ya jugados)
-// y effPwr (confederacion + boost de paridad), no solo el power rating
-// pre-torneo. Equipos favoritos que ya mostraron fragilidad en J1 (Espana
-// 0-0 vs debutante, Holanda 2-2 vs Japon, Belgica vs Egipto) ven su
-// probabilidad de titulo penalizada en proporcion.
-// ════════════════════════════════════════════════════
-// CHAMPION PROBABILITIES — Modelo integrado final
-// Incorpora: effPwr (FIFA+mkt+PIB+cultura+sorpresa+DT+LBC+depth)
-// + momentum exponencial real + profundidad de plantel
-// + exponente 3.2 (mas paridad que 3.4 original)
-// ════════════════════════════════════════════════════
 function champProbabilities(topN){
   topN = topN || 7;
   var keys = Object.keys(TEAMS);
@@ -1696,13 +1690,7 @@ function champProbabilities(topN){
   var total = 0;
   for(var i=0;i<keys.length;i++){
     var d = TEAMS[keys[i]];
-
-    // Base: effPwr ya incluye PARITY_BLEND + confederacion + PIB + cultura + sorpresa
     var basePwr = effPwr(keys[i]);
-
-    // Factor de forma real con MOMENTUM EXPONENCIAL
-    // El ultimo resultado vale 8x, el anterior 4x, etc.
-    // Equipos que aun no jugaron: factor 1.0 (neutro)
     var formFactor = 1.0;
     var realPlayed = 0;
     for(var k in PLAYED_MATCHES){
@@ -1710,28 +1698,16 @@ function champProbabilities(topN){
       if (parts[0]===keys[i] || parts[1]===keys[i]) realPlayed++;
     }
     if (realPlayed > 0){
-      // momentumScore ya usa pesos exponenciales [8,4,2,1,0.5]
       var mom = momentumScore(keys[i]);
-      // Mapear 0-1 a 0.80-1.15 (mas rango: goleada Messi = +15%, empate Spain = -20%)
       formFactor = 0.80 + mom*0.35;
     }
-
-    // Bonus de profundidad de plantel (dep 0-10)
-    // En un torneo de 7 partidos, los bancos profundos ganan cuartos y semis
     var dep = d.dep || 5;
-    var depBonus = 1 + (dep-5)*0.010; // -5% a +5%
-
-    // Bonus de conversion vs bloque bajo (lbc 0-10)
-    // En eliminatorias, casi todos los rivales juegan cerrados
+    var depBonus = 1 + (dep-5)*0.010;
     var lbc = d.lbc || 5;
-    var lbcBonus = 1 + (lbc-5)*0.008; // -4% a +4%
-
-    // Continuidad DT: equipos con DT consolidado tienen menor varianza en knockout
+    var lbcBonus = 1 + (lbc-5)*0.008;
     var dtc = d.dtc || 5;
-    var dtcBonus = 1 + (dtc-5)*0.006; // -3% a +3%
-
+    var dtcBonus = 1 + (dtc-5)*0.006;
     var effective = basePwr * formFactor * depBonus * lbcBonus * dtcBonus;
-    // Exponente 3.2: menos concentrado que 3.4/4.2, mas chances para outsiders
     var s = Math.pow(Math.max(effective,0)/100, 3.2);
     scores.push({name:keys[i], score:s});
     total += s;
@@ -1768,14 +1744,11 @@ function renderDonut(){
     ctx.fill();
     start += ang;
   }
-  // hueco central
   ctx.globalCompositeOperation = "destination-out";
   ctx.beginPath();
   ctx.arc(cx,cy,rInner,0,Math.PI*2);
   ctx.fill();
   ctx.globalCompositeOperation = "source-over";
-
-  // legend
   var legend = document.getElementById("donut-legend");
   var html = "";
   for(var i=0;i<data.length;i++){
@@ -1788,7 +1761,6 @@ function renderDonut(){
   legend.innerHTML = html;
 }
 
-// ── AI CONFIDENCE GAUGES ────────────────────────────────
 function svgGauge(pct, color){
   var r = 24, c = 2*Math.PI*r;
   var off = c * (1 - pct/100);
@@ -1801,9 +1773,9 @@ function svgGauge(pct, color){
 
 function renderGauges(){
   var marquee = [
-    ["Brasil","Marruecos","Grupo C · Apertura"],
-    ["Argentina","Austria","Grupo J"],
-    ["Espana","Uruguay","Grupo H"]
+    ["Francia","Marruecos","Cuartos · 9 jul · Boston"],
+    ["Espana","Belgica","Cuartos · 10 jul · Los Angeles"],
+    ["Noruega","Inglaterra","Cuartos · 11 jul · Miami"]
   ];
   var html = "";
   for(var i=0;i<marquee.length;i++){
@@ -1823,28 +1795,32 @@ function renderGauges(){
   document.getElementById("gauge-row").innerHTML = html;
 }
 
-// ── PROXIMO PARTIDO (J1 grupo B: Canada vs Bosnia) ─────
 function renderOpener(){
-  var j = J1.I;
-  var nameL = j.local, nameV = j.visita;
-  var lam = getLambdasN(nameL, nameV);
-  var conf = calcConf(lam.ll, lam.lv);
-  var t3 = top3(lam.ll, lam.lv);
-  var dL = TEAMS[nameL], dV = TEAMS[nameV];
-  var html = '<div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:10px;">'
-    +'<div style="text-align:center;flex:1;"><div style="font-size:32px;">'+dL.flag+'</div><div style="font-size:11px;font-weight:800;margin-top:4px;">'+shortName(nameL)+'</div></div>'
-    +'<div style="text-align:center;padding:0 8px;"><div style="font-family:var(--font-mono);font-size:24px;font-weight:800;color:var(--gold);">'+t3[0].l+'-'+t3[0].v+'</div><div style="font-size:8px;color:var(--muted);letter-spacing:1px;">PROB '+t3[0].pct+'%</div></div>'
-    +'<div style="text-align:center;flex:1;"><div style="font-size:32px;">'+dV.flag+'</div><div style="font-size:11px;font-weight:800;margin-top:4px;">'+shortName(nameV)+'</div></div>'
-    +'</div>'
-    +'<div style="font-size:10px;color:var(--muted2);text-align:center;line-height:1.8;">'
-    +'📍 '+j.sede+' · Grupo I · Jornada 1<br>'
-    +'🎯 Confianza IA: <span style="color:var(--gold);font-weight:800;">'+Math.round(conf*100)+'%</span>'
-    +'</div>';
+  // Cuartos de final confirmados (+ uno pendiente esta noche)
+  var qf = [
+    ["Francia","Marruecos","9 jul · Boston"],
+    ["Espana","Belgica","10 jul · Los Angeles"],
+    ["Noruega","Inglaterra","11 jul · Miami"],
+    ["Argentina","Suiza","11 jul · Kansas City"],
+  ];
+  var html = '<div style="font-size:9px;font-weight:700;letter-spacing:2px;color:var(--gold);margin-bottom:10px;">CUARTOS DE FINAL · 9-11 JUL</div>';
+  qf.forEach(function(p){
+    var nL=p[0], nV=p[1], fecha=p[2];
+    var dL=TEAMS[nL], dV=TEAMS[nV]||{flag:"❓"};
+    var lam = dV.pwr ? getLambdasN(nL,nV) : {ll:1.2,lv:1.0};
+    var t3 = dV.pwr ? top3(lam.ll,lam.lv) : [{l:"?",v:"?",pct:"?"}];
+    html += '<div style="display:flex;align-items:center;gap:8px;padding:7px 0;border-bottom:1px solid var(--border);">'
+      +'<span style="font-size:20px;">'+dL.flag+'</span>'
+      +'<span style="flex:1;font-size:11px;font-weight:700;">'+shortName(nL)+'</span>'
+      +'<span style="font-family:var(--font-mono);font-size:13px;font-weight:800;color:var(--gold);">'+t3[0].l+'-'+t3[0].v+'</span>'
+      +'<span style="flex:1;font-size:11px;font-weight:700;text-align:right;">'+shortName(nV)+'</span>'
+      +'<span style="font-size:20px;">'+dV.flag+'</span>'
+      +'</div>';
+  });
+  html += '<div style="font-size:9px;color:var(--muted);margin-top:6px;text-align:center;">Los 4 cuartos confirmados · 9-11 jul</div>';
   document.getElementById("opener-card").innerHTML = html;
 }
 
-
-// ── TICKER DE RESULTADOS REALES ─────────────────────────
 function renderResultsTicker(){
   var el = document.getElementById("results-ticker");
   if (!el || RESULTS_FEED.length===0){ if(el) el.parentNode.style.display="none"; return; }
@@ -1852,18 +1828,24 @@ function renderResultsTicker(){
   for(var i=0;i<RESULTS_FEED.length;i++){
     var r = RESULTS_FEED[i];
     var dA = TEAMS[r.a], dB = TEAMS[r.b];
+    var isUpset = false;
+    if (dA && dB && r.gA < r.gB && dA.pwr > dB.pwr + 10) isUpset = true;
+    if (dA && dB && r.gB < r.gA && dB.pwr > dA.pwr + 10) isUpset = true;
+    var estadoColor = isUpset ? "var(--red)" : "var(--green)";
+    var estadoBg = isUpset ? "rgba(239,68,68,.08)" : "rgba(34,197,94,.08)";
+    var estadoBorder = isUpset ? "rgba(239,68,68,.2)" : "rgba(34,197,94,.2)";
+    var upsetTag = isUpset ? ' 🔴' : '';
     html += '<div style="display:flex;align-items:center;gap:10px;padding:8px 0;'+(i>0?'border-top:1px solid var(--border);':'')+'">'
-      +'<span style="font-size:8px;font-weight:800;letter-spacing:2px;color:var(--green);background:rgba(34,197,94,.08);border:1px solid rgba(34,197,94,.2);border-radius:4px;padding:2px 6px;">'+r.estado+'</span>'
-      +'<span style="font-size:9px;color:var(--muted);width:50px;">Grupo '+r.group+'</span>'
-      +'<span style="flex:1;font-size:12px;font-weight:700;text-align:right;">'+dA.flag+' '+shortName(r.a)+'</span>'
+      +'<span style="font-size:8px;font-weight:800;letter-spacing:2px;color:'+estadoColor+';background:'+estadoBg+';border:1px solid '+estadoBorder+';border-radius:4px;padding:2px 6px;">'+r.estado+upsetTag+'</span>'
+      +'<span style="font-size:9px;color:var(--muted);width:50px;">Grp '+r.group+'</span>'
+      +'<span style="flex:1;font-size:12px;font-weight:700;text-align:right;">'+(dA?dA.flag:'')+' '+shortName(r.a)+'</span>'
       +'<span style="font-family:var(--font-mono);font-size:16px;font-weight:800;color:var(--gold);padding:0 8px;">'+r.gA+' - '+r.gB+'</span>'
-      +'<span style="flex:1;font-size:12px;font-weight:700;">'+dB.flag+' '+shortName(r.b)+'</span>'
+      +'<span style="flex:1;font-size:12px;font-weight:700;">'+(dB?dB.flag:'')+' '+shortName(r.b)+'</span>'
       +'</div>';
   }
   el.innerHTML = html;
 }
 
-// ── PANEL DE BAJAS CONFIRMADAS ───────────────────────────
 function renderInjuries(){
   var el = document.getElementById("injury-panel");
   if (!el) return;
@@ -1883,8 +1865,6 @@ function renderInjuries(){
   el.innerHTML = html;
 }
 
-
-// Promedio alto + poca dispersion entre los 4 equipos = grupo durisimo
 function groupDifficulty(teams){
   var pwrs = teams.map(function(t){ return TEAMS[t].pwr; });
   var avg = pwrs.reduce(function(a,b){return a+b;},0)/pwrs.length;
@@ -1901,8 +1881,6 @@ function computeGroupDifficulty(){
   return out;
 }
 
-
-// ── TABLA REAL PARCIAL (solo partidos ya jugados) ───────
 function getRealStandings(teams){
   var pts={}, gd={}, gf={}, pj={};
   for(var i=0;i<teams.length;i++){ pts[teams[i]]=0; gd[teams[i]]=0; gf[teams[i]]=0; pj[teams[i]]=0; }
@@ -1919,13 +1897,13 @@ function getRealStandings(teams){
   }
   var arr=[];
   for(var i=0;i<teams.length;i++){ arr.push({name:teams[i],pts:pts[teams[i]],gd:gd[teams[i]],gf:gf[teams[i]],pj:pj[teams[i]]}); }
-  arr.sort(function(x,y){ if(y.pts!==x.pts) return y.pts-x.pts; return y.gd-x.gd; });
+  arr.sort(function(x,y){ if(y.pts!==x.pts) return y.pts-x.pts; if(y.gd!==x.gd) return y.gd-x.gd; return y.gf-x.gf; });
   return arr;
 }
 
 function renderDashGroups(){
   var html = '<thead><tr><th>Grupo</th><th>Equipos</th><th class="c">Líder</th><th class="c">Estado</th></tr></thead><tbody>';
-  for(var i=0;i<GROUP_KEYS.length;i++){
+  for(var i=0;i<GROUP_KEYS.length; i++){
     var g = GROUP_KEYS[i];
     var teams = GRUPOS[g];
     var flagsHtml = "";
@@ -1934,10 +1912,13 @@ function renderDashGroups(){
     }
     var real = getRealStandings(teams);
     var anyPlayed = real[0].pj > 0;
+    var allPlayed = real[0].pj >= 3;
     var leadName, statusHtml, j1 = J1[g];
     if (anyPlayed){
       leadName = real[0].name;
-      statusHtml = '<span style="font-size:9px;font-weight:800;color:var(--green);">'+real[0].pts+' pts (J'+real[0].pj+')</span>';
+      var statusColor = allPlayed ? "var(--gold)" : "var(--green)";
+      var statusText = allPlayed ? "✅ "+real[0].pts+" pts (J3)" : real[0].pts+" pts (J"+real[0].pj+")";
+      statusHtml = '<span style="font-size:9px;font-weight:800;color:'+statusColor+';">'+statusText+'</span>';
     } else {
       leadName = teams[0]; var bestPwr = TEAMS[leadName].pwr;
       for(var j=0;j<teams.length;j++){ if (TEAMS[teams[j]].pwr > bestPwr){ leadName = teams[j]; bestPwr = TEAMS[teams[j]].pwr; } }
@@ -1951,9 +1932,7 @@ function renderDashGroups(){
   document.getElementById("dash-groups-table").innerHTML = html;
 }
 
-// ── PAGINA GRUPOS: PROYECCION ──────────────────────────
 function renderGroups(){
-  // calcular los 2 grupos mas dificiles ("Grupo de la Muerte")
   var diffs = computeGroupDifficulty();
   var sortedByDiff = GROUP_KEYS.slice().sort(function(a,b){ return diffs[b].score-diffs[a].score; });
   var deathGroups = {}; deathGroups[sortedByDiff[0]]=true; deathGroups[sortedByDiff[1]]=true;
@@ -1964,23 +1943,29 @@ function renderGroups(){
     var teams = GRUPOS[g];
     var proj = projectGroup(teams, 800);
 
-    // chequear si algun partido de este grupo ya se jugo
     var playedCount = 0;
     for(var a=0;a<teams.length;a++){
       for(var b=a+1;b<teams.length;b++){
         if (getPlayedResult(teams[a],teams[b])) playedCount++;
       }
     }
+    var totalMatches = 6; // C(4,2)
+    var j3complete = playedCount >= totalMatches;
 
     var rows = "";
     for(var i=0;i<proj.length;i++){
       var p = proj[i];
       var d = TEAMS[p.name];
-      var rowCls = i<2 ? "row-q" : "";
+      var st = CONFIRMED_STATUS[p.name] || "";
+      var rowCls = st==="q1"||st==="q2" ? "row-q" : st==="q3" ? "row-q2" : st==="elim" ? "row-elim" : (i<2?"row-q":"");
       var hostTag = (HOSTS.indexOf(p.name)>=0) ? '<span class="host-tag">SEDE</span>' : "";
+      var stBadge = st==="q1" ? '<span style="font-size:7px;background:rgba(212,175,55,.2);color:var(--gold);border-radius:3px;padding:1px 4px;margin-left:3px;">1°✅</span>'
+                  : st==="q2" ? '<span style="font-size:7px;background:rgba(59,130,246,.2);color:var(--blue);border-radius:3px;padding:1px 4px;margin-left:3px;">2°✅</span>'
+                  : st==="q3" ? '<span style="font-size:7px;background:rgba(34,197,94,.2);color:var(--green);border-radius:3px;padding:1px 4px;margin-left:3px;">3°✅</span>'
+                  : st==="elim" ? '<span style="font-size:7px;background:rgba(239,68,68,.12);color:var(--red);border-radius:3px;padding:1px 4px;margin-left:3px;">ELIM</span>' : "";
       rows += '<tr class="'+rowCls+'">'
         +'<td style="font-family:var(--font-mono);color:var(--muted);font-size:10px;">'+(i+1)+'</td>'
-        +'<td>'+d.flag+' '+shortName(p.name)+hostTag+'</td>'
+        +'<td>'+d.flag+' '+shortName(p.name)+hostTag+stBadge+'</td>'
         +'<td class="pwr-num">'+d.pwr.toFixed(1)+'</td>'
         +'<td style="font-family:var(--font-mono);font-size:11px;">'+p.avgPts.toFixed(2)+'</td>'
         +'<td style="font-family:var(--font-mono);font-size:11px;color:'+(p.avgGd>=0?"var(--green)":"var(--red)")+';">'+(p.avgGd>=0?"+":"")+p.avgGd.toFixed(1)+'</td>'
@@ -1989,7 +1974,8 @@ function renderGroups(){
     }
     var badges = "";
     if (deathGroups[g]) badges += '<span style="font-size:7px;font-weight:800;letter-spacing:1px;padding:1px 5px;border-radius:3px;background:rgba(239,68,68,.12);color:var(--red);margin-left:5px;">🔥 GRUPO DE LA MUERTE</span>';
-    if (playedCount>0) badges += '<span style="font-size:7px;font-weight:800;letter-spacing:1px;padding:1px 5px;border-radius:3px;background:rgba(34,197,94,.12);color:var(--green);margin-left:5px;">✅ J1 JUGADA</span>';
+    if (j3complete) badges += '<span style="font-size:7px;font-weight:800;letter-spacing:1px;padding:1px 5px;border-radius:3px;background:rgba(212,175,55,.12);color:var(--gold);margin-left:5px;">✅ J3 COMPLETA</span>';
+    else if (playedCount>0) badges += '<span style="font-size:7px;font-weight:800;letter-spacing:1px;padding:1px 5px;border-radius:3px;background:rgba(34,197,94,.12);color:var(--green);margin-left:5px;">📋 '+playedCount+'/6 JUGADOS</span>';
 
     html += '<div class="group-card">'
       +'<div class="group-head"><span class="group-letter">'+g+'</span><span class="group-info">Grupo '+g+badges+'</span></div>'
@@ -2000,6 +1986,7 @@ function renderGroups(){
   }
   document.getElementById("groups-grid").innerHTML = html;
 }
+
 // ════════════════════════════════════════════════════
 //  RENDER — MATCH PREDICTION CENTER
 // ════════════════════════════════════════════════════
@@ -2049,7 +2036,6 @@ function selSc(sc){
   updateMatch();
 }
 
-// ── ACTUALIZAR MATCH PREDICTION CENTER ─────────────────
 function updateMatch(){
   var nameL = document.getElementById("sel-l").value;
   var nameV = document.getElementById("sel-v").value;
@@ -2072,7 +2058,6 @@ function updateMatch(){
   var lam = getLambdasN(nameL, nameV, venue);
   var ll = lam.ll, lv = lam.lv;
 
-  // resultado mas probable (con boost de empate + Dixon-Coles ρ)
   var maxP=-1, best=[0,0];
   for(var l=0;l<7;l++){
     for(var v=0;v<7;v++){
@@ -2111,7 +2096,6 @@ function updateMatch(){
   renderBars(pL, pV);
   renderTeamCards(nameL, nameV);
 
-  // monte carlo W/D/L
   setTimeout(function(){
     var w=0,d=0,lo=0; var N=4000;
     for(var i=0;i<N;i++){
@@ -2128,7 +2112,6 @@ function updateMatch(){
   }, 80);
 }
 
-// ── RADAR ───────────────────────────────────────────────
 function drawRadar(pL, pV, nmL, nmV){
   var cv = document.getElementById("radar-cv");
   var ctx = cv.getContext("2d");
@@ -2189,7 +2172,6 @@ function renderBars(pL, pV){
   document.getElementById("abars").innerHTML = html;
 }
 
-// ── FICHAS DE EQUIPO ─────────────────────────────────────
 function renderTeamCards(nameL, nameV){
   var html = "";
   var pair = [nameL, nameV];
@@ -2217,7 +2199,6 @@ function renderTeamCards(nameL, nameV){
   document.getElementById("team-cards").innerHTML = html;
 }
 
-// ── SIMULAR PARTIDO (LIVE LOG) ──────────────────────────
 function simLive(){
   var nameL = document.getElementById("sel-l").value;
   var nameV = document.getElementById("sel-v").value;
@@ -2241,6 +2222,7 @@ function simLive(){
     document.getElementById("live-out").style.display="block";
   }, 450);
 }
+
 // ════════════════════════════════════════════════════
 //  RENDER — RANKINGS
 // ════════════════════════════════════════════════════
@@ -2283,6 +2265,11 @@ function renderRankings(){
   for(var i=0;i<keys.length;i++){
     var nm = keys[i], d = TEAMS[nm];
     var hostTag = (HOSTS.indexOf(nm)>=0) ? '<span class="host-tag">SEDE</span>' : "";
+    var st = CONFIRMED_STATUS[nm] || "";
+    var stBadge = st==="q1" ? '<span style="font-size:7px;background:rgba(212,175,55,.2);color:var(--gold);border-radius:3px;padding:1px 4px;margin-left:3px;">1°✅</span>'
+                : st==="q2" ? '<span style="font-size:7px;background:rgba(59,130,246,.2);color:var(--blue);border-radius:3px;padding:1px 4px;margin-left:3px;">2°✅</span>'
+                : st==="q3" ? '<span style="font-size:7px;background:rgba(34,197,94,.2);color:var(--green);border-radius:3px;padding:1px 4px;margin-left:3px;">3°✅</span>'
+                : st==="elim" ? '<span style="font-size:7px;background:rgba(239,68,68,.12);color:var(--red);border-radius:3px;padding:1px 4px;margin-left:3px;">ELIM</span>' : "";
     var barW = (d.pwr/maxPwr*100).toFixed(0);
     var mktTxt = d.mkt>=1000 ? "€"+(d.mkt/1000).toFixed(1)+"B" : "€"+d.mkt.toFixed(0)+"M";
     var dtc = d.dtc||5, dep = d.dep||5, lbc = d.lbc||5;
@@ -2291,7 +2278,7 @@ function renderRankings(){
     var lbcColor = lbc>=7?"var(--green)":lbc>=5?"var(--gold)":"var(--red)";
     html += '<tr>'
       +'<td class="rank-pos">'+(i+1)+'</td>'
-      +'<td>'+d.flag+' '+nm+hostTag+'</td>'
+      +'<td>'+d.flag+' '+nm+hostTag+stBadge+'</td>'
       +'<td class="c" style="font-family:var(--font-mono);color:var(--muted2);font-size:10px;">#'+d.rk+'</td>'
       +'<td><div style="display:flex;align-items:center;gap:6px;"><div class="rank-bar-bg" style="width:50px;"><div class="rank-bar" style="width:'+barW+'%"></div></div><span class="pwr-num">'+d.pwr.toFixed(1)+'</span></div></td>'
       +'<td class="c" style="font-size:10px;color:var(--muted2);">'+mktTxt+'</td>'
@@ -2304,7 +2291,6 @@ function renderRankings(){
   html += '</tbody>';
   document.getElementById("rankings-table").innerHTML = html;
 }
-
 
 // ════════════════════════════════════════════════════
 //  RENDER — BRACKET PROYECTADO
@@ -2337,34 +2323,94 @@ function projectedClassified(){
   return { winners:winners, runnersUp:runnersUp, thirds:bestThirds, bestThirdGroups:bestThirdGroups };
 }
 
-function pwrOf(name){ return TEAMS[name].pwr; }
-
 function projectedWinner(a,b){
-  // gana el que tenga mayor lambda esperado (considera ataque y defensa rival)
   var lam = getLambdasN(a,b);
   return lam.ll >= lam.lv ? a : b;
 }
 
 function buildBracketState(){
-  var res = projectedClassified();
-  var r32pairs = buildR32(res); // 16 pares
-  var r32winners = [];
-  for(var i=0;i<r32pairs.length;i++){ r32winners.push(projectedWinner(r32pairs[i][0], r32pairs[i][1])); }
+  // ════════════════════════════════════════════════════
+  // RESULTADOS REALES HARDCODEADOS
+  // 16avos (R32) y Octavos (R16) ya jugados → resultados fijos
+  // Cuartos en adelante → proyección del modelo
+  // ════════════════════════════════════════════════════
 
-  var r16pairs=[], r16winners=[];
-  for(var i=0;i<r32winners.length;i+=2){
-    r16pairs.push([r32winners[i], r32winners[i+1]]);
-    r16winners.push(projectedWinner(r32winners[i], r32winners[i+1]));
-  }
-  var qfpairs=[], qfwinners=[];
-  for(var i=0;i<r16winners.length;i+=2){
-    qfpairs.push([r16winners[i], r16winners[i+1]]);
-    qfwinners.push(projectedWinner(r16winners[i], r16winners[i+1]));
-  }
-  var sfpairs=[[qfwinners[0],qfwinners[1]],[qfwinners[2],qfwinners[3]]];
-  var sfwinners=[projectedWinner(sfpairs[0][0],sfpairs[0][1]), projectedWinner(sfpairs[1][0],sfpairs[1][1])];
-  var finpairs=[[sfwinners[0],sfwinners[1]]];
-  var finwinner=[projectedWinner(finpairs[0][0],finpairs[0][1])];
+  // ── 16AVOS — pares y ganadores reales ──────────────
+  var r32pairs = [
+    ["Canada","Sudafrica"],
+    ["Brasil","Japon"],
+    ["Alemania","Paraguay"],
+    ["Holanda","Marruecos"],
+    ["Noruega","Costa de Marfil"],
+    ["Francia","Suecia"],
+    ["Mexico","Ecuador"],
+    ["Inglaterra","RD Congo"],
+    ["Belgica","Senegal"],
+    ["Estados Unidos","Bosnia"],
+    ["Espana","Austria"],
+    ["Portugal","Croacia"],
+    ["Suiza","Argelia"],
+    ["Egipto","Australia"],
+    ["Argentina","Cabo Verde"],
+    ["Colombia","Ghana"],
+  ];
+  var r32winners = [
+    "Canada",        // 1-0
+    "Brasil",        // 2-1
+    "Paraguay",      // 1-1 (4-3 pen)
+    "Marruecos",     // 1-1 (3-2 pen)
+    "Noruega",       // 2-1
+    "Francia",       // 3-0
+    "Mexico",        // 2-0
+    "Inglaterra",    // 2-1
+    "Belgica",       // 3-2 aet
+    "Estados Unidos",// 2-0
+    "Espana",        // 3-0
+    "Portugal",      // 2-1
+    "Suiza",         // 2-0
+    "Egipto",        // 1-1 (4-2 pen)
+    "Argentina",     // 3-2 aet
+    "Colombia",      // 1-0
+  ];
+
+  // ── OCTAVOS — pares y ganadores reales ─────────────
+  var r16pairs = [
+    ["Marruecos","Canada"],
+    ["Francia","Paraguay"],
+    ["Noruega","Brasil"],
+    ["Inglaterra","Mexico"],
+    ["Espana","Portugal"],
+    ["Belgica","Estados Unidos"],
+    ["Argentina","Egipto"],
+    ["Suiza","Colombia"],   // pendiente esta noche — se actualiza manual
+  ];
+  var r16winners = [
+    "Marruecos",      // 3-0
+    "Francia",        // 1-0
+    "Noruega",        // 2-1
+    "Inglaterra",     // 3-2
+    "Espana",         // 1-0
+    "Belgica",        // 4-1
+    "Argentina",      // 3-2 (remontada épica)
+    "Suiza",         // 1-1 (pen) Colombia eliminada
+  ];
+
+  // ── CUARTOS — pares reales confirmados ─────────────
+  // Francia vs Marruecos (9 jul) · España vs Bélgica (10 jul)
+  // Noruega vs Inglaterra (11 jul) · Argentina vs (Suiza/Colombia) (11 jul)
+  var qfpairs = [
+    ["Francia","Marruecos"],
+    ["Espana","Belgica"],
+    ["Noruega","Inglaterra"],
+    ["Argentina","Suiza"],     // 11 jul · Kansas City
+  ];
+  var qfwinners = qfpairs.map(function(p){ return projectedWinner(p[0],p[1]); });
+
+  // ── SEMIS y FINAL — proyección pura ────────────────
+  var sfpairs = [[qfwinners[0],qfwinners[1]],[qfwinners[2],qfwinners[3]]];
+  var sfwinners = [projectedWinner(sfpairs[0][0],sfpairs[0][1]), projectedWinner(sfpairs[1][0],sfpairs[1][1])];
+  var finpairs = [[sfwinners[0],sfwinners[1]]];
+  var finwinner = [projectedWinner(finpairs[0][0],finpairs[0][1])];
 
   bracketState = {
     r32:{pairs:r32pairs, winners:r32winners},
@@ -2417,7 +2463,6 @@ function pickW(ronda, idx, ganador){
       var k = orden[i];
       bracketState[k].winners = bracketState[k].pairs.map(function(p){ return p[0]; });
     }
-    // recalcular pairs en cascada
     for(var i=rIdx+2; i<orden.length; i++){
       var prevW = bracketState[orden[i-1]].winners;
       var pairs2 = [];
@@ -2440,7 +2485,6 @@ function renderBracket(){
   buildBracketUI();
 }
 
-// ── SIMULADOR MONTE CARLO ───────────────────────────────
 function simularTorneo(){
   document.getElementById("t-spin").style.display="flex";
   document.getElementById("t-out").style.display="none";
@@ -2525,7 +2569,7 @@ function bestResultScore(text){
   if (text.indexOf("Cuartos")>=0) return 0.48;
   if (text.indexOf("Octavos")>=0) return 0.32;
   if (text.indexOf("Debut")>=0) return 0.08;
-  return 0.18; // fase de grupos
+  return 0.18;
 }
 
 function histWeights(name){
@@ -2646,8 +2690,8 @@ function init(){
   populateSelects();
   buildGroupQuickChips();
   var selL = document.getElementById("sel-l"), selV = document.getElementById("sel-v");
-  selL.value = "Brasil";
-  selV.value = "Argentina";
+  selL.value = "Argentina";
+  selV.value = "Jordania";
   updateMatch();
 
   renderConfChips();
@@ -2664,17 +2708,6 @@ function init(){
 }
 
 document.addEventListener("DOMContentLoaded", init);
-
-
-
-
-
-
-
-
-
-
-
 
 </script>
 </body>
