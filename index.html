@@ -410,7 +410,7 @@ select:focus { outline: none; border-color: var(--gold); }
   <div class="hero-band">
     <div class="hero-eyebrow">FIFA · World Cup 2026 · 48 Selecciones</div>
     <h1 class="hero-h1">World Cup<br><span>Intelligence</span></h1>
-    <p class="hero-sub">Modelo Poisson · Pi-Rating + Dixon-Coles + Decay · Fase de grupos completa · 16avos y Octavos completados · Cuartos: 9-11 jul · Actualizado 7 jul 2026</p>
+    <p class="hero-sub">Modelo Poisson · Pi-Rating + Dixon-Coles + Decay · Fase de grupos + eliminatorias completas · 🏆 FINAL: Argentina vs España · 19 jul 2026 · MetLife Stadium NJ</p>
     <div class="hero-kpis">
       <div class="hk"><div class="hk-n">48</div><div class="hk-l">Selecciones</div></div>
       <div class="hk"><div class="hk-n">12</div><div class="hk-l">Grupos</div></div>
@@ -682,12 +682,12 @@ select:focus { outline: none; border-color: var(--gold); }
 
 <div class="footer-bar">
   <span>Datos: FIFA Ranking · Sorteo oficial Washington D.C. (5 dic 2025) · Repechajes resueltos (31 mar 2026)</span>
-  <span id="footer-update">⚽ 7 jul 2026 · Octavos completos · Suiza elimina Colombia PEN · Argentina 3-2 Egipto · Cuartos confirmados: FRA-MAR · ESP-BEL · NOR-ING · ARG-SUI</span>
+  <span id="footer-update">🏆 FINAL · Argentina vs España · 19 jul · MetLife Stadium NJ · Argentina 2-1 Inglaterra (remontada) · España 2-0 Francia</span>
 </div>
 
 <script>
 
-const TEAMS = {
+var TEAMS = {
   "Mexico": {g:"A",conf:"CONCACAF",flag:"🇲🇽",c:"#006847",pts:1650,rk:14,pwr:88.1,xg:1.31,gc:0.53,mkt:191.9,dtc:15,dep:7,lbc:7,titles:0,apps:17,best:"Cuartos de Final",form:[3,3,1,3,3]},
   "Corea del Sur": {g:"A",conf:"AFC",flag:"🇰🇷",c:"#cd2e3a",pts:1530,rk:23,pwr:63.3,xg:1.22,gc:1.03,mkt:139.1,dtc:7,dep:6,lbc:6,titles:0,apps:11,best:"Semifinal (1966*)",form:[0,3,0,0,3]},
   "Sudafrica": {g:"A",conf:"CAF",flag:"🇿🇦",c:"#007749",pts:1478,rk:58,pwr:41.8,xg:0.64,gc:1.27,mkt:49.3,dtc:5,dep:3,lbc:4,titles:0,apps:4,best:"Fase de Grupos",form:[1,0,3,1,3]},
@@ -712,11 +712,11 @@ const TEAMS = {
   "Japon": {g:"F",conf:"AFC",flag:"🇯🇵",c:"#bc002d",pts:1678,rk:13,pwr:75.2,xg:1.75,gc:0.65,mkt:270.9,inj:"Sin Wataru Endo (capitan, mediocampo defensivo)",dtc:10,dep:6,lbc:6,titles:0,apps:8,best:"Octavos de Final",form:[3,1,1,3,3]},
   "Suecia": {g:"F",conf:"UEFA",flag:"🇸🇪",c:"#005293",pts:1578,rk:26,pwr:69.4,xg:1.04,gc:1.97,mkt:406.1,dtc:8,dep:6,lbc:6,titles:0,apps:12,best:"Subcampeon (1958)",form:[0,3,0,3,1]},
   "Tunez": {g:"F",conf:"CAF",flag:"🇹🇳",c:"#e70013",pts:1525,rk:39,pwr:42.4,xg:0.48,gc:1.93,mkt:69.9,dtc:5,dep:3,lbc:4,titles:0,apps:7,best:"Fase de Grupos",form:[0,0,0,3,0]},
-  "Belgica": {g:"G",conf:"UEFA",flag:"🇧🇪",c:"#ed2939",pts:1742,rk:9,pwr:75.0,xg:1.85,gc:0.90,mkt:547.5,dtc:6,dep:8,lbc:5,titles:0,apps:15,best:"Cuartos (2026)",form:[3,3,3,3,3]},
+  "Belgica": {g:"G",conf:"UEFA",flag:"🇧🇪",c:"#ed2939",pts:1742,rk:9,pwr:78.0,xg:2.10,gc:0.85,mkt:547.5,dtc:6,dep:8,lbc:5,titles:0,apps:15,best:"Cuartos (2026)",form:[3,3,3,3,3]},
   "Egipto": {g:"G",conf:"CAF",flag:"🇪🇬",c:"#ce1126",pts:1598,rk:24,pwr:55.9,xg:1.46,gc:1.08,mkt:116.5,dtc:7,dep:5,lbc:5,titles:0,apps:4,best:"Fase de Grupos",form:[3,1,3,3,0]},
   "Iran": {g:"G",conf:"AFC",flag:"🇮🇷",c:"#239f40",pts:1638,rk:19,pwr:49.6,xg:0.95,gc:1.16,mkt:32.1,dtc:6,dep:4,lbc:5,titles:0,apps:7,best:"Fase de Grupos",form:[1,3,3,0,0]},
   "Nueva Zelanda": {g:"G",conf:"OFC",flag:"🇳🇿",c:"#000000",pts:1418,rk:70,pwr:38.8,xg:0.74,gc:1.87,mkt:34.4,dtc:5,dep:2,lbc:3,titles:0,apps:3,best:"Fase de Grupos",form:[0,1,3,0,0]},
-  "Espana": {g:"H",conf:"UEFA",flag:"🇪🇸",c:"#aa151b",pts:1874,rk:2,pwr:73.0,xg:1.80,gc:0.20,mkt:1220.0,dtc:6,dep:9,lbc:4,titles:1,apps:16,best:"Campeon",form:[1,3,3,3,3]},
+  "Espana": {g:"H",conf:"UEFA",flag:"🇪🇸",c:"#aa151b",pts:1874,rk:2,pwr:74.0,xg:1.40,gc:0.20,mkt:1220.0,dtc:6,dep:9,lbc:4,titles:1,apps:16,best:"Campeon",form:[3,3,3,3,3]},
   "Cabo Verde": {g:"H",conf:"CAF",flag:"🇨🇻",c:"#003893",pts:1462,rk:63,pwr:49.8,xg:0.92,gc:1.7,mkt:54.5,dtc:7,dep:3,lbc:6,titles:0,apps:1,best:"Debut",form:[1,1,3,1,0]},
   "Arabia Saudita": {g:"H",conf:"AFC",flag:"🇸🇦",c:"#006c35",pts:1495,rk:48,pwr:45.3,xg:0.53,gc:2.08,mkt:40.7,dtc:5,dep:3,lbc:4,titles:0,apps:7,best:"Octavos de Final",form:[0,1,0,0,1]},
   "Uruguay": {g:"H",conf:"CONMEBOL",flag:"🇺🇾",c:"#5cb6e8",pts:1712,rk:12,pwr:69.7,xg:1.33,gc:1.0,mkt:359.3,dtc:8,dep:6,lbc:6,titles:2,apps:14,best:"Campeon",form:[1,1,3,3,1]},
@@ -738,7 +738,7 @@ const TEAMS = {
   "Panama": {g:"L",conf:"CONCACAF",flag:"🇵🇦",c:"#db1f48",pts:1495,rk:49,pwr:46.0,xg:0.78,gc:1.29,mkt:34.6,dtc:6,dep:3,lbc:4,titles:0,apps:2,best:"Fase de Grupos",form:[0,0,3,0,3]},
 };
 
-const GRUPOS = {
+var GRUPOS = {
   A: ["Mexico","Corea del Sur","Sudafrica","Rep. Checa"],
   B: ["Canada","Suiza","Qatar","Bosnia"],
   C: ["Brasil","Marruecos","Escocia","Haiti"],
@@ -753,7 +753,7 @@ const GRUPOS = {
   L: ["Inglaterra","Croacia","Ghana","Panama"],
 };
 
-const J1 = {
+var J1 = {
   A: {sede:"Ciudad de Mexico", fecha:"11 jun", hora:"13:00", local:"Mexico", visita:"Sudafrica"},
   B: {sede:"Toronto",          fecha:"12 jun", hora:"12:00", local:"Canada", visita:"Bosnia"},
   C: {sede:"Los Angeles",      fecha:"12 jun", hora:"16:00", local:"Brasil", visita:"Marruecos"},
@@ -847,7 +847,7 @@ var PLAYED_MATCHES = {
   "Cabo Verde|Arabia Saudita": {gA:0, gB:0, fecha:"26 jun"},
   "Uruguay|Espana":            {gA:0, gB:1, fecha:"26 jun"},
   // Grupo I — 26 jun
-  "Francia|Noruega":           {gA:4, gB:1, fecha:"26 jun"},  // Francia 4-1 Noruega ✅
+  "Francia|Noruega":           {gA:4, gB:1, fecha:"26 jun"},
   "Senegal|Irak":              {gA:5, gB:0, fecha:"26 jun"},
   // Grupo G — 26 jun (COMPLETO)
   "Belgica|Nueva Zelanda":     {gA:5, gB:1, fecha:"26 jun"},
@@ -862,19 +862,19 @@ var PLAYED_MATCHES = {
   // ── 16AVOS DE FINAL (28 jun – 3 jul) ────────────────────
   "Canada|Sudafrica":          {gA:1, gB:0, fecha:"28 jun"},
   "Brasil|Japon":              {gA:2, gB:1, fecha:"29 jun"},
-  "Alemania|Paraguay":         {gA:1, gB:1, fecha:"29 jun"},  // Paraguay 4-3 penales
-  "Holanda|Marruecos":         {gA:1, gB:1, fecha:"29 jun"},  // Marruecos 3-2 penales
+  "Alemania|Paraguay":         {gA:1, gB:1, fecha:"29 jun"},
+  "Holanda|Marruecos":         {gA:1, gB:1, fecha:"29 jun"},
   "Noruega|Costa de Marfil":   {gA:2, gB:1, fecha:"30 jun"},
   "Francia|Suecia":            {gA:3, gB:0, fecha:"30 jun"},
   "Mexico|Ecuador":            {gA:2, gB:0, fecha:"30 jun"},
   "Inglaterra|RD Congo":       {gA:2, gB:1, fecha:"1 jul"},
-  "Belgica|Senegal":           {gA:3, gB:2, fecha:"1 jul"},   // aet
+  "Belgica|Senegal":           {gA:3, gB:2, fecha:"1 jul"},
   "Estados Unidos|Bosnia":     {gA:2, gB:0, fecha:"1 jul"},
   "Espana|Austria":            {gA:3, gB:0, fecha:"2 jul"},
   "Portugal|Croacia":          {gA:2, gB:1, fecha:"2 jul"},
   "Suiza|Argelia":             {gA:2, gB:0, fecha:"2 jul"},
-  "Egipto|Australia":          {gA:1, gB:1, fecha:"3 jul"},   // Egipto 4-2 penales
-  "Argentina|Cabo Verde":      {gA:3, gB:2, fecha:"3 jul"},   // aet
+  "Egipto|Australia":          {gA:1, gB:1, fecha:"3 jul"},
+  "Argentina|Cabo Verde":      {gA:3, gB:2, fecha:"3 jul"},
   "Colombia|Ghana":            {gA:1, gB:0, fecha:"3 jul"},
   // ── OCTAVOS DE FINAL (4–7 jul) ───────────────────────────
   "Marruecos|Canada":          {gA:3, gB:0, fecha:"4 jul"},
@@ -883,77 +883,38 @@ var PLAYED_MATCHES = {
   "Inglaterra|Mexico":         {gA:3, gB:2, fecha:"5 jul"},
   "Espana|Portugal":           {gA:1, gB:0, fecha:"6 jul"},
   "Belgica|Estados Unidos":    {gA:4, gB:1, fecha:"6 jul"},
-  "Argentina|Egipto":          {gA:3, gB:2, fecha:"7 jul"},   // remontada épica 0-2 → 3-2
-  "Suiza|Colombia":            {gA:1, gB:1, fecha:"7 jul"},   // Suiza gana penales
+  "Argentina|Egipto":          {gA:3, gB:2, fecha:"7 jul"},
+  "Suiza|Colombia":            {gA:1, gB:1, fecha:"7 jul"},
+  // ── CUARTOS DE FINAL (9–11 jul) ──────────────────────────
+  "Francia|Marruecos":         {gA:2, gB:0, fecha:"9 jul"},
+  "Espana|Belgica":            {gA:2, gB:1, fecha:"10 jul"},
+  "Inglaterra|Noruega":        {gA:2, gB:1, fecha:"11 jul"},
+  "Argentina|Suiza":           {gA:3, gB:1, fecha:"11 jul"},, Álvarez 112', Lautaro
+  // ── SEMIFINALES (13–15 jul) ──────────────────────────────
+  "Espana|Francia":            {gA:2, gB:0, fecha:"14 jul"},
+  "Argentina|Inglaterra":      {gA:2, gB:1, fecha:"15 jul"},
 };
 
-// ── CLASIFICADOS, ELIMINADOS Y ESTADO KNOCKOUT — 7 jul 2026 ──────────
-// Fuente: ESPN, Yahoo Sports, CBS Sports, FIFA.com
-// q1=1ro grupo, q2=2do grupo, q3=3ro clasificado, elim=eliminado en grupos
-// "ko_elim" = eliminado en fase eliminatoria, "qf" = cuartos de final
+// ── ESTADO FINAL — 15 jul 2026 · FINALISTAS CONFIRMADOS ──────────────
+// 🇦🇷 Argentina vs 🇪🇸 España — FINAL 19 jul · MetLife Stadium, NJ
 // ────────────────────────────────────────────────────────────────────
 var CONFIRMED_STATUS = {
-  // GRUPO A
-  "Mexico":          "qf",      // 1° grupo → venció Ecuador 16avos, perdió vs Inglaterra octavos → eliminado
-  "Sudafrica":       "ko_elim", // 2° grupo → perdió vs Canadá 16avos
-  "Corea del Sur":   "elim",    // 3ro eliminado en grupos
-  "Rep. Checa":      "elim",
-  // GRUPO B
-  "Suiza":           "qf",      // 1° grupo → venció Argelia 16avos, venció Colombia octavos (pen) → CUARTOS
-  "Canada":          "ko_elim", // 2° grupo → venció Sudáfrica 16avos, perdió vs Marruecos octavos
-  "Bosnia":          "ko_elim", // 3ro → perdió vs USA 16avos
-  "Qatar":           "elim",
-  // GRUPO C
-  "Brasil":          "ko_elim", // 1° grupo → venció Japón 16avos, perdió vs Noruega octavos
-  "Marruecos":       "qf",      // 2° grupo → venció Holanda 16avos (pen), venció Canadá octavos → CUARTOS
-  "Escocia":         "elim",
-  "Haiti":           "elim",
-  // GRUPO D
-  "Estados Unidos":  "ko_elim", // 1° grupo → venció Bosnia 16avos, perdió vs Bélgica octavos
-  "Australia":       "ko_elim", // 2° grupo → perdió vs Egipto 16avos (pen)
-  "Paraguay":        "ko_elim", // 3ro → venció Alemania 16avos (pen), perdió vs Francia octavos
-  "Turquia":         "elim",
-  // GRUPO E
-  "Alemania":        "ko_elim", // 1° grupo → perdió vs Paraguay 16avos (pen)
-  "Costa de Marfil": "ko_elim", // 2° grupo → perdió vs Noruega 16avos
-  "Ecuador":         "ko_elim", // 3ro → perdió vs México 16avos
-  "Curazao":         "elim",
-  // GRUPO F
-  "Holanda":         "ko_elim", // 1° grupo → perdió vs Marruecos 16avos (pen)
-  "Japon":           "ko_elim", // 2° grupo → perdió vs Brasil 16avos
-  "Suecia":          "ko_elim", // 3ro → perdió vs Francia 16avos
-  "Tunez":           "elim",
-  // GRUPO G
-  "Belgica":         "qf",      // 1° grupo → venció Senegal 16avos, venció USA octavos → CUARTOS
-  "Egipto":          "ko_elim", // 2° grupo → venció Australia 16avos (pen), perdió vs Argentina octavos
-  "Iran":            "elim",    // 3ro eliminado en grupos (desplazado por Argelia en top 8)
-  "Nueva Zelanda":   "elim",
-  // GRUPO H
-  "Espana":          "qf",      // 1° grupo → venció Austria 16avos, venció Portugal octavos → CUARTOS
-  "Cabo Verde":      "ko_elim", // 2° grupo → perdió vs Argentina 16avos
-  "Arabia Saudita":  "q3",      // 3ro clasificado — perdió vs... (ver cuadro)
-  "Uruguay":         "elim",
-  // GRUPO I
-  "Francia":         "qf",      // 1° grupo → venció Suecia 16avos, venció Paraguay octavos → CUARTOS
-  "Noruega":         "qf",      // 2° grupo → venció Costa de Marfil 16avos, venció Brasil octavos → CUARTOS
-  "Senegal":         "ko_elim", // 3ro → perdió vs Bélgica 16avos
-  "Irak":            "elim",
-  // GRUPO J
-  "Argentina":       "qf",      // 1° grupo → venció Cabo Verde 16avos, venció Egipto octavos → CUARTOS
-  "Austria":         "ko_elim", // 2° grupo → perdió vs España 16avos
-  "Argelia":         "ko_elim", // 3ro → perdió vs Suiza 16avos
-  "Jordania":        "elim",
-  // GRUPO K
-  "Colombia":        "ko_elim", // 1° grupo → venció Ghana 16avos, perdió vs Suiza octavos (pen)
-  "Portugal":        "ko_elim", // 2° grupo → perdió vs España octavos
-  "Uzbekistan":      "elim",
-  "RD Congo":        "ko_elim", // 3ro → perdió vs Inglaterra 16avos
-  // GRUPO L
-  "Inglaterra":      "qf",      // 1° grupo → venció RD Congo 16avos, venció México octavos → CUARTOS
-  "Croacia":         "ko_elim", // 2° grupo → perdió vs Portugal 16avos
-  "Ghana":           "ko_elim", // 3ro → perdió vs Colombia 16avos
-  "Panama":          "elim",
+  "Mexico":"ko_elim","Sudafrica":"ko_elim","Corea del Sur":"elim","Rep. Checa":"elim",
+  "Suiza":"ko_elim","Canada":"ko_elim","Bosnia":"ko_elim","Qatar":"elim",
+  "Brasil":"ko_elim","Marruecos":"ko_elim","Escocia":"elim","Haiti":"elim",
+  "Estados Unidos":"ko_elim","Australia":"ko_elim","Paraguay":"ko_elim","Turquia":"elim",
+  "Alemania":"ko_elim","Costa de Marfil":"ko_elim","Ecuador":"ko_elim","Curazao":"elim",
+  "Holanda":"ko_elim","Japon":"ko_elim","Suecia":"ko_elim","Tunez":"elim",
+  "Belgica":"ko_elim","Egipto":"ko_elim","Iran":"elim","Nueva Zelanda":"elim",
+  "Espana":"final",
+  "Cabo Verde":"ko_elim","Arabia Saudita":"q3","Uruguay":"elim",
+  "Francia":"ko_elim","Noruega":"ko_elim","Senegal":"ko_elim","Irak":"elim",
+  "Argentina":"final",
+  "Austria":"ko_elim","Argelia":"ko_elim","Jordania":"elim",
+  "Colombia":"ko_elim","Portugal":"ko_elim","Uzbekistan":"elim","RD Congo":"ko_elim",
+  "Inglaterra":"ko_elim","Croacia":"ko_elim","Ghana":"ko_elim","Panama":"elim",
 };
+
 
 function getPlayedResult(a,b){
   var k1=a+"|"+b, k2=b+"|"+a;
@@ -964,30 +925,22 @@ function getPlayedResult(a,b){
 
 // ── TICKER DEL DASHBOARD — últimos resultados ────────────
 var RESULTS_FEED = [
-  // OCTAVOS — 7 jul
-  {a:"Suiza",        b:"Colombia",       gA:1, gB:1, group:"R16", fecha:"7 jul",  estado:"FINAL PEN"},
+  // SEMIS
+  {a:"Argentina",    b:"Inglaterra",     gA:2, gB:1, group:"SF",  fecha:"15 jul", estado:"FINAL"},
+  {a:"Espana",       b:"Francia",        gA:2, gB:0, group:"SF",  fecha:"14 jul", estado:"FINAL"},
+  // CUARTOS
+  {a:"Argentina",    b:"Suiza",          gA:3, gB:1, group:"QF",  fecha:"11 jul", estado:"FINAL AET"},
+  {a:"Inglaterra",   b:"Noruega",        gA:2, gB:1, group:"QF",  fecha:"11 jul", estado:"FINAL AET"},
+  {a:"Espana",       b:"Belgica",        gA:2, gB:1, group:"QF",  fecha:"10 jul", estado:"FINAL"},
+  {a:"Francia",      b:"Marruecos",      gA:2, gB:0, group:"QF",  fecha:"9 jul",  estado:"FINAL"},
+  // OCTAVOS
   {a:"Argentina",    b:"Egipto",         gA:3, gB:2, group:"R16", fecha:"7 jul",  estado:"FINAL"},
-  // OCTAVOS — 6 jul
+  {a:"Suiza",        b:"Colombia",       gA:1, gB:1, group:"R16", fecha:"7 jul",  estado:"FINAL PEN"},
   {a:"Belgica",      b:"Estados Unidos", gA:4, gB:1, group:"R16", fecha:"6 jul",  estado:"FINAL"},
   {a:"Espana",       b:"Portugal",       gA:1, gB:0, group:"R16", fecha:"6 jul",  estado:"FINAL"},
-  // OCTAVOS — 5 jul
-  {a:"Noruega",      b:"Brasil",         gA:2, gB:1, group:"R16", fecha:"5 jul",  estado:"FINAL 🔴"},
+  {a:"Noruega",      b:"Brasil",         gA:2, gB:1, group:"R16", fecha:"5 jul",  estado:"FINAL"},
   {a:"Inglaterra",   b:"Mexico",         gA:3, gB:2, group:"R16", fecha:"5 jul",  estado:"FINAL"},
-  // OCTAVOS — 4 jul
-  {a:"Marruecos",    b:"Canada",         gA:3, gB:0, group:"R16", fecha:"4 jul",  estado:"FINAL"},
-  {a:"Francia",      b:"Paraguay",       gA:1, gB:0, group:"R16", fecha:"4 jul",  estado:"FINAL"},
-  // 16AVOS — 3 jul
-  {a:"Argentina",    b:"Cabo Verde",     gA:3, gB:2, group:"R32", fecha:"3 jul",  estado:"FINAL AET"},
-  {a:"Egipto",       b:"Australia",      gA:1, gB:1, group:"R32", fecha:"3 jul",  estado:"FINAL PEN"},
-  {a:"Colombia",     b:"Ghana",          gA:1, gB:0, group:"R32", fecha:"3 jul",  estado:"FINAL"},
-  // 16AVOS — 2 jul
-  {a:"Espana",       b:"Austria",        gA:3, gB:0, group:"R32", fecha:"2 jul",  estado:"FINAL"},
-  {a:"Portugal",     b:"Croacia",        gA:2, gB:1, group:"R32", fecha:"2 jul",  estado:"FINAL"},
-  {a:"Suiza",        b:"Argelia",        gA:2, gB:0, group:"R32", fecha:"2 jul",  estado:"FINAL"},
-  // 16AVOS — 1 jul
-  {a:"Belgica",      b:"Senegal",        gA:3, gB:2, group:"R32", fecha:"1 jul",  estado:"FINAL AET"},
-  {a:"Estados Unidos",b:"Bosnia",        gA:2, gB:0, group:"R32", fecha:"1 jul",  estado:"FINAL"},
-  {a:"Inglaterra",   b:"RD Congo",       gA:2, gB:1, group:"R32", fecha:"1 jul",  estado:"FINAL"},
+];
   // 25 jun — Grupos D, E, F
   {a:"Turquia",      b:"Estados Unidos", gA:3, gB:2, group:"D", fecha:"25 jun", estado:"FINAL"},
   {a:"Paraguay",     b:"Australia",      gA:0, gB:0, group:"D", fecha:"25 jun", estado:"FINAL"},
@@ -1217,7 +1170,15 @@ function initPiRatingsFromResults(){
     ["Espana","Portugal",1,0],
     ["Belgica","Estados Unidos",4,1],
     ["Argentina","Egipto",3,2],
-    ["Suiza","Colombia",1,1],   // Suiza gana penales
+    ["Suiza","Colombia",1,1],
+    // Cuartos (9-11 jul)
+    ["Francia","Marruecos",2,0],
+    ["Espana","Belgica",2,1],
+    ["Inglaterra","Noruega",2,1],
+    ["Argentina","Suiza",3,1],
+    // Semis (14-15 jul)
+    ["Espana","Francia",2,0],
+    ["Argentina","Inglaterra",2,1],
   ];
   for(var i=0;i<matchOrder.length;i++){
     var m=matchOrder[i];
@@ -1658,14 +1619,13 @@ function shortName(n){
 }
 
 function renderCountdown(){
-  // Próximo hito: inicio de los 16avos, 28 jun
-  var target = new Date("2026-07-09T20:00:00Z").getTime(); // Cuartos: Francia vs Marruecos
+  var target = new Date("2026-07-19T19:00:00Z").getTime(); // FINAL: Argentina vs España
   function tick(){
     var now = new Date().getTime();
     var diff = target - now;
     var html = "";
     if (diff <= 0){
-      html = '<div class="cd-box" style="border-color:rgba(34,197,94,.3);background:rgba(34,197,94,.06);"><div class="cd-n" style="color:var(--green);">●</div><div class="cd-l" style="color:var(--green);">EN VIVO</div></div>';
+      html = '<div class="cd-box" style="border-color:rgba(212,175,55,.4);background:rgba(212,175,55,.08);"><div class="cd-n" style="color:var(--gold);">🏆</div><div class="cd-l" style="color:var(--gold);">FINAL!</div></div>';
     } else {
       var d = Math.floor(diff/86400000);
       var h = Math.floor((diff%86400000)/3600000);
@@ -1677,7 +1637,7 @@ function renderCountdown(){
       }
     }
     var el = document.getElementById("countdown");
-    if (el) el.innerHTML = '<div style="font-size:9px;font-weight:700;letter-spacing:2px;color:var(--muted);margin-bottom:6px;width:100%;">⏱ CUARTOS · FRANCIA vs MARRUECOS · 9 JUL</div>' + html;
+    if (el) el.innerHTML = '<div style="font-size:9px;font-weight:700;letter-spacing:2px;color:var(--gold);margin-bottom:6px;width:100%;">🏆 FINAL · ARGENTINA vs ESPAÑA · 19 JUL · METLIFE STADIUM NJ</div>' + html;
   }
   tick();
   setInterval(tick, 1000);
@@ -1773,9 +1733,9 @@ function svgGauge(pct, color){
 
 function renderGauges(){
   var marquee = [
-    ["Francia","Marruecos","Cuartos · 9 jul · Boston"],
-    ["Espana","Belgica","Cuartos · 10 jul · Los Angeles"],
-    ["Noruega","Inglaterra","Cuartos · 11 jul · Miami"]
+    ["Argentina","Espana","🏆 FINAL · 19 jul · MetLife NJ"],
+    ["Argentina","Espana","Prediccion: goles más probables"],
+    ["Espana","Argentina","Vista desde España"],
   ];
   var html = "";
   for(var i=0;i<marquee.length;i++){
@@ -1795,30 +1755,20 @@ function renderGauges(){
   document.getElementById("gauge-row").innerHTML = html;
 }
 
+
 function renderOpener(){
-  // Cuartos de final confirmados (+ uno pendiente esta noche)
-  var qf = [
-    ["Francia","Marruecos","9 jul · Boston"],
-    ["Espana","Belgica","10 jul · Los Angeles"],
-    ["Noruega","Inglaterra","11 jul · Miami"],
-    ["Argentina","Suiza","11 jul · Kansas City"],
-  ];
-  var html = '<div style="font-size:9px;font-weight:700;letter-spacing:2px;color:var(--gold);margin-bottom:10px;">CUARTOS DE FINAL · 9-11 JUL</div>';
-  qf.forEach(function(p){
-    var nL=p[0], nV=p[1], fecha=p[2];
-    var dL=TEAMS[nL], dV=TEAMS[nV]||{flag:"❓"};
-    var lam = dV.pwr ? getLambdasN(nL,nV) : {ll:1.2,lv:1.0};
-    var t3 = dV.pwr ? top3(lam.ll,lam.lv) : [{l:"?",v:"?",pct:"?"}];
-    html += '<div style="display:flex;align-items:center;gap:8px;padding:7px 0;border-bottom:1px solid var(--border);">'
-      +'<span style="font-size:20px;">'+dL.flag+'</span>'
-      +'<span style="flex:1;font-size:11px;font-weight:700;">'+shortName(nL)+'</span>'
-      +'<span style="font-family:var(--font-mono);font-size:13px;font-weight:800;color:var(--gold);">'+t3[0].l+'-'+t3[0].v+'</span>'
-      +'<span style="flex:1;font-size:11px;font-weight:700;text-align:right;">'+shortName(nV)+'</span>'
-      +'<span style="font-size:20px;">'+dV.flag+'</span>'
-      +'</div>';
-  });
-  html += '<div style="font-size:9px;color:var(--muted);margin-top:6px;text-align:center;">Los 4 cuartos confirmados · 9-11 jul</div>';
-  document.getElementById("opener-card").innerHTML = html;
+  var nL="Argentina",nV="Espana",dL=TEAMS[nL],dV=TEAMS[nV];
+  var lam=getLambdasN(nL,nV),t=top3(lam.ll,lam.lv),conf=calcConf(lam.ll,lam.lv);
+  var html='<div style="text-align:center;margin-bottom:10px;font-size:9px;font-weight:800;letter-spacing:3px;color:var(--gold);">🏆 GRAN FINAL · 19 JUL · METLIFE NJ</div>'
+    +'<div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:12px;">'
+    +'<div style="text-align:center;flex:1;"><div style="font-size:38px;">'+dL.flag+'</div><div style="font-size:11px;font-weight:800;margin-top:4px;">ARGENTINA</div><div style="font-size:9px;color:var(--muted);">3x Campeon</div></div>'
+    +'<div style="text-align:center;"><div style="font-family:var(--font-mono);font-size:26px;font-weight:800;color:var(--gold);">'+t[0].l+'-'+t[0].v+'</div><div style="font-size:8px;color:var(--muted);">'+t[0].pct+'%</div><div style="font-size:9px;color:var(--muted2);margin-top:3px;">IA: <b style="color:var(--gold);">'+Math.round(conf*100)+'%</b></div></div>'
+    +'<div style="text-align:center;flex:1;"><div style="font-size:38px;">'+dV.flag+'</div><div style="font-size:11px;font-weight:800;margin-top:4px;">ESPAÑA</div><div style="font-size:9px;color:var(--muted);">1x Campeon</div></div>'
+    +'</div>'
+    +'<div style="display:flex;gap:5px;justify-content:center;">'
+    +t.map(function(s,i){return'<div style="background:var(--surface2);border:1px solid '+(i===0?'rgba(212,175,55,.4)':'var(--border)')+';border-radius:7px;padding:4px 10px;text-align:center;"><div style="font-family:var(--font-mono);font-size:14px;font-weight:800;color:'+(i===0?'var(--gold)':'#fff')+';">'+s.l+'-'+s.v+'</div><div style="font-size:8px;color:var(--muted);">'+s.pct+'%</div></div>';}).join('')
+    +'</div>';
+  document.getElementById("opener-card").innerHTML=html;
 }
 
 function renderResultsTicker(){
@@ -1949,7 +1899,7 @@ function renderGroups(){
         if (getPlayedResult(teams[a],teams[b])) playedCount++;
       }
     }
-    var totalMatches = 6; // C(4,2)
+    var totalMatches = 6;
     var j3complete = playedCount >= totalMatches;
 
     var rows = "";
@@ -2328,97 +2278,20 @@ function projectedWinner(a,b){
   return lam.ll >= lam.lv ? a : b;
 }
 
+
 function buildBracketState(){
-  // ════════════════════════════════════════════════════
-  // RESULTADOS REALES HARDCODEADOS
-  // 16avos (R32) y Octavos (R16) ya jugados → resultados fijos
-  // Cuartos en adelante → proyección del modelo
-  // ════════════════════════════════════════════════════
-
-  // ── 16AVOS — pares y ganadores reales ──────────────
-  var r32pairs = [
-    ["Canada","Sudafrica"],
-    ["Brasil","Japon"],
-    ["Alemania","Paraguay"],
-    ["Holanda","Marruecos"],
-    ["Noruega","Costa de Marfil"],
-    ["Francia","Suecia"],
-    ["Mexico","Ecuador"],
-    ["Inglaterra","RD Congo"],
-    ["Belgica","Senegal"],
-    ["Estados Unidos","Bosnia"],
-    ["Espana","Austria"],
-    ["Portugal","Croacia"],
-    ["Suiza","Argelia"],
-    ["Egipto","Australia"],
-    ["Argentina","Cabo Verde"],
-    ["Colombia","Ghana"],
-  ];
-  var r32winners = [
-    "Canada",        // 1-0
-    "Brasil",        // 2-1
-    "Paraguay",      // 1-1 (4-3 pen)
-    "Marruecos",     // 1-1 (3-2 pen)
-    "Noruega",       // 2-1
-    "Francia",       // 3-0
-    "Mexico",        // 2-0
-    "Inglaterra",    // 2-1
-    "Belgica",       // 3-2 aet
-    "Estados Unidos",// 2-0
-    "Espana",        // 3-0
-    "Portugal",      // 2-1
-    "Suiza",         // 2-0
-    "Egipto",        // 1-1 (4-2 pen)
-    "Argentina",     // 3-2 aet
-    "Colombia",      // 1-0
-  ];
-
-  // ── OCTAVOS — pares y ganadores reales ─────────────
-  var r16pairs = [
-    ["Marruecos","Canada"],
-    ["Francia","Paraguay"],
-    ["Noruega","Brasil"],
-    ["Inglaterra","Mexico"],
-    ["Espana","Portugal"],
-    ["Belgica","Estados Unidos"],
-    ["Argentina","Egipto"],
-    ["Suiza","Colombia"],   // pendiente esta noche — se actualiza manual
-  ];
-  var r16winners = [
-    "Marruecos",      // 3-0
-    "Francia",        // 1-0
-    "Noruega",        // 2-1
-    "Inglaterra",     // 3-2
-    "Espana",         // 1-0
-    "Belgica",        // 4-1
-    "Argentina",      // 3-2 (remontada épica)
-    "Suiza",         // 1-1 (pen) Colombia eliminada
-  ];
-
-  // ── CUARTOS — pares reales confirmados ─────────────
-  // Francia vs Marruecos (9 jul) · España vs Bélgica (10 jul)
-  // Noruega vs Inglaterra (11 jul) · Argentina vs (Suiza/Colombia) (11 jul)
-  var qfpairs = [
-    ["Francia","Marruecos"],
-    ["Espana","Belgica"],
-    ["Noruega","Inglaterra"],
-    ["Argentina","Suiza"],     // 11 jul · Kansas City
-  ];
-  var qfwinners = qfpairs.map(function(p){ return projectedWinner(p[0],p[1]); });
-
-  // ── SEMIS y FINAL — proyección pura ────────────────
-  var sfpairs = [[qfwinners[0],qfwinners[1]],[qfwinners[2],qfwinners[3]]];
-  var sfwinners = [projectedWinner(sfpairs[0][0],sfpairs[0][1]), projectedWinner(sfpairs[1][0],sfpairs[1][1])];
-  var finpairs = [[sfwinners[0],sfwinners[1]]];
-  var finwinner = [projectedWinner(finpairs[0][0],finpairs[0][1])];
-
-  bracketState = {
-    r32:{pairs:r32pairs, winners:r32winners},
-    r16:{pairs:r16pairs, winners:r16winners},
-    qf:{pairs:qfpairs, winners:qfwinners},
-    sf:{pairs:sfpairs, winners:sfwinners},
-    fin:{pairs:finpairs, winners:finwinner},
-  };
+  // Todo hardcodeado — solo la FINAL queda por jugar (19 jul)
+  var r32pairs=[["Canada","Sudafrica"],["Brasil","Japon"],["Alemania","Paraguay"],["Holanda","Marruecos"],["Noruega","Costa de Marfil"],["Francia","Suecia"],["Mexico","Ecuador"],["Inglaterra","RD Congo"],["Belgica","Senegal"],["Estados Unidos","Bosnia"],["Espana","Austria"],["Portugal","Croacia"],["Suiza","Argelia"],["Egipto","Australia"],["Argentina","Cabo Verde"],["Colombia","Ghana"]];
+  var r32winners=["Canada","Brasil","Paraguay","Marruecos","Noruega","Francia","Mexico","Inglaterra","Belgica","Estados Unidos","Espana","Portugal","Suiza","Egipto","Argentina","Colombia"];
+  var r16pairs=[["Marruecos","Canada"],["Francia","Paraguay"],["Noruega","Brasil"],["Inglaterra","Mexico"],["Espana","Portugal"],["Belgica","Estados Unidos"],["Argentina","Egipto"],["Suiza","Colombia"]];
+  var r16winners=["Marruecos","Francia","Noruega","Inglaterra","Espana","Belgica","Argentina","Suiza"];
+  var qfpairs=[["Francia","Marruecos"],["Espana","Belgica"],["Inglaterra","Noruega"],["Argentina","Suiza"]];
+  var qfwinners=["Francia","Espana","Inglaterra","Argentina"];
+  var sfpairs=[["Espana","Francia"],["Argentina","Inglaterra"]];
+  var sfwinners=["Espana","Argentina"];
+  var finpairs=[["Argentina","Espana"]];
+  var finwinner=[projectedWinner("Argentina","Espana")];
+  bracketState={r32:{pairs:r32pairs,winners:r32winners},r16:{pairs:r16pairs,winners:r16winners},qf:{pairs:qfpairs,winners:qfwinners},sf:{pairs:sfpairs,winners:sfwinners},fin:{pairs:finpairs,winners:finwinner}};
 }
 
 function buildBracketUI(){
