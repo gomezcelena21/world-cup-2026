@@ -410,7 +410,7 @@ select:focus { outline: none; border-color: var(--gold); }
   <div class="hero-band">
     <div class="hero-eyebrow">FIFA · World Cup 2026 · 48 Selecciones</div>
     <h1 class="hero-h1">World Cup<br><span>Intelligence</span></h1>
-    <p class="hero-sub">Modelo Poisson · Pi-Rating + Dixon-Coles + Decay · Fase de grupos + eliminatorias completas · 🏆 FINAL: Argentina vs España · 19 jul 2026 · MetLife Stadium NJ</p>
+    <p class="hero-sub">Modelo Poisson · Pi-Rating + Dixon-Coles + Decay · Torneo completo · 🏆 España campeón del mundo 2026 · 1-0 AET vs Argentina · Ferran Torres 106' · MetLife Stadium NJ</p>
     <div class="hero-kpis">
       <div class="hk"><div class="hk-n">48</div><div class="hk-l">Selecciones</div></div>
       <div class="hk"><div class="hk-n">12</div><div class="hk-l">Grupos</div></div>
@@ -617,6 +617,42 @@ select:focus { outline: none; border-color: var(--gold); }
     <div class="champ-name" id="mi-name">–</div>
   </div>
 
+  <!-- TERCER PUESTO -->
+  <div class="panel-head" style="border-radius:12px 12px 0 0;border:1px solid var(--border);margin:16px 0 0;">
+    <div class="panel-title">🥉 Tercer Puesto</div>
+    <div class="panel-badge">18 jul · Hard Rock Stadium · Miami</div>
+  </div>
+  <div class="panel" style="border-radius:0 0 12px 12px;margin-bottom:16px;">
+    <div class="panel-body">
+      <div style="display:flex;align-items:center;gap:12px;">
+        <div style="text-align:center;flex:1;">
+          <div style="font-size:36px;">🇫🇷</div>
+          <div style="font-size:12px;font-weight:800;margin-top:4px;">FRANCIA</div>
+          <div style="font-size:9px;color:var(--muted);">Perdió vs España 0-2</div>
+        </div>
+        <div style="text-align:center;padding:0 12px;">
+          <div style="font-size:9px;font-weight:700;letter-spacing:2px;color:var(--muted);text-transform:uppercase;margin-bottom:4px;">Predicción IA</div>
+          <div id="tp-score" style="font-family:var(--font-mono);font-size:28px;font-weight:800;color:var(--gold);">3-1</div>
+          <div style="font-size:8px;color:var(--muted);margin-top:2px;">Francia favorita</div>
+          <div style="font-size:9px;color:var(--gold);font-weight:700;margin-top:6px;">⚽ Mbappé busca el Botín de Oro</div>
+        </div>
+        <div style="text-align:center;flex:1;">
+          <div style="font-size:36px;">🏴󠁧󠁢󠁥󠁮󠁧󠁿</div>
+          <div style="font-size:12px;font-weight:800;margin-top:4px;">INGLATERRA</div>
+          <div style="font-size:9px;color:var(--muted);">Perdió vs Argentina 1-2</div>
+        </div>
+      </div>
+      <div style="margin-top:12px;padding:10px;background:var(--surface2);border-radius:8px;border:1px solid var(--border);">
+        <div style="font-size:9px;font-weight:700;letter-spacing:2px;color:var(--muted);text-transform:uppercase;margin-bottom:6px;">🎯 Contexto clave</div>
+        <div style="font-size:11px;color:var(--muted2);line-height:1.7;">
+          Mbappé y Messi empatan en goles (8). Mbappé lidera en asistencias → necesita 1 gol para el Botín de Oro.<br>
+          Deschamps se despide tras 14 años como DT de Francia — quiere medalla de bronce.<br>
+          Últimas 8 finales por 3er puesto: promedio 3.6 goles/partido.
+        </div>
+      </div>
+    </div>
+  </div>
+
   <div class="panel-head" style="border-radius:12px 12px 0 0;border:1px solid var(--border);margin:16px 0 12px;">
     <div class="panel-title">Simulador Monte Carlo</div>
     <div class="panel-badge">3,000 torneos</div>
@@ -682,7 +718,7 @@ select:focus { outline: none; border-color: var(--gold); }
 
 <div class="footer-bar">
   <span>Datos: FIFA Ranking · Sorteo oficial Washington D.C. (5 dic 2025) · Repechajes resueltos (31 mar 2026)</span>
-  <span id="footer-update">🏆 FINAL · Argentina vs España · 19 jul · MetLife Stadium NJ · Argentina 2-1 Inglaterra (remontada) · España 2-0 Francia</span>
+  <span id="footer-update">🏆 España campeón del mundo 2026 · 1-0 AET · Ferran Torres 106' · Argentina subcampeón · 19 jul · MetLife Stadium NJ</span>
 </div>
 
 <script>
@@ -893,6 +929,8 @@ var PLAYED_MATCHES = {
   // ── SEMIFINALES (13–15 jul) ──────────────────────────────
   "Espana|Francia":            {gA:2, gB:0, fecha:"14 jul"},
   "Argentina|Inglaterra":      {gA:2, gB:1, fecha:"15 jul"},
+  "Francia|Inglaterra":        {gA:3, gB:1, fecha:"18 jul"},
+  "Espana|Argentina":          {gA:1, gB:0, fecha:"19 jul"},
 };
 
 // ── ESTADO FINAL — 15 jul 2026 · FINALISTAS CONFIRMADOS ──────────────
@@ -906,10 +944,10 @@ var CONFIRMED_STATUS = {
   "Alemania":"ko_elim","Costa de Marfil":"ko_elim","Ecuador":"ko_elim","Curazao":"elim",
   "Holanda":"ko_elim","Japon":"ko_elim","Suecia":"ko_elim","Tunez":"elim",
   "Belgica":"ko_elim","Egipto":"ko_elim","Iran":"elim","Nueva Zelanda":"elim",
-  "Espana":"final",
+  "Espana":"campeon",
   "Cabo Verde":"ko_elim","Arabia Saudita":"q3","Uruguay":"elim",
   "Francia":"ko_elim","Noruega":"ko_elim","Senegal":"ko_elim","Irak":"elim",
-  "Argentina":"final",
+  "Argentina":"subcampeon",
   "Austria":"ko_elim","Argelia":"ko_elim","Jordania":"elim",
   "Colombia":"ko_elim","Portugal":"ko_elim","Uzbekistan":"elim","RD Congo":"ko_elim",
   "Inglaterra":"ko_elim","Croacia":"ko_elim","Ghana":"ko_elim","Panama":"elim",
@@ -925,21 +963,18 @@ function getPlayedResult(a,b){
 
 // ── TICKER DEL DASHBOARD — últimos resultados ────────────
 var RESULTS_FEED = [
+  // FINAL — 19 jul
+  {a:"Espana",       b:"Argentina",      gA:1, gB:0, group:"FINAL", fecha:"19 jul", estado:"CAMPEON AET"},
+  // TERCER PUESTO — 18 jul
+  {a:"Francia",      b:"Inglaterra",     gA:3, gB:1, group:"3P",   fecha:"18 jul", estado:"FINAL"},
   // SEMIS
-  {a:"Argentina",    b:"Inglaterra",     gA:2, gB:1, group:"SF",  fecha:"15 jul", estado:"FINAL"},
-  {a:"Espana",       b:"Francia",        gA:2, gB:0, group:"SF",  fecha:"14 jul", estado:"FINAL"},
+  {a:"Argentina",    b:"Inglaterra",     gA:2, gB:1, group:"SF",   fecha:"15 jul", estado:"FINAL"},
+  {a:"Espana",       b:"Francia",        gA:2, gB:0, group:"SF",   fecha:"14 jul", estado:"FINAL"},
   // CUARTOS
-  {a:"Argentina",    b:"Suiza",          gA:3, gB:1, group:"QF",  fecha:"11 jul", estado:"FINAL AET"},
-  {a:"Inglaterra",   b:"Noruega",        gA:2, gB:1, group:"QF",  fecha:"11 jul", estado:"FINAL AET"},
-  {a:"Espana",       b:"Belgica",        gA:2, gB:1, group:"QF",  fecha:"10 jul", estado:"FINAL"},
-  {a:"Francia",      b:"Marruecos",      gA:2, gB:0, group:"QF",  fecha:"9 jul",  estado:"FINAL"},
-  // OCTAVOS
-  {a:"Argentina",    b:"Egipto",         gA:3, gB:2, group:"R16", fecha:"7 jul",  estado:"FINAL"},
-  {a:"Suiza",        b:"Colombia",       gA:1, gB:1, group:"R16", fecha:"7 jul",  estado:"FINAL PEN"},
-  {a:"Belgica",      b:"Estados Unidos", gA:4, gB:1, group:"R16", fecha:"6 jul",  estado:"FINAL"},
-  {a:"Espana",       b:"Portugal",       gA:1, gB:0, group:"R16", fecha:"6 jul",  estado:"FINAL"},
-  {a:"Noruega",      b:"Brasil",         gA:2, gB:1, group:"R16", fecha:"5 jul",  estado:"FINAL"},
-  {a:"Inglaterra",   b:"Mexico",         gA:3, gB:2, group:"R16", fecha:"5 jul",  estado:"FINAL"},
+  {a:"Argentina",    b:"Suiza",          gA:3, gB:1, group:"QF",   fecha:"11 jul", estado:"FINAL AET"},
+  {a:"Inglaterra",   b:"Noruega",        gA:2, gB:1, group:"QF",   fecha:"11 jul", estado:"FINAL AET"},
+  {a:"Espana",       b:"Belgica",        gA:2, gB:1, group:"QF",   fecha:"10 jul", estado:"FINAL"},
+  {a:"Francia",      b:"Marruecos",      gA:2, gB:0, group:"QF",   fecha:"9 jul",  estado:"FINAL"},
 ];
 
 var CONF_NAMES = {
@@ -1622,7 +1657,7 @@ function renderCountdown(){
       }
     }
     var el = document.getElementById("countdown");
-    if (el) el.innerHTML = '<div style="font-size:9px;font-weight:700;letter-spacing:2px;color:var(--gold);margin-bottom:6px;width:100%;">🏆 FINAL · ARGENTINA vs ESPAÑA · 19 JUL · METLIFE STADIUM NJ</div>' + html;
+    if (el) el.innerHTML = '<div style="font-size:9px;font-weight:700;letter-spacing:2px;color:var(--gold);margin-bottom:6px;width:100%;">🏆 ESPAÑA CAMPEÓN DEL MUNDO 2026 · 1-0 AET · FERRAN TORRES 106\'</div>' + html;
   }
   tick();
   setInterval(tick, 1000);
@@ -2275,7 +2310,7 @@ function buildBracketState(){
   var sfpairs=[["Espana","Francia"],["Argentina","Inglaterra"]];
   var sfwinners=["Espana","Argentina"];
   var finpairs=[["Argentina","Espana"]];
-  var finwinner=[projectedWinner("Argentina","Espana")];
+  var finwinner=["Espana"]; // España campeón 1-0 AET - Ferran Torres 106'
   bracketState={r32:{pairs:r32pairs,winners:r32winners},r16:{pairs:r16pairs,winners:r16winners},qf:{pairs:qfpairs,winners:qfwinners},sf:{pairs:sfpairs,winners:sfwinners},fin:{pairs:finpairs,winners:finwinner}};
 }
 
